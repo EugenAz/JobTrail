@@ -1,10 +1,10 @@
 import { registerEnumType } from '@nestjs/graphql';
 
 export enum ApplicationStatus {
-  OPEN,
-  REJECTED,
-  CLOSED,
-  EXPIRED,
+  OPEN = 'open',
+  REJECTED = 'rejected',
+  CLOSED = 'closed',
+  EXPIRED = 'expired',
 }
 
 registerEnumType(ApplicationStatus, { name: 'ApplicationStatus' });

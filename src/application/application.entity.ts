@@ -18,8 +18,8 @@ export class Application {
   @Column({ type: 'date' })
   date: Date;
 
-  @UpdateDateColumn()
-  date_updated: Date;
+  @Column({ type: 'date', nullable: true })
+  status_changed_at: Date;
 
   @ManyToOne(() => Campaign)
   @JoinColumn({ name: 'campaign_id' })
@@ -37,7 +37,8 @@ export class Application {
 
   @Column({
     type: 'varchar',
-    length: 100,
+    length: 255,
+    nullable: true,
   })
   link: string;
 
