@@ -14,3 +14,9 @@
 
 # Built files
 dist
+
+# DB
+db_data
+
+# env
+.env*
