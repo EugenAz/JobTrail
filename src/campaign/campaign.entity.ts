@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn, Unique } from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { ApplicationEntity } from '../application/application.entity';
 
 @Entity()
 export class Campaign {
@@ -17,4 +18,7 @@ export class Campaign {
 
   @Column({ type: 'date', nullable: true })
   data_end: Date;
+
+  @OneToMany(() => ApplicationEntity, (application) => application.campaign)
+  applications: ApplicationEntity[];
 }

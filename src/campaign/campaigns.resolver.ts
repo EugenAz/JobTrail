@@ -1,31 +1,19 @@
-import {
-  Args,
-  Int,
-  Parent,
-  Query,
-  ResolveField,
-  Resolver,
-} from '@nestjs/graphql';
-import { Campaign } from './campaign.model';
+import { Args, Query, Resolver } from '@nestjs/graphql';
+import { CampaignSummary } from './campaign-summary.model';
+import { CampaignDetail } from './campaign-detail.model';
 import { CampaingsService } from './campaigns.service';
-// import { Application } from '../application/application.model';
-// import { ApplicationsService } from '../application/applications.service';
 
-@Resolver(() => Campaign)
+@Resolver()
 export class CampaignsResolver {
-  constructor(
-    // private applicationsService: ApplicationsService,
-    private campaignsService: CampaingsService,
-  ) {}
+  constructor(private campaignsService: CampaingsService) {}
 
-  @Query(() => Campaign, { name: 'campaign' })
-  async getCampaign(@Args('id', { type: () => Int }) id: number) {
-    return this.campaignsService.findOneById(id);
+  @Query(() => [CampaignSummary], { name: 'campaigns' })
+  async getCampaigns() {
+    return this.campaignsService.findAll();
   }
 
-  // @ResolveField('applications', () => [Application])
-  // async getApplications(@Parent() campaign: Campaign) {
-  //   const { id } = campaign;
-  //   return this.applicationsService.findAllByCampaignId(id);
-  // }
+  @Query(() => CampaignDetail, { name: 'campaign' })
+  async getCampaign(@Args('id') id: string) {
+    return this.campaignsService.findOneById(id);
+  }
 }

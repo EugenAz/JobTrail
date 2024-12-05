@@ -2,15 +2,13 @@ import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
-
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { join } from 'path';
+
+import { DB, DB_PASSWORD, DB_USERNAME, ENVIRONMENT } from './env';
+
 import { ApplicationModule } from './application/application.module';
 import { CompanyModule } from './company/company.module';
 import { CampaignModule } from './campaign/campaign.module';
-
-import { DB, DB_PASSWORD, DB_USERNAME, ENVIRONMENT } from './env';
 
 @Module({
   imports: [
@@ -25,16 +23,14 @@ import { DB, DB_PASSWORD, DB_USERNAME, ENVIRONMENT } from './env';
       autoLoadEntities: true,
       synchronize: ENVIRONMENT === 'development',
     }),
-    CompanyModule,
-    CampaignModule,
-    ApplicationModule,
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
       sortSchema: true,
     }),
+    CompanyModule,
+    CampaignModule,
+    ApplicationModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
 })
 export class AppModule {}

@@ -2,12 +2,12 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type Application {
-  campaign: Campaign!
+type ApplicationModel {
+  campaign: CampaignSummary!
   company: Company!
   dateCreated: DateTime!
   dateUpdated: DateTime!
-  id: Int!
+  id: String!
   link: String!
   notes: [String!]!
   roleName: String!
@@ -21,15 +21,23 @@ enum ApplicationStatus {
   REJECTED
 }
 
-type Campaign {
+type CampaignDetail {
+  applications: [ApplicationModel!]
   dateEnd: DateTime
   dateStart: DateTime!
-  id: Int!
+  id: String!
+  name: String!
+}
+
+type CampaignSummary {
+  dateEnd: DateTime
+  dateStart: DateTime!
+  id: String!
   name: String!
 }
 
 type Company {
-  id: Int!
+  id: String!
   name: String!
 }
 
@@ -39,6 +47,8 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 scalar DateTime
 
 type Query {
-  application(id: Int!): Application!
-  campaign(id: Int!): Campaign!
+  application(id: String!): ApplicationModel!
+  campaign(id: String!): CampaignDetail!
+  campaigns: [CampaignSummary!]!
+  companies: [Company!]!
 }

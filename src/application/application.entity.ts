@@ -4,14 +4,13 @@ import {
   JoinColumn,
   ManyToOne,
   PrimaryGeneratedColumn,
-  UpdateDateColumn,
 } from 'typeorm';
 import { ApplicationStatus } from '../types';
 import { Campaign } from '../campaign/campaign.entity';
 import { Company } from '../company/company.entity';
 
 @Entity()
-export class Application {
+export class ApplicationEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -21,7 +20,7 @@ export class Application {
   @Column({ type: 'date', nullable: true })
   status_changed_at: Date;
 
-  @ManyToOne(() => Campaign)
+  @ManyToOne(() => Campaign, (campaign) => campaign.applications)
   @JoinColumn({ name: 'campaign_id' })
   campaign: Campaign;
 

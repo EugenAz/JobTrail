@@ -7,15 +7,19 @@ export class CompaniesService {
     return {} as any;
   }
 
-  async findOneById(id: number): Promise<Company> {
+  async findOneById(id: string): Promise<Company> {
     return {} as any;
   }
 
   async findAll(): Promise<Company[]> {
-    return [] as Company[];
+    return [
+      { id: 'id1', name: 'Company Name' },
+      { id: 'id2', name: 'Company Name 2' },
+      { id: 'id3', name: 'Company Name 3' },
+    ] as Company[];
   }
 
-  async remove(id: number): Promise<boolean> {
+  async remove(id: string): Promise<boolean> {
     return true;
   }
 }

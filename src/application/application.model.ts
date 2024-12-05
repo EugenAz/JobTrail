@@ -1,12 +1,12 @@
-import { Field, Int, ObjectType } from '@nestjs/graphql';
+import { Field, ObjectType } from '@nestjs/graphql';
 import { ApplicationStatus } from '../types';
-import { Campaign } from '../campaign/campaign.model';
+import { CampaignSummary } from '../campaign/campaign-summary.model';
 import { Company } from '../company/company.model';
 
 @ObjectType()
-export class Application {
-  @Field((type) => Int)
-  id: number;
+export class ApplicationModel {
+  @Field()
+  id: string;
 
   @Field()
   dateCreated: Date;
@@ -15,7 +15,7 @@ export class Application {
   dateUpdated: Date;
 
   @Field()
-  campaign: Campaign;
+  campaign: CampaignSummary;
 
   @Field()
   company: Company;
@@ -26,9 +26,9 @@ export class Application {
   @Field()
   link: string;
 
-  @Field((type) => ApplicationStatus)
+  @Field(() => ApplicationStatus)
   status: ApplicationStatus;
 
-  @Field((type) => [String])
+  @Field(() => [String])
   notes: string[];
 }
