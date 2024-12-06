@@ -1,7 +1,6 @@
 import { NotFoundException } from '@nestjs/common';
 import {
   Args,
-  Int,
   Parent,
   Query,
   ResolveField,
@@ -51,7 +50,6 @@ export class ApplicationsResolver {
   @ResolveField('campaign', () => CampaignSummaryModel)
   async getCampaign(@Parent() application: ApplicationEntity) {
     const { campaign } = application;
-    console.log('!!application', application);
     return this.campaignsService.findOneById(campaign.id);
   }
 
