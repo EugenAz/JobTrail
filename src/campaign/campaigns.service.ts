@@ -16,16 +16,14 @@ export class CampaingsService {
     private readonly campaignRepository: Repository<CampaignEntity>,
   ) {}
 
-  async create(
-    data: any /* TODO: NewCampaignInput */,
-  ): Promise<CampaignSummaryModel> {
-    return {} as any;
-  }
-
   async findOneById(id: string): Promise<CampaignDetailModel> {
     const campaign = await this.campaignRepository.findOne({
       where: { id },
-      relations: ['applications'],
+      relations: [
+        'applications',
+        'applications.company',
+        'applications.campaign',
+      ],
     });
 
     return mapToCampaignDetailModel(campaign);
@@ -35,6 +33,12 @@ export class CampaingsService {
     const campaigns = await this.campaignRepository.find();
 
     return campaigns.map(mapToCampaignSummaryModel);
+  }
+
+  async create(
+    data: any /* TODO: NewCampaignInput */,
+  ): Promise<CampaignSummaryModel> {
+    return {} as any;
   }
 
   async remove(id: string): Promise<boolean> {

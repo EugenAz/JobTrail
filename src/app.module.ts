@@ -22,6 +22,7 @@ import { CampaignModule } from './campaign/campaign.module';
       entities: [__dirname + '/**/*.entity.ts'],
       autoLoadEntities: true,
       synchronize: ENVIRONMENT === 'development',
+      // logging: ENVIRONMENT === 'development',
     }),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,

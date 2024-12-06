@@ -3,6 +3,8 @@ import { CampaignDetailModel } from './campaign-detail.model';
 import { CampaignSummaryModel } from './campaign-summary.model';
 import { CampaignEntity } from './campaign.entity';
 
+/* TODO migrate all postgres date columns to datetime */
+
 export const mapToCampaignSummaryModel = ({
   id,
   date_end,
@@ -28,5 +30,3 @@ export const mapToCampaignDetailModel = ({
   dateEnd: date_end ? new Date(date_end) : null,
   applications: applications.map(mapToApplicationModel),
 });
-
-/* TODO migrate all postgres date columns to datetime */

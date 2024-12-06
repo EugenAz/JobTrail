@@ -6,7 +6,7 @@ type ApplicationModel {
   campaign: CampaignSummaryModel!
   company: CompanyModel!
   dateCreated: DateTime!
-  id: String!
+  id: ID!
   link: String
   notes: [String!]
   roleName: String!
@@ -25,19 +25,19 @@ type CampaignDetailModel {
   applications: [ApplicationModel!]
   dateEnd: DateTime
   dateStart: DateTime!
-  id: String!
+  id: ID!
   name: String!
 }
 
 type CampaignSummaryModel {
   dateEnd: DateTime
   dateStart: DateTime!
-  id: String!
+  id: ID!
   name: String!
 }
 
 type CompanyModel {
-  id: String!
+  id: ID!
   name: String!
 }
 
@@ -48,7 +48,6 @@ scalar DateTime
 
 type Query {
   application(id: String!): ApplicationModel!
-  applications: [ApplicationModel!]!
   campaign(id: String!): CampaignDetailModel!
   campaigns: [CampaignSummaryModel!]!
   companies: [CompanyModel!]!

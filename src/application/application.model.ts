@@ -1,11 +1,11 @@
-import { Field, ObjectType } from '@nestjs/graphql';
+import { Field, ID, ObjectType } from '@nestjs/graphql';
 import { ApplicationStatus } from '../types';
 import { CampaignSummaryModel } from '../campaign/campaign-summary.model';
 import { CompanyModel } from '../company/company.model';
 
 @ObjectType()
 export class ApplicationModel {
-  @Field()
+  @Field(() => ID)
   id: string;
 
   @Field()
@@ -14,10 +14,10 @@ export class ApplicationModel {
   @Field()
   statusChangedAt: Date;
 
-  @Field()
+  @Field(() => CampaignSummaryModel)
   campaign: CampaignSummaryModel;
 
-  @Field()
+  @Field(() => CompanyModel)
   company: CompanyModel;
 
   @Field()

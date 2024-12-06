@@ -17,18 +17,13 @@ export class ApplicationsService {
     return {} as any;
   }
 
-  async findAll(): Promise<ApplicationModel[]> {
-    const applications = await this.applicationsRepository.find();
-
-    return applications.map(mapToApplicationModel);
-  }
-
   async findOneById(id: string): Promise<ApplicationModel> {
-    return {
-      id,
-      roleName: 'Tech Lead',
-      link: 'https://link.com',
-    } as ApplicationModel;
+    const application = await this.applicationsRepository.findOne({
+      where: { id },
+      relations: ['companies', 'campaigns'],
+    });
+
+    return mapToApplicationModel(application);
   }
 
   async findAllByCampaignId(campaignId: string): Promise<ApplicationModel[]> {

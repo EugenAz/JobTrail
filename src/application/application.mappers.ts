@@ -1,3 +1,4 @@
+import { mapToCampaignSummaryModel } from '../campaign/campaign.mappers';
 import { ApplicationEntity } from './application.entity';
 import { ApplicationModel } from './application.model';
 
@@ -9,6 +10,8 @@ export const mapToApplicationModel = ({
   notes,
   date,
   status_changed_at,
+  campaign,
+  company,
 }: ApplicationEntity): ApplicationModel => ({
   id,
   status,
@@ -17,6 +20,6 @@ export const mapToApplicationModel = ({
   roleName: role_name,
   dateCreated: new Date(date),
   statusChangedAt: new Date(status_changed_at),
-  campaign: {} as any,
-  company: {} as any,
+  campaign: campaign ? mapToCampaignSummaryModel(campaign) : null,
+  company,
 });
