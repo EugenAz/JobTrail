@@ -1,22 +1,28 @@
 import { Injectable } from '@nestjs/common';
 import { CompanyModel } from './company.model';
+import { InjectRepository } from '@nestjs/typeorm';
+import { CompanyEntity } from './company.entity';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class CompaniesService {
-  async create(data: any /* TODO: NewCompanyInput */): Promise<CompanyModel> {
-    return {} as any;
-  }
+  constructor(
+    @InjectRepository(CompanyEntity)
+    private readonly companyRepository: Repository<CompanyEntity>,
+  ) {}
 
   async findOneById(id: string): Promise<CompanyModel> {
-    return {} as any;
+    const campaign = await this.companyRepository.findOne({ where: { id } });
+
+    return campaign;
   }
 
   async findAll(): Promise<CompanyModel[]> {
-    return [
-      { id: 'id1', name: 'Company Name' },
-      { id: 'id2', name: 'Company Name 2' },
-      { id: 'id3', name: 'Company Name 3' },
-    ] as CompanyModel[];
+    return await this.companyRepository.find();
+  }
+
+  async create(data: any /* TODO: NewCompanyInput */): Promise<CompanyModel> {
+    return {} as any;
   }
 
   async remove(id: string): Promise<boolean> {

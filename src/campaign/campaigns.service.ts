@@ -28,8 +28,6 @@ export class CampaingsService {
       relations: ['applications'],
     });
 
-    console.log('!! campaign', campaign);
-
     return mapToCampaignDetailModel(campaign);
   }
 
