@@ -5,29 +5,28 @@ import { CampaignEntity } from './campaign.entity';
 
 export const mapToCampaignSummaryModel = ({
   id,
-  data_end,
+  date_end,
   name,
-  data_start,
+  date_start,
 }: CampaignEntity): CampaignSummaryModel => ({
   id,
   name,
-  dateStart: new Date(data_start),
-  dateEnd: data_end ? new Date(data_end) : null,
+  dateStart: new Date(date_start),
+  dateEnd: date_end ? new Date(date_end) : null,
 });
 
 export const mapToCampaignDetailModel = ({
   id,
-  data_end,
+  date_end,
   name,
-  data_start,
+  date_start,
   applications,
 }: CampaignEntity): CampaignDetailModel => ({
   id,
   name,
-  dateStart: new Date(data_start),
-  dateEnd: data_end ? new Date(data_end) : null,
+  dateStart: new Date(date_start),
+  dateEnd: date_end ? new Date(date_end) : null,
   applications: applications.map(mapToApplicationModel),
 });
 
 /* TODO migrate all postgres date columns to datetime */
-/* TODO ALTER TABLE rename columns data_* to date_* */
