@@ -16,7 +16,7 @@
 dist
 
 # DB
-db_data
+db
 
 # env
 .env*
