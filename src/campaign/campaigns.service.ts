@@ -8,6 +8,10 @@ import {
   mapToCampaignDetailModel,
   mapToCampaignSummaryModel,
 } from './campaign.mappers';
+import { NewCampaignInput } from './dto/new-campaign.input';
+import { UpdatedCampaignInput } from './dto/updated-campaign.input';
+
+// TODO come up with the abstraction that would deal with the mapping of entities to models and vice versa
 
 @Injectable()
 export class CampaingsService {
@@ -35,13 +39,46 @@ export class CampaingsService {
     return campaigns.map(mapToCampaignSummaryModel);
   }
 
-  async create(
-    data: any /* TODO: NewCampaignInput */,
-  ): Promise<CampaignSummaryModel> {
-    return {} as any;
+  async create({
+    name,
+    dateStart,
+    dateEnd,
+  }: NewCampaignInput): Promise<CampaignSummaryModel> {
+    const newCampaign = this.campaignRepository.create({
+      name,
+      date_start: dateStart,
+      date_end: dateEnd,
+    });
+    const savedCampaign = await this.campaignRepository.save(newCampaign);
+
+    return mapToCampaignSummaryModel(savedCampaign);
   }
 
-  async remove(id: string): Promise<boolean> {
-    return true;
+  async update({
+    id,
+    name,
+    dateStart,
+    dateEnd,
+  }: UpdatedCampaignInput): Promise<CampaignSummaryModel> {
+    const campaign = await this.campaignRepository.findOne({ where: { id } });
+    // TODO check if there's more optimal way to do this
+    campaign.name = name ?? campaign.name;
+    campaign.date_start = dateStart ?? campaign.date_start;
+    campaign.date_end = dateEnd ?? campaign.date_end;
+
+    const savedCampaign = await this.campaignRepository.save(campaign);
+
+    return mapToCampaignSummaryModel(savedCampaign);
+  }
+
+  async delete(id: string): Promise<boolean> {
+    try {
+      const result = await this.campaignRepository.delete(id);
+
+      return result.affected > 0;
+    } catch (error) {
+      console.error(`Error deleting campaign with id ${id}:`, error);
+      return false;
+    }
   }
 }
