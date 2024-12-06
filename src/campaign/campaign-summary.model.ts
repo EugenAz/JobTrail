@@ -1,7 +1,7 @@
 import { Field, ObjectType } from '@nestjs/graphql';
 
 @ObjectType()
-export class CampaignSummary {
+export class CampaignSummaryModel {
   @Field()
   id: string;
 

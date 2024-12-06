@@ -1,9 +1,9 @@
 import { Field, ObjectType } from '@nestjs/graphql';
-import { CampaignSummary } from './campaign-summary.model';
+import { CampaignSummaryModel } from './campaign-summary.model';
 import { ApplicationModel } from '../application/application.model';
 
 @ObjectType()
-export class CampaignDetail extends CampaignSummary {
-  @Field(() => [ApplicationModel], { nullable: true })
+export class CampaignDetailModel extends CampaignSummaryModel {
+  @Field(() => [ApplicationModel], { nullable: true, defaultValue: [] })
   applications?: ApplicationModel[];
 }

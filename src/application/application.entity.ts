@@ -6,10 +6,10 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { ApplicationStatus } from '../types';
-import { Campaign } from '../campaign/campaign.entity';
-import { Company } from '../company/company.entity';
+import { CampaignEntity } from '../campaign/campaign.entity';
+import { CompanyEntity } from '../company/company.entity';
 
-@Entity()
+@Entity('applications')
 export class ApplicationEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
@@ -20,13 +20,13 @@ export class ApplicationEntity {
   @Column({ type: 'date', nullable: true })
   status_changed_at: Date;
 
-  @ManyToOne(() => Campaign, (campaign) => campaign.applications)
+  @ManyToOne(() => CampaignEntity, (campaign) => campaign.applications)
   @JoinColumn({ name: 'campaign_id' })
-  campaign: Campaign;
+  campaign: CampaignEntity;
 
-  @ManyToOne(() => Company)
+  @ManyToOne(() => CompanyEntity)
   @JoinColumn({ name: 'company_id' })
-  company: Company;
+  company: CompanyEntity;
 
   @Column({
     type: 'varchar',

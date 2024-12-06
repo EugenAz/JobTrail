@@ -1,7 +1,7 @@
 import { Field, ObjectType } from '@nestjs/graphql';
 import { ApplicationStatus } from '../types';
-import { CampaignSummary } from '../campaign/campaign-summary.model';
-import { Company } from '../company/company.model';
+import { CampaignSummaryModel } from '../campaign/campaign-summary.model';
+import { CompanyModel } from '../company/company.model';
 
 @ObjectType()
 export class ApplicationModel {
@@ -12,23 +12,23 @@ export class ApplicationModel {
   dateCreated: Date;
 
   @Field()
-  dateUpdated: Date;
+  statusChangedAt: Date;
 
   @Field()
-  campaign: CampaignSummary;
+  campaign: CampaignSummaryModel;
 
   @Field()
-  company: Company;
+  company: CompanyModel;
 
   @Field()
   roleName: string;
 
-  @Field()
-  link: string;
+  @Field({ nullable: true })
+  link?: string;
 
   @Field(() => ApplicationStatus)
   status: ApplicationStatus;
 
-  @Field(() => [String])
-  notes: string[];
+  @Field(() => [String], { nullable: true })
+  notes?: string[];
 }

@@ -1,8 +1,8 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { ApplicationEntity } from '../application/application.entity';
 
-@Entity()
-export class Campaign {
+@Entity('campaigns')
+export class CampaignEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 

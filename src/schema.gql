@@ -3,15 +3,15 @@
 # ------------------------------------------------------
 
 type ApplicationModel {
-  campaign: CampaignSummary!
-  company: Company!
+  campaign: CampaignSummaryModel!
+  company: CompanyModel!
   dateCreated: DateTime!
-  dateUpdated: DateTime!
   id: String!
-  link: String!
-  notes: [String!]!
+  link: String
+  notes: [String!]
   roleName: String!
   status: ApplicationStatus!
+  statusChangedAt: DateTime!
 }
 
 enum ApplicationStatus {
@@ -21,7 +21,7 @@ enum ApplicationStatus {
   REJECTED
 }
 
-type CampaignDetail {
+type CampaignDetailModel {
   applications: [ApplicationModel!]
   dateEnd: DateTime
   dateStart: DateTime!
@@ -29,14 +29,14 @@ type CampaignDetail {
   name: String!
 }
 
-type CampaignSummary {
+type CampaignSummaryModel {
   dateEnd: DateTime
   dateStart: DateTime!
   id: String!
   name: String!
 }
 
-type Company {
+type CompanyModel {
   id: String!
   name: String!
 }
@@ -48,7 +48,8 @@ scalar DateTime
 
 type Query {
   application(id: String!): ApplicationModel!
-  campaign(id: String!): CampaignDetail!
-  campaigns: [CampaignSummary!]!
-  companies: [Company!]!
+  applications: [ApplicationModel!]!
+  campaign(id: String!): CampaignDetailModel!
+  campaigns: [CampaignSummaryModel!]!
+  companies: [CompanyModel!]!
 }

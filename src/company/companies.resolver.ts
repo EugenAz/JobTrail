@@ -1,13 +1,13 @@
 import { Query, Resolver } from '@nestjs/graphql';
 
 import { CompaniesService } from './companies.service';
-import { Company } from './company.model';
+import { CompanyModel } from './company.model';
 
-@Resolver(() => Company)
+@Resolver(() => CompanyModel)
 export class CompaniesResolver {
   constructor(private companiesService: CompaniesService) {}
 
-  @Query(() => [Company], { name: 'companies' })
+  @Query(() => [CompanyModel], { name: 'companies' })
   async getCompanies() {
     return this.companiesService.findAll();
   }
