@@ -3,6 +3,7 @@ import { CompanyModel } from './company.model';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CompanyEntity } from './company.entity';
 import { Repository } from 'typeorm';
+import { UpdatedCompanyInput } from './updated-company.input';
 
 @Injectable()
 export class CompaniesService {
@@ -21,11 +22,27 @@ export class CompaniesService {
     return await this.companyRepository.find();
   }
 
-  async create(data: any /* TODO: NewCompanyInput */): Promise<CompanyModel> {
-    return {} as any;
+  async create(name: string): Promise<CompanyModel> {
+    const company = this.companyRepository.create({ name });
+
+    return this.companyRepository.save(company);
   }
 
-  async remove(id: string): Promise<boolean> {
-    return true;
+  async update({ id, name }: UpdatedCompanyInput): Promise<CompanyModel> {
+    const company = await this.companyRepository.findOne({ where: { id } });
+    company.name = name;
+
+    return this.companyRepository.save(company);
+  }
+
+  async delete(id: string): Promise<boolean> {
+    try {
+      const result = await this.companyRepository.delete(id);
+
+      return result.affected > 0;
+    } catch (error) {
+      console.error(`Error deleting company with id ${id}:`, error);
+      return false;
+    }
   }
 }

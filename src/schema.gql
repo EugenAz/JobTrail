@@ -46,9 +46,20 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
+type Mutation {
+  createCompany(name: String!): CompanyModel!
+  deleteCompany(id: ID!): Boolean!
+  updateCompany(updatedCompanyData: UpdatedCompanyInput!): CompanyModel!
+}
+
 type Query {
   application(id: String!): ApplicationModel!
   campaign(id: String!): CampaignDetailModel!
   campaigns: [CampaignSummaryModel!]!
   companies: [CompanyModel!]!
+}
+
+input UpdatedCompanyInput {
+  id: ID!
+  name: String!
 }
