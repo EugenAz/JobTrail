@@ -5,11 +5,11 @@ import { ApplicationModel } from './application.model';
 export const mapToApplicationModel = ({
   id,
   status,
-  role_name,
+  roleName,
   link,
   notes,
-  date,
-  status_changed_at,
+  dateCreated,
+  dateUpdated,
   campaign,
   company,
 }: ApplicationEntity): ApplicationModel => ({
@@ -17,9 +17,9 @@ export const mapToApplicationModel = ({
   status,
   link,
   notes,
-  roleName: role_name,
-  dateCreated: new Date(date),
-  statusChangedAt: new Date(status_changed_at),
+  roleName,
+  dateCreated: new Date(dateCreated),
+  dateUpdated: new Date(dateUpdated),
   campaign: campaign ? mapToCampaignSummaryModel(campaign) : null,
   company,
 });

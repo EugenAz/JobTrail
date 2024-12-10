@@ -13,11 +13,11 @@ export class CampaignEntity {
   })
   name: string;
 
-  @Column({ type: 'date' })
-  date_start: Date;
+  @Column({ type: 'date', name: 'date_start' })
+  dateStart: Date;
 
-  @Column({ type: 'date', nullable: true })
-  date_end: Date;
+  @Column({ type: 'date', nullable: true, name: 'date_end' })
+  dateEnd: Date;
 
   @OneToMany(() => ApplicationEntity, (application) => application.campaign)
   applications: ApplicationEntity[];

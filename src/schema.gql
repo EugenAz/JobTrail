@@ -6,12 +6,12 @@ type ApplicationModel {
   campaign: CampaignSummaryModel!
   company: CompanyModel!
   dateCreated: DateTime!
+  dateUpdated: DateTime!
   id: ID!
   link: String
   notes: [String!]
   roleName: String!
   status: ApplicationStatus!
-  statusChangedAt: DateTime!
 }
 
 enum ApplicationStatus {

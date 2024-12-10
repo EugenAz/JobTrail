@@ -14,11 +14,11 @@ export class ApplicationEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column({ type: 'date' })
-  date: Date;
+  @Column({ type: 'date', name: 'date' })
+  dateCreated: Date;
 
-  @Column({ type: 'date', nullable: true })
-  status_changed_at: Date;
+  @Column({ type: 'date', nullable: true, name: 'status_changed_at' })
+  dateUpdated: Date;
 
   @ManyToOne(() => CampaignEntity, (campaign) => campaign.applications)
   @JoinColumn({ name: 'campaign_id' })
@@ -29,10 +29,11 @@ export class ApplicationEntity {
   company: CompanyEntity;
 
   @Column({
+    name: 'role_name',
     type: 'varchar',
     length: 100,
   })
-  role_name: string;
+  roleName: string;
 
   @Column({
     type: 'varchar',

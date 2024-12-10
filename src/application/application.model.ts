@@ -12,7 +12,7 @@ export class ApplicationModel {
   dateCreated: Date;
 
   @Field()
-  statusChangedAt: Date;
+  dateUpdated: Date;
 
   @Field(() => CampaignSummaryModel)
   campaign: CampaignSummaryModel;

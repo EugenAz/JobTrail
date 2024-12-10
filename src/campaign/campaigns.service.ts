@@ -11,7 +11,7 @@ import {
 import { NewCampaignInput } from './dto/new-campaign.input';
 import { UpdatedCampaignInput } from './dto/updated-campaign.input';
 
-// TODO come up with the abstraction that would deal with the mapping of entities to models and vice versa
+// TODO come up with an abstraction that would deal with the mapping of entities to models and vice versa
 
 @Injectable()
 export class CampaingsService {
@@ -44,8 +44,8 @@ export class CampaingsService {
   }: NewCampaignInput): Promise<CampaignSummaryModel> {
     const newCampaign = this.campaignRepository.create({
       name,
-      date_start: dateStart,
-      date_end: dateEnd,
+      dateStart,
+      dateEnd,
     });
     const savedCampaign = await this.campaignRepository.save(newCampaign);
 
@@ -61,8 +61,8 @@ export class CampaingsService {
     const campaign = await this.campaignRepository.findOne({ where: { id } });
     // TODO check if there's more optimal way to do this
     campaign.name = name ?? campaign.name;
-    campaign.date_start = dateStart ?? campaign.date_start;
-    campaign.date_end = dateEnd ?? campaign.date_end;
+    campaign.dateStart = dateStart ?? campaign.dateStart;
+    campaign.dateEnd = dateEnd ?? campaign.dateEnd;
 
     const savedCampaign = await this.campaignRepository.save(campaign);
 

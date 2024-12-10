@@ -51,11 +51,11 @@ export class ApplicationsService {
       status,
       link,
       notes,
-      role_name: roleName,
-      date: dateCreated,
-      status_changed_at: dateCreated,
+      dateCreated,
+      roleName,
       campaign,
       company,
+      dateUpdated: new Date(),
     });
     const savedApplication =
       await this.applicationsRepository.save(newApplication);
@@ -81,7 +81,7 @@ export class ApplicationsService {
     }
 
     if (dateCreated) {
-      application.date = dateCreated;
+      application.dateCreated = dateCreated;
     }
     if (link) {
       application.link = link;
@@ -91,13 +91,13 @@ export class ApplicationsService {
     }
     if (status) {
       if (status !== application.status) {
-        application.status_changed_at = new Date();
+        application.dateUpdated = new Date();
       }
 
       application.status = status;
     }
     if (roleName) {
-      application.role_name = roleName;
+      application.roleName = roleName;
     }
 
     if (campaignId) {

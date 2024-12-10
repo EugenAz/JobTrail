@@ -7,26 +7,26 @@ import { CampaignEntity } from './campaign.entity';
 
 export const mapToCampaignSummaryModel = ({
   id,
-  date_end,
+  dateEnd,
   name,
-  date_start,
+  dateStart,
 }: CampaignEntity): CampaignSummaryModel => ({
   id,
   name,
-  dateStart: new Date(date_start),
-  dateEnd: date_end ? new Date(date_end) : null,
+  dateStart: new Date(dateStart),
+  dateEnd: dateEnd ? new Date(dateEnd) : null,
 });
 
 export const mapToCampaignDetailModel = ({
   id,
-  date_end,
+  dateEnd,
   name,
-  date_start,
+  dateStart,
   applications,
 }: CampaignEntity): CampaignDetailModel => ({
   id,
   name,
-  dateStart: new Date(date_start),
-  dateEnd: date_end ? new Date(date_end) : null,
+  dateStart: new Date(dateStart),
+  dateEnd: dateEnd ? new Date(dateEnd) : null,
   applications: applications.map(mapToApplicationModel),
 });
