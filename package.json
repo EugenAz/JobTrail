@@ -1,6 +1,5 @@
 {
   "name": "job-trail",
-  "packageManager": "yarn@4.5.2",
   "scripts": {
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
