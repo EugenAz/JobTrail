@@ -47,12 +47,25 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 scalar DateTime
 
 type Mutation {
+  createApplication(newApplicationInput: NewApplicationInput!): ApplicationModel!
   createCampaign(newCampaignInput: NewCampaignInput!): CampaignSummaryModel!
   createCompany(name: String!): CompanyModel!
+  deleteApplication(id: String!): Boolean!
   deleteCampaign(id: ID!): Boolean!
   deleteCompany(id: ID!): Boolean!
+  updateApplication(updatedApplicationInput: UpdatedApplicationInput!): ApplicationModel!
   updateCampaign(updatedCampaignData: UpdatedCampaignInput!): CampaignSummaryModel!
   updateCompany(updatedCompanyData: UpdatedCompanyInput!): CompanyModel!
+}
+
+input NewApplicationInput {
+  campaignId: ID!
+  companyId: ID!
+  dateCreated: DateTime!
+  link: String
+  notes: [String!] = [""]
+  roleName: String!
+  status: ApplicationStatus
 }
 
 input NewCampaignInput {
@@ -66,6 +79,17 @@ type Query {
   campaign(id: String!): CampaignDetailModel!
   campaigns: [CampaignSummaryModel!]!
   companies: [CompanyModel!]!
+}
+
+input UpdatedApplicationInput {
+  campaignId: ID
+  companyId: ID
+  dateCreated: DateTime
+  id: ID!
+  link: String
+  notes: [String!]
+  roleName: String
+  status: ApplicationStatus
 }
 
 input UpdatedCampaignInput {

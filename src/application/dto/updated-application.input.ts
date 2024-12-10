@@ -3,18 +3,21 @@ import { MaxLength, IsDateString, IsEnum } from 'class-validator';
 import { ApplicationStatus } from '../../types';
 
 @InputType()
-export class NewApplicationInput {
-  @Field()
+export class UpdatedApplicationInput {
+  @Field(() => ID)
+  id: string;
+
+  @Field({ nullable: true })
   @IsDateString()
   dateCreated: Date;
 
-  @Field(() => ID)
+  @Field(() => ID, { nullable: true })
   campaignId: string;
 
-  @Field(() => ID)
+  @Field(() => ID, { nullable: true })
   companyId: string;
 
-  @Field()
+  @Field({ nullable: true })
   @MaxLength(255)
   roleName: string;
 
@@ -26,6 +29,6 @@ export class NewApplicationInput {
   @IsEnum(ApplicationStatus)
   status: ApplicationStatus;
 
-  @Field(() => [String], { nullable: true, defaultValue: [''] })
+  @Field(() => [String], { nullable: true })
   notes: string[];
 }

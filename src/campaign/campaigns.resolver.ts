@@ -5,6 +5,7 @@ import { CampaingsService } from './campaigns.service';
 import { CampaignEntity } from './campaign.entity';
 import { NewCampaignInput } from './dto/new-campaign.input';
 import { UpdatedCampaignInput } from './dto/updated-campaign.input';
+import { mapToCampaignDetailModel } from './campaign.mappers';
 
 @Resolver()
 export class CampaignsResolver {
@@ -17,7 +18,8 @@ export class CampaignsResolver {
 
   @Query(() => CampaignDetailModel, { name: 'campaign' })
   async getCampaign(@Args('id') id: string) {
-    return this.campaignsService.findOneById(id);
+    const campaign = await this.campaignsService.findOneById(id);
+    return mapToCampaignDetailModel(campaign);
   }
 
   @Mutation(() => CampaignSummaryModel, { name: 'createCampaign' })

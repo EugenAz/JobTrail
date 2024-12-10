@@ -24,7 +24,7 @@ export class ApplicationEntity {
   @JoinColumn({ name: 'campaign_id' })
   campaign: CampaignEntity;
 
-  @ManyToOne(() => CompanyEntity)
+  @ManyToOne(() => CompanyEntity, { eager: true })
   @JoinColumn({ name: 'company_id' })
   company: CompanyEntity;
 

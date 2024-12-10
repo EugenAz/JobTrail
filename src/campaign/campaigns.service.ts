@@ -20,8 +20,8 @@ export class CampaingsService {
     private readonly campaignRepository: Repository<CampaignEntity>,
   ) {}
 
-  async findOneById(id: string): Promise<CampaignDetailModel> {
-    const campaign = await this.campaignRepository.findOne({
+  async findOneById(id: string): Promise<CampaignEntity> {
+    return this.campaignRepository.findOne({
       where: { id },
       relations: [
         'applications',
@@ -29,8 +29,6 @@ export class CampaingsService {
         'applications.campaign',
       ],
     });
-
-    return mapToCampaignDetailModel(campaign);
   }
 
   async findAll(): Promise<CampaignSummaryModel[]> {
