@@ -1,6 +1,12 @@
-import { useQuery, gql } from '@apollo/client';
+import { useQuery, gql, useMutation } from '@apollo/client';
 import { Link, useParams } from 'react-router';
 import { formatDate } from '../utils/dates';
+
+const DELETE_APPLICATION = gql`
+  mutation DeleteApplication($id: String!) {
+    deleteApplication(id: $id)
+  }
+`;
 
 const GET_CAMPAIGN = (id: string) => gql`
   query GetCampaign {
@@ -24,10 +30,14 @@ const GET_CAMPAIGN = (id: string) => gql`
 export const Campaign = () => {
   let { campaignId } = useParams();
   const { loading, error, data } = useQuery(GET_CAMPAIGN(campaignId));
+  const [
+    deleteApplication,
+    { loading: mutationLoading, error: mutationError },
+  ] = useMutation(DELETE_APPLICATION);
 
   // TODO sort by date and status
 
-  if (loading) {
+  if (loading || mutationLoading) {
     return <p>Loading...</p>;
   }
 
@@ -35,8 +45,27 @@ export const Campaign = () => {
     <p>{error.message}</p>;
   }
 
+  // TODO error strategy
+  if (mutationError) {
+    <p>{mutationError.message}</p>;
+  }
+
   const campaign = data.campaign;
   const applications = campaign.applications;
+
+  const handleDeleteClick = async (id: string) => {
+    if (confirm('Are you sure?')) {
+      const response = await deleteApplication({
+        variables: {
+          id,
+        },
+      });
+
+      if (response.data.deleteApplication) {
+        // TODO invalidate cache of GET_CAMPAIGN query ...
+      }
+    }
+  };
 
   return (
     <div>
@@ -67,6 +96,7 @@ export const Campaign = () => {
               <td>{a.dateUpdated ? formatDate(a.dateUpdated) : '-'}</td>
               <td>
                 <Link to={`/application/${a.id}`}>Edit</Link>
+                <button onClick={() => handleDeleteClick(a.id)}>Delete</button>
               </td>
             </tr>
           ))}

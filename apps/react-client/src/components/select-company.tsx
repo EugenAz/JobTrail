@@ -12,7 +12,7 @@ const createOption = (companyName: string, companyId: string) => ({
   value: companyId,
 });
 
-export const CREATE_COMPANY = gql`
+const CREATE_COMPANY = gql`
   mutation CreateCompany($name: String!) {
     createCompany(name: $name) {
       id
