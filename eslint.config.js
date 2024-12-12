@@ -1,11 +1,21 @@
-import globals from 'globals';
-import pluginJs from '@eslint/js';
-import tseslint from 'typescript-eslint';
-
-/** @type {import('eslint').Linter.Config[]} */
 export default [
-  { files: ['**/*.{js,mjs,cjs,ts}'] },
-  { languageOptions: { globals: globals.browser } },
-  pluginJs.configs.recommended,
-  ...tseslint.configs.recommended,
+  {
+    parser: '@typescript-eslint/parser',
+    parserOptions: {
+      project: './tsconfig.json',
+    },
+    extends: [
+      'eslint:recommended',
+      'standard',
+      'prettier',
+      'plugin:@typescript-eslint/recommended',
+      'prettier/@typescript-eslint',
+    ],
+    plugins: ['@typescript-eslint'],
+    env: {
+      es6: true,
+      node: true,
+    },
+    ignorePatterns: ['dist', 'node_modules', 'examples', 'scripts'],
+  },
 ];

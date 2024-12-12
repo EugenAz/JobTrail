@@ -1,18 +1,36 @@
 {
   "compilerOptions": {
-    "module": "ESNext",
-    "declaration": true,
-    "removeComments": true,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "allowSyntheticDefaultImports": true,
+    "incremental": true,
+    "outDir": "./dist",
+    "baseUrl": ".",
+    "moduleResolution": "Node",
+    "module": "CommonJS",
     "target": "ES2021",
     "sourceMap": true,
-    "strictPropertyInitialization": false,
-    "incremental": true,
-    "forceConsistentCasingInFileNames": true,
-    "skipLibCheck": true,
+    "lib": [
+      "esnext"
+    ],
+    "esModuleInterop": true,
+    "alwaysStrict": true,
     "strictNullChecks": false,
-    "moduleResolution": "nodenext"
-  }
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noUnusedLocals": true,
+    "resolveJsonModule": true,
+    "paths": {
+      "@monorepo/*": [
+        "packages/*/src/index.ts"
+      ]
+    }
+  },
+  "references": [
+    {
+      "path": "apps/server"
+    },
+    {
+      "path": "apps/react-client"
+    }
+  ],
+  "exclude": ["node_modules", "dist", "*.d.ts"]
 }
