@@ -1,25 +1,20 @@
 {
   "name": "@job-trail/monorepo",
-  "version": "1.0.0",
   "private": true,
   "workspaces": {
     "packages": [
-      "./apps/*",
-      "./libs/*"
+      "apps/*",
+      "libs/*"
     ]
   },
-  "scripts": {},
-  "author": "Ievgen Aznaurov",
-  "license": "ISC",
-  "description": "",
   "dependencies": {
     "graphql": "^16.9.0"
   },
   "devDependencies": {
     "@tsconfig/recommended": "^1.0.8",
     "@types/node": "^22.10.2",
-    "jest": "^29.7.0",
     "eslint": "^9.15.0",
+    "jest": "^29.7.0",
     "ts-jest": "^29.2.5",
     "ts-node": "^10.9.2",
     "typescript": "^5.7.2",

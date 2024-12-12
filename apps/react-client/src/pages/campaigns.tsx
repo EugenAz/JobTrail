@@ -11,7 +11,7 @@ const GET_CAMPAIGNS = gql`
   }
 `;
 
-export const App = () => {
+export const Campaigns = () => {
   const { loading, error, data } = useQuery(GET_CAMPAIGNS);
 
   if (loading) {

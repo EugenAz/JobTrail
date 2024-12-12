@@ -5,8 +5,9 @@ import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 
 // TODO fix prettier
 
-import { App } from './app'
+import { Campaigns } from './pages/campaigns'
 import { Campaign } from './pages/campaign';
+import { ApplicationForm } from './pages/application-form';
 
 const client = new ApolloClient({
   uri: 'http://localhost:3000/graphql',
@@ -18,8 +19,9 @@ createRoot(document.getElementById('root')!).render(
     <ApolloProvider client={client}>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<App />} />
+          <Route path="/" element={<Campaigns />} />
           <Route path="/campaign/:campaignId" element={<Campaign />} />
+          <Route path="/applications/:applicationId" element={<ApplicationForm />} />
         </Routes>
       </BrowserRouter>
     </ApolloProvider>
