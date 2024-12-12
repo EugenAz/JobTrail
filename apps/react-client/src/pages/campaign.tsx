@@ -1,5 +1,5 @@
 import {useQuery, gql} from '@apollo/client';
-import { useParams } from 'react-router';
+import { Link, useParams } from 'react-router';
 
 const GET_CAMPAIGN = (id: string) => gql`
   query GetCampaign {
@@ -24,6 +24,8 @@ export const Campaign = () => {
   let { campaignId } = useParams();
   const { loading, error, data } = useQuery(GET_CAMPAIGN(campaignId));
 
+  // TODO sort by date and status
+
   if (loading) {
     return <p>Loading...</p>
   }
@@ -46,6 +48,7 @@ export const Campaign = () => {
             <th>Role</th>
             <th>Status</th>
             <th>Date Updated</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -55,6 +58,7 @@ export const Campaign = () => {
             <td>{a.roleName}</td>
             <td>{a.status}</td>
             <td>{a.dateUpdated}</td>
+            <td><Link to={`/application/${a.id}`}>Edit</Link></td>
           </tr>)}
         </tbody>
       </table>

@@ -1,4 +1,4 @@
-import { Field, ID, InputType, Int } from '@nestjs/graphql';
+import { Field, ID, InputType } from '@nestjs/graphql';
 import { MaxLength, IsDateString, IsEnum } from 'class-validator';
 import { ApplicationStatus } from '../../types';
 

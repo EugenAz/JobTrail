@@ -22,7 +22,7 @@ export class ApplicationsService {
   async findOneById(id: string): Promise<ApplicationModel> {
     const application = await this.applicationsRepository.findOne({
       where: { id },
-      relations: ['companies', 'campaigns'],
+      relations: ['company', 'campaign'],
     });
 
     return mapToApplicationModel(application);

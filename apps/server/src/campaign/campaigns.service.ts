@@ -1,13 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import { CampaignDetailModel } from './campaign-detail.model';
 import { CampaignSummaryModel } from './campaign-summary.model';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CampaignEntity } from './campaign.entity';
 import { Repository } from 'typeorm';
-import {
-  mapToCampaignDetailModel,
-  mapToCampaignSummaryModel,
-} from './campaign.mappers';
+import { mapToCampaignSummaryModel } from './campaign.mappers';
 import { NewCampaignInput } from './dto/new-campaign.input';
 import { UpdatedCampaignInput } from './dto/updated-campaign.input';
 

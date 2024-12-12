@@ -2,7 +2,6 @@ import { Args, ID, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { CampaignSummaryModel } from './campaign-summary.model';
 import { CampaignDetailModel } from './campaign-detail.model';
 import { CampaingsService } from './campaigns.service';
-import { CampaignEntity } from './campaign.entity';
 import { NewCampaignInput } from './dto/new-campaign.input';
 import { UpdatedCampaignInput } from './dto/updated-campaign.input';
 import { mapToCampaignDetailModel } from './campaign.mappers';
