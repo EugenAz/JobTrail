@@ -67,6 +67,8 @@ export const Campaign = () => {
     }
   };
 
+  // TODO introduce search by role names and company names
+
   return (
     <div>
       <h2>{campaign.name}</h2>
