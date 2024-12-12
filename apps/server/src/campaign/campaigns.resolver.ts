@@ -23,14 +23,14 @@ export class CampaignsResolver {
 
   @Mutation(() => CampaignSummaryModel, { name: 'createCampaign' })
   async create(
-    @Args('newCampaignInput') newCampaignInput: NewCampaignInput,
+    @Args('newCampaignInput') newCampaignInput: NewCampaignInput
   ): Promise<CampaignSummaryModel> {
     return this.campaignsService.create(newCampaignInput);
   }
 
   @Mutation(() => CampaignSummaryModel, { name: 'updateCampaign' })
   async update(
-    @Args('updatedCampaignData') updatedCampaignData: UpdatedCampaignInput,
+    @Args('updatedCampaignData') updatedCampaignData: UpdatedCampaignInput
   ): Promise<CampaignSummaryModel> {
     return this.campaignsService.update(updatedCampaignData);
   }

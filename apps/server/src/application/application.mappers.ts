@@ -19,7 +19,7 @@ export const mapToApplicationModel = ({
   notes,
   roleName,
   dateCreated: new Date(dateCreated),
-  dateUpdated: new Date(dateUpdated),
+  dateUpdated: dateUpdated ? new Date(dateUpdated) : null,
   campaign: campaign ? mapToCampaignSummaryModel(campaign) : null,
   company,
 });

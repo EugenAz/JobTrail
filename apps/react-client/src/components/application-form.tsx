@@ -5,10 +5,12 @@ import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import { SelectCompany } from './select-company';
+import { formatDate, getTodayInFormat } from '../utils/dates';
 
 interface ApplicationFormProps {
-  initialData: any; // TODO
+  initialData?: any; // TODO
   onSubmit: any; // TODO
+  campaignId: string;
 }
 
 // Validation schema for the form
@@ -22,16 +24,19 @@ const schema = yup.object().shape({
 
 export const ApplicationForm: FC<ApplicationFormProps> = ({
   onSubmit,
+  campaignId,
   initialData,
 }) => {
-  const { control, handleSubmit, watch } = useForm<any>({
+  const isEdit = !!initialData;
+
+  const { control, handleSubmit } = useForm<any>({
     defaultValues: {
-      roleName: initialData.roleName || '',
-      status: initialData.status || 'OPEN', // TODO use enum
-      companyId: initialData.companyId || '',
-      link: initialData.link || '',
-      notes: initialData.notes || '',
-      dateCreated: initialData.dateCreated || '',
+      roleName: initialData?.roleName ?? '',
+      status: initialData?.status ?? 'OPEN', // TODO use enum
+      companyId: initialData?.company.id ?? '',
+      link: initialData?.link ?? '',
+      notes: initialData?.notes ?? '',
+      dateCreated: formatDate(initialData?.dateCreated) ?? getTodayInFormat(),
     },
     resolver: yupResolver(schema),
   });
@@ -40,7 +45,7 @@ export const ApplicationForm: FC<ApplicationFormProps> = ({
 
   return (
     <div>
-      <Link to={`/campaign/${initialData.campaign.id}`}>Back to Campaign</Link>
+      <Link to={`/campaign/${campaignId}`}>Back to Campaign</Link>
 
       <form onSubmit={handleSubmit(onSubmit)}>
         <div>
@@ -101,8 +106,8 @@ export const ApplicationForm: FC<ApplicationFormProps> = ({
             control={control}
             render={({ field }) => (
               <select {...field}>
-                <option value="open">Open</option>
-                <option value="reject">Rejected</option>
+                <option value="OPEN">Open</option>
+                <option value="REJECTED">Rejected</option>
               </select>
             )}
           />
@@ -122,14 +127,16 @@ export const ApplicationForm: FC<ApplicationFormProps> = ({
           />
         </div>
 
-        <div>
-          Last status update:
-          <time dateTime={initialData.dateUpdated}>
-            {initialData.dateUpdated}
-          </time>
-        </div>
+        {isEdit && initialData?.dateUpdated && (
+          <div>
+            Last status update:
+            <time dateTime={formatDate(initialData?.dateUpdated)}>
+              {formatDate(initialData?.dateUpdated)}
+            </time>
+          </div>
+        )}
 
-        <button type="submit">Submit</button>
+        <button type="submit">{isEdit ? 'Save' : 'Create'}</button>
       </form>
     </div>
   );

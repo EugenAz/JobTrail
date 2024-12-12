@@ -11,7 +11,7 @@ export class ApplicationModel {
   @Field()
   dateCreated: Date;
 
-  @Field()
+  @Field({ nullable: true })
   dateUpdated: Date;
 
   @Field(() => CampaignSummaryModel)
