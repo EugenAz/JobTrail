@@ -1,5 +1,4 @@
 {
-  "extends": "@tsconfig/recommended",
   "compilerOptions": {
     "module": "ESNext",
     "declaration": true,
@@ -13,6 +12,7 @@
     "incremental": true,
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true,
-    "strictNullChecks": false
+    "strictNullChecks": false,
+    "moduleResolution": "nodenext"
   }
 }
