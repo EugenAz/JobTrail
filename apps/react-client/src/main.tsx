@@ -3,7 +3,8 @@ import { createRoot } from 'react-dom/client';
 import { BrowserRouter, Route, Routes } from 'react-router';
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 
-// TODO fix prettier
+// TODO: add tailwind
+// TODO: reuse types across BE and FE
 
 import { Campaigns } from './pages/campaigns';
 import { Campaign } from './pages/campaign';
