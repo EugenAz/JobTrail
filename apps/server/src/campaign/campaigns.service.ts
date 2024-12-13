@@ -13,7 +13,7 @@ import { UpdatedCampaignInput } from './dto/updated-campaign.input';
 export class CampaingsService {
   constructor(
     @InjectRepository(CampaignEntity)
-    private readonly campaignRepository: Repository<CampaignEntity>,
+    private readonly campaignRepository: Repository<CampaignEntity>
   ) {}
 
   async findOneById(id: string): Promise<CampaignEntity> {
