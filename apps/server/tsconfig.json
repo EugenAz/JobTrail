@@ -8,12 +8,13 @@
     "resolveJsonModule": true,
     "composite": true,
     "allowJs": false,
+    "experimentalDecorators": true,
     "declaration": true,
     "declarationMap": true,
     "allowSyntheticDefaultImports": true,
     "paths": {
       "@jobtrail/*": ["./app/*", "./libs/*"]
-    },
+    }
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "dist"]
