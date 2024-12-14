@@ -1,0 +1,9 @@
+{
+  "name": "@job-trail/dates-lib",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "types": "index.js",
+  "scripts": {
+    "build": "tsc --build"
+  }
+}

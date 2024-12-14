@@ -9,10 +9,10 @@ export class ApplicationModel {
   id: string;
 
   @Field()
-  dateCreated: Date;
+  dateCreated: string;
 
   @Field({ nullable: true })
-  dateUpdated: Date;
+  dateUpdated: string;
 
   @Field(() => CampaignSummaryModel)
   campaign: CampaignSummaryModel;

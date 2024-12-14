@@ -5,8 +5,8 @@
 type ApplicationModel {
   campaign: CampaignSummaryModel!
   company: CompanyModel!
-  dateCreated: DateTime!
-  dateUpdated: DateTime
+  dateCreated: String!
+  dateUpdated: String
   id: ID!
   link: String
   notes: [String!]
@@ -23,15 +23,15 @@ enum ApplicationStatus {
 
 type CampaignDetailModel {
   applications: [ApplicationModel!]
-  dateEnd: DateTime
-  dateStart: DateTime!
+  dateEnd: String
+  dateStart: String!
   id: ID!
   name: String!
 }
 
 type CampaignSummaryModel {
-  dateEnd: DateTime
-  dateStart: DateTime!
+  dateEnd: String
+  dateStart: String!
   id: ID!
   name: String!
 }
@@ -40,11 +40,6 @@ type CompanyModel {
   id: ID!
   name: String!
 }
-
-"""
-A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
-"""
-scalar DateTime
 
 type Mutation {
   createApplication(newApplicationInput: NewApplicationInput!): ApplicationModel!
@@ -61,7 +56,7 @@ type Mutation {
 input NewApplicationInput {
   campaignId: ID!
   companyId: ID!
-  dateCreated: DateTime!
+  dateCreated: String!
   link: String
   notes: [String!] = [""]
   roleName: String!
@@ -69,8 +64,8 @@ input NewApplicationInput {
 }
 
 input NewCampaignInput {
-  dateEnd: DateTime
-  dateStart: DateTime!
+  dateEnd: String
+  dateStart: String!
   name: String!
 }
 
@@ -84,7 +79,7 @@ type Query {
 input UpdatedApplicationInput {
   campaignId: ID
   companyId: ID
-  dateCreated: DateTime
+  dateCreated: String
   id: ID!
   link: String
   notes: [String!]
@@ -93,8 +88,8 @@ input UpdatedApplicationInput {
 }
 
 input UpdatedCampaignInput {
-  dateEnd: DateTime
-  dateStart: DateTime
+  dateEnd: String
+  dateStart: String
   id: ID!
   name: String
 }

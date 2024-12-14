@@ -6,7 +6,7 @@ import { ApplicationStatus } from '../../types';
 export class NewApplicationInput {
   @Field()
   @IsDateString()
-  dateCreated: Date;
+  dateCreated: string;
 
   @Field(() => ID)
   campaignId: string;

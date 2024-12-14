@@ -1,6 +1,11 @@
 import { useQuery, gql, useMutation } from '@apollo/client';
 import { Link, useParams } from 'react-router';
-import { formatDate } from '../utils/dates';
+
+const formatDate = (dateString: string): string => {
+  const [date] = dateString.split('T');
+  return date;
+};
+
 
 const DELETE_APPLICATION = gql`
   mutation DeleteApplication($id: String!) {

@@ -14,10 +14,10 @@ export class CampaignEntity {
   name: string;
 
   @Column({ type: 'date', name: 'date_start' })
-  dateStart: Date;
+  dateStart: string;
 
   @Column({ type: 'date', nullable: true, name: 'date_end' })
-  dateEnd: Date;
+  dateEnd: string;
 
   @OneToMany(() => ApplicationEntity, (application) => application.campaign)
   applications: ApplicationEntity[];

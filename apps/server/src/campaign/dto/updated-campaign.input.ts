@@ -11,9 +11,9 @@ export class UpdatedCampaignInput {
   @MinLength(1)
   name?: string;
 
-  @Field(() => Date, { nullable: true })
-  dateStart?: Date;
+  @Field(() => String, { nullable: true })
+  dateStart?: string;
 
-  @Field(() => Date, { nullable: true })
-  dateEnd?: Date;
+  @Field(() => String, { nullable: true })
+  dateEnd?: string;
 }

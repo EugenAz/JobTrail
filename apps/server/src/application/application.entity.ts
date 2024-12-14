@@ -15,10 +15,10 @@ export class ApplicationEntity {
   id: string;
 
   @Column({ type: 'date', name: 'date' })
-  dateCreated: Date;
+  dateCreated: string;
 
   @Column({ type: 'date', nullable: true, name: 'status_changed_at' })
-  dateUpdated: Date;
+  dateUpdated: string;
 
   @ManyToOne(() => CampaignEntity, (campaign) => campaign.applications)
   @JoinColumn({ name: 'campaign_id' })

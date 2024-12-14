@@ -10,13 +10,20 @@ import { CompaniesService } from '../company/companies.service';
 import { CampaingsService } from '../campaign/campaigns.service';
 import { UpdatedApplicationInput } from './dto/updated-application.input';
 
+
+// TODO extract
+const getToday = (): string => {
+  const today = new Date();
+  return `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`;
+};
+
 @Injectable()
 export class ApplicationsService {
   constructor(
     @InjectRepository(ApplicationEntity)
     private readonly applicationsRepository: Repository<ApplicationEntity>,
     private companiesService: CompaniesService,
-    private campaignsService: CampaingsService,
+    private campaignsService: CampaingsService
   ) {}
 
   async findOneById(id: string): Promise<ApplicationModel> {
@@ -55,7 +62,7 @@ export class ApplicationsService {
       roleName,
       campaign,
       company,
-      dateUpdated: new Date(),
+      dateUpdated: getToday(),
     });
     const savedApplication =
       await this.applicationsRepository.save(newApplication);
@@ -91,7 +98,7 @@ export class ApplicationsService {
     }
     if (status) {
       if (status !== application.status) {
-        application.dateUpdated = new Date();
+        application.dateUpdated = getToday();
       }
 
       application.status = status;

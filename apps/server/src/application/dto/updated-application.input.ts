@@ -9,7 +9,7 @@ export class UpdatedApplicationInput {
 
   @Field({ nullable: true })
   @IsDateString()
-  dateCreated: Date;
+  dateCreated: string;
 
   @Field(() => ID, { nullable: true })
   campaignId: string;

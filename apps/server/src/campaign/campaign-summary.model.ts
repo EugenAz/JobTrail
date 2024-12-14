@@ -9,8 +9,8 @@ export class CampaignSummaryModel {
   name: string;
 
   @Field()
-  dateStart: Date;
+  dateStart: string;
 
   @Field({ nullable: true })
-  dateEnd?: Date;
+  dateEnd?: string;
 }

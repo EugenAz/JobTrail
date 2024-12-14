@@ -5,7 +5,16 @@ import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import { SelectCompany } from './select-company';
-import { formatDate, getTodayInFormat } from '../utils/dates';
+
+const getToday = (): string => {
+  const today = new Date();
+  return `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`;
+};
+const formatDate = (dateString: string): string => {
+  const [date] = dateString.split('T');
+  return date;
+};
+
 
 interface ApplicationFormProps {
   initialData?: any; // TODO
@@ -36,7 +45,7 @@ export const ApplicationForm: FC<ApplicationFormProps> = ({
       companyId: initialData?.company.id ?? '',
       link: initialData?.link ?? '',
       notes: initialData?.notes ?? '',
-      dateCreated: formatDate(initialData?.dateCreated) ?? getTodayInFormat(),
+      dateCreated: formatDate(initialData?.dateCreated) ?? getToday(),
     },
     resolver: yupResolver(schema),
   });

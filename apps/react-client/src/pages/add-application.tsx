@@ -18,7 +18,7 @@ export const AddApplication = () => {
   let { campaignId } = useParams();
   const navigate = useNavigate();
 
-  const [createApplication, { loading, error, data }] =
+  const [createApplication, { loading, error }] =
     useMutation(CREATE_APPLICATION);
 
   if (loading) {
