@@ -9,3 +9,7 @@ db
 
 # env
 .env*
+
+vite.config.*.timestamp*
+
+.nx

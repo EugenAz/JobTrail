@@ -2,6 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 
+import { getToday } from '@job-trail/dates';
+
 import { ApplicationModel } from './application.model';
 import { NewApplicationInput } from './dto/new-application.input';
 import { ApplicationEntity } from './application.entity';
@@ -9,13 +11,6 @@ import { mapToApplicationModel } from './application.mappers';
 import { CompaniesService } from '../company/companies.service';
 import { CampaingsService } from '../campaign/campaigns.service';
 import { UpdatedApplicationInput } from './dto/updated-application.input';
-
-
-// TODO extract
-const getToday = (): string => {
-  const today = new Date();
-  return `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`;
-};
 
 @Injectable()
 export class ApplicationsService {

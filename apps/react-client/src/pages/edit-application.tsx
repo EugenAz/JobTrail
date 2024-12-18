@@ -4,6 +4,8 @@ import { ApplicationForm } from '../components/application-form';
 import { useParams } from 'react-router';
 import { SubmitHandler } from 'react-hook-form';
 
+// TODO saving notes does not work
+
 // updateApplication(updatedApplicationInput: UpdatedApplicationInput!): ApplicationModel!
 export const UPDATE_APPLICATION = gql`
   mutation UpdateApplication(
@@ -46,7 +48,7 @@ const GET_APPLICATION = (id: string) => gql`
 `;
 
 export const EditApplication = () => {
-  let { applicationId } = useParams();
+  const { applicationId } = useParams();
   const [
     updateApplication,
     { loading: mutationLoading, error: mutationError, data: mutationData },

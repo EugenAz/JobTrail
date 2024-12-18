@@ -1,27 +1,21 @@
 {
-  "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "lib": ["DOM"],
-    "rootDir": ".",
-    "outDir": "./dist",
-    "baseUrl": ".",
-    "sourceMap": true,
-    "resolveJsonModule": true,
-    "composite": true,
-    "allowJs": false,
     "jsx": "react-jsx",
-    "declaration": true,
-    "declarationMap": true,
+    "allowJs": false,
+    "esModuleInterop": false,
     "allowSyntheticDefaultImports": true,
-    "paths": {
-      "@monorepo/server": ["../server/src/index.ts"]
-    }
+    "strict": true,
+    "types": ["vite/client", "vitest"]
   },
+  "files": [],
+  "include": [],
   "references": [
     {
-      "path": "../server"
+      "path": "./tsconfig.app.json"
+    },
+    {
+      "path": "./tsconfig.spec.json"
     }
   ],
-  "include": ["src/**/*"],
-  "exclude": ["node_modules", "dist"]
+  "extends": "../../tsconfig.base.json"
 }

@@ -1,0 +1,64 @@
+{
+  "workspaceLayout": {
+    "appsDir": "apps",
+    "libsDir": "libs"
+  },
+  "plugins": [
+    {
+      "plugin": "@nx/vite/plugin",
+      "options": {
+        "buildTargetName": "build",
+        "testTargetName": "test",
+        "serveTargetName": "serve",
+        "previewTargetName": "preview",
+        "serveStaticTargetName": "serve-static",
+        "typecheckTargetName": "typecheck"
+      }
+    },
+    {
+      "plugin": "@nx/eslint/plugin",
+      "options": {
+        "targetName": "lint"
+      }
+    },
+    {
+      "plugin": "@nx/webpack/plugin",
+      "options": {
+        "buildTargetName": "build",
+        "serveTargetName": "serve",
+        "previewTargetName": "preview"
+      }
+    },
+    {
+      "plugin": "@nx/jest/plugin",
+      "options": {
+        "targetName": "test"
+      },
+      "exclude": ["apps/temp-e2e/**/*"]
+    }
+  ],
+  "generators": {
+    "@nx/react": {
+      "application": {
+        "babel": true,
+        "style": "tailwind",
+        "linter": "eslint",
+        "bundler": "vite"
+      },
+      "component": {
+        "style": "tailwind"
+      },
+      "library": {
+        "style": "tailwind",
+        "linter": "eslint"
+      }
+    }
+  },
+  "targetDefaults": {
+    "@nx/js:tsc": {
+      "cache": true,
+      "dependsOn": ["^build"],
+      "inputs": ["default", "^default"]
+    }
+  }
+}

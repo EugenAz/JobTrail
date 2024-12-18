@@ -15,7 +15,7 @@ export const CREATE_APPLICATION = gql`
 `;
 
 export const AddApplication = () => {
-  let { campaignId } = useParams();
+  const { campaignId } = useParams();
   const navigate = useNavigate();
 
   const [createApplication, { loading, error }] =

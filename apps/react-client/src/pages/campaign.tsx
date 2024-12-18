@@ -33,7 +33,7 @@ const GET_CAMPAIGN = (id: string) => gql`
 `;
 
 export const Campaign = () => {
-  let { campaignId } = useParams();
+  const { campaignId } = useParams();
   const { loading, error, data } = useQuery(GET_CAMPAIGN(campaignId));
   const [
     deleteApplication,

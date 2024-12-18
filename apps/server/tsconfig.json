@@ -1,21 +1,17 @@
 {
-  "extends": "../../tsconfig.json",
-  "compilerOptions": {
-    "rootDir": ".",
-    "outDir": "./dist",
-    "baseUrl": ".",
-    "sourceMap": true,
-    "resolveJsonModule": true,
-    "composite": true,
-    "allowJs": false,
-    "experimentalDecorators": true,
-    "declaration": true,
-    "declarationMap": true,
-    "allowSyntheticDefaultImports": true,
-    "paths": {
-      "@jobtrail/*": ["./app/*", "./libs/*"]
+  "extends": "../../tsconfig.base.json",
+  "files": [],
+  "include": [],
+  "exclude": ["src/schema.gql"],
+  "references": [
+    {
+      "path": "./tsconfig.app.json"
+    },
+    {
+      "path": "./tsconfig.spec.json"
     }
-  },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules", "dist"]
+  ],
+  "compilerOptions": {
+    "esModuleInterop": true
+  }
 }

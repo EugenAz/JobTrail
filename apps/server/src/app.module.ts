@@ -26,7 +26,7 @@ import { CampaignModule } from './campaign/campaign.module';
     }),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
-      autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
+      autoSchemaFile: join(process.cwd(), 'apps/server/src/schema.gql'),
       sortSchema: true,
     }),
     CompanyModule,

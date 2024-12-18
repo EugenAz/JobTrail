@@ -1,0 +1,2 @@
+# To avoid restarting the server in the watch mode
+schema.gql
