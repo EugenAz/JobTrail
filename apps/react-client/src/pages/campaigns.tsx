@@ -37,7 +37,7 @@ export const Campaigns = () => {
         ))}
         <li>
           <TileLink
-            to="/new-campaign/"
+            to="/new-campaign"
             className="shadow-none hover:border-gray-300 border-dashed border-2 border-gray-200"
           >
             + New Campaign

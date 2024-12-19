@@ -3,11 +3,12 @@ import { createRoot } from 'react-dom/client';
 import { BrowserRouter, Route, Routes } from 'react-router';
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 
+import { Layout } from './components/layout';
 import { Campaigns } from './pages/campaigns';
 import { Campaign } from './pages/campaign';
 import { EditApplication } from './pages/edit-application';
 import { AddApplication } from './pages/add-application';
-import { Layout } from './components/layout';
+import { AddCampaign } from './pages/add-campaign';
 
 const client = new ApolloClient({
   uri: 'http://localhost:3000/graphql',
@@ -23,6 +24,10 @@ createRoot(document.getElementById('root')!).render(
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Layout page={<Campaigns />} />} />
+          <Route
+            path="/new-campaign"
+            element={<Layout page={<AddCampaign />} />}
+          />
           <Route
             path="/campaign/:campaignId"
             element={<Layout page={<Campaign />} />}

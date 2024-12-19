@@ -1,7 +1,7 @@
-import { ApplicationModel } from '@job-trail/types';
+import { IApplicationModel } from '@job-trail/types';
 
 export type ApplicationFormData = Omit<
-  ApplicationModel,
+  IApplicationModel,
   'id' | 'dateUpdated' | 'campaign' | 'company'
 > & {
   companyId: string;
