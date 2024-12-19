@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router';
 
 import { ApplicationForm } from '../components/application-form/application-form';
 import { useApplicationCreator } from '../graphql/use-application-creator';
+import { ApplicationFormData } from '../components/application-form/application-form-data.type';
 
 export const AddApplication = () => {
   const { campaignId } = useParams();
@@ -22,13 +23,13 @@ export const AddApplication = () => {
     <p>{error.message}</p>;
   }
 
-  const onSubmit: SubmitHandler<any> = async (d) => {
+  const onSubmit: SubmitHandler<ApplicationFormData> = async (d) => {
     try {
       const response = await createApplication({
         variables: {
           newApplicationInput: {
             roleName: d.roleName,
-            status: d.status,
+            status: d.status.toUpperCase(),
             companyId: d.companyId,
             link: d.link,
             notes: d.notes,
