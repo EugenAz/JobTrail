@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import { CompanyModel } from '@job-trail/types';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CompanyEntity } from './company.entity';
 import { Repository } from 'typeorm';
 import { UpdatedCompanyInput } from './updated-company.input';
+import { CompanyModel } from './company.model';
 
 @Injectable()
 export class CompaniesService {

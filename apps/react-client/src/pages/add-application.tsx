@@ -1,7 +1,7 @@
 import { SubmitHandler } from 'react-hook-form';
 import { useNavigate, useParams } from 'react-router';
 
-import { ApplicationForm } from '../components/application-form';
+import { ApplicationForm } from '../components/application-form/application-form';
 import { useApplicationCreator } from '../graphql/use-application-creator';
 
 export const AddApplication = () => {

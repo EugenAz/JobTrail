@@ -1,11 +1,11 @@
 import { Injectable } from '@nestjs/common';
-import { CampaignSummaryModel } from '@job-trail/types';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CampaignEntity } from './campaign.entity';
 import { Repository } from 'typeorm';
 import { mapToCampaignSummaryModel } from './campaign.mappers';
 import { NewCampaignInput } from './dto/new-campaign.input';
 import { UpdatedCampaignInput } from './dto/updated-campaign.input';
+import { CampaignSummaryModel } from './campaign-summary.model';
 
 // TODO come up with an abstraction that would deal with the mapping of entities to models and vice versa
 

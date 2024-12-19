@@ -4,13 +4,13 @@ import { InjectRepository } from '@nestjs/typeorm';
 
 import { getToday } from '@job-trail/dates';
 
-import { ApplicationModel } from '@job-trail/types';
 import { NewApplicationInput } from './dto/new-application.input';
 import { ApplicationEntity } from './application.entity';
 import { mapToApplicationModel } from './application.mappers';
 import { CompaniesService } from '../company/companies.service';
 import { CampaingsService } from '../campaign/campaigns.service';
 import { UpdatedApplicationInput } from './dto/updated-application.input';
+import { ApplicationModel } from './application.model';
 
 @Injectable()
 export class ApplicationsService {

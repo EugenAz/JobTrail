@@ -1,4 +1,5 @@
 import { useQuery, gql } from '@apollo/client';
+import { ICampaignDetailModel } from '@job-trail/types';
 
 const GET_CAMPAIGN = (id: string) => gql`
   query GetCampaign {
@@ -20,5 +21,5 @@ const GET_CAMPAIGN = (id: string) => gql`
 `;
 
 export const useCampaignGetter = (id: string) => {
-  return useQuery(GET_CAMPAIGN(id));
+  return useQuery<{ campaign: ICampaignDetailModel }>(GET_CAMPAIGN(id));
 };

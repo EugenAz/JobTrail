@@ -1,9 +1,10 @@
 import { Args, ID, Mutation, Query, Resolver } from '@nestjs/graphql';
-import { CampaignSummaryModel, CampaignDetailModel } from '@job-trail/types';
 import { CampaingsService } from './campaigns.service';
 import { NewCampaignInput } from './dto/new-campaign.input';
 import { UpdatedCampaignInput } from './dto/updated-campaign.input';
 import { mapToCampaignDetailModel } from './campaign.mappers';
+import { CampaignSummaryModel } from './campaign-summary.model';
+import { CampaignDetailModel } from './campaign-detail.model';
 
 @Resolver()
 export class CampaignsResolver {

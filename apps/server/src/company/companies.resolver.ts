@@ -1,9 +1,9 @@
 import { Args, ID, Mutation, Query, Resolver } from '@nestjs/graphql';
 
 import { CompaniesService } from './companies.service';
-import { CompanyModel } from '@job-trail/types';
 import { CompanyEntity } from './company.entity';
 import { UpdatedCompanyInput } from './updated-company.input';
+import { CompanyModel } from './company.model';
 
 @Resolver(() => CompanyModel)
 export class CompaniesResolver {

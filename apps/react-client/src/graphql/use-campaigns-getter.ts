@@ -1,7 +1,7 @@
 import { useQuery, gql } from '@apollo/client';
-import { CampaignSummaryModel } from '@job-trail/types';
+import { ICampaignSummaryModel } from '@job-trail/types';
 
-type Campaign = Pick<CampaignSummaryModel, 'id' | 'name'>;
+type Campaign = Pick<ICampaignSummaryModel, 'id' | 'name'>;
 
 const GET_CAMPAIGNS = gql`
   query GetCampaigns {

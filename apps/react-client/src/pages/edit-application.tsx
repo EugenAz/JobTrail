@@ -1,8 +1,9 @@
-import { ApplicationForm } from '../components/application-form';
+import { ApplicationForm } from '../components/application-form/application-form';
 import { useParams } from 'react-router';
 import { SubmitHandler } from 'react-hook-form';
 import { useApplicationUpdater } from '../graphql/use-application-updater';
 import { useApplicationGetter } from '../graphql/use-application-getter';
+import { ApplicationFormData } from '../components/application-form/application-form-data.type';
 
 export const EditApplication = () => {
   const { applicationId } = useParams<{ applicationId: string }>();
@@ -29,9 +30,13 @@ export const EditApplication = () => {
     <p>{mutationError.message}</p>;
   }
 
-  const onSubmit: SubmitHandler<any> = async (d) => {
+  if (!data) {
+    throw new Error('application data is unavailable');
+  }
+
+  const onSubmit: SubmitHandler<ApplicationFormData> = async (d) => {
     try {
-      const response = await updateApplication({
+      await updateApplication({
         variables: {
           updatedApplicationInput: {
             id: applicationId,
@@ -44,8 +49,6 @@ export const EditApplication = () => {
           },
         },
       });
-      console.log('Application updated:', response.data.updateApplication);
-      // TODO happy path => redirect?
     } catch (err) {
       // TODO error strategy
       console.error('Error updating application:', err);

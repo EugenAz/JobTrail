@@ -1,10 +1,10 @@
 import { Field, ID, ObjectType } from '@nestjs/graphql';
-import { CampaignSummaryModel } from './campaign-summary.model';
-import { CompanyModel } from './company.model';
-import { ApplicationStatus } from '../application-status';
+import { CampaignSummaryModel } from '../campaign/campaign-summary.model';
+import { ApplicationStatus, IApplicationModel } from '@job-trail/types';
+import { CompanyModel } from '../company/company.model';
 
 @ObjectType()
-export class ApplicationModel {
+export class ApplicationModel implements IApplicationModel {
   @Field(() => ID)
   id: string;
 
@@ -30,5 +30,5 @@ export class ApplicationModel {
   status: ApplicationStatus;
 
   @Field(() => [String], { nullable: true })
-  notes?: string[];
+  notes?: string;
 }

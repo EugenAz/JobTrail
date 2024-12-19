@@ -1,5 +1,6 @@
 import { mapToApplicationModel } from '../application/application.mappers';
-import { CampaignDetailModel, CampaignSummaryModel } from '@job-trail/types';
+import { CampaignDetailModel } from './campaign-detail.model';
+import { CampaignSummaryModel } from './campaign-summary.model';
 import { CampaignEntity } from './campaign.entity';
 
 export const mapToCampaignSummaryModel = ({

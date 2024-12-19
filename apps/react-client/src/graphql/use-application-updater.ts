@@ -1,4 +1,5 @@
 import { useMutation, gql } from '@apollo/client';
+import { IApplicationModel } from '@job-trail/types';
 
 const UPDATE_APPLICATION = gql`
   mutation UpdateApplication(
@@ -20,5 +21,7 @@ const UPDATE_APPLICATION = gql`
 `;
 
 export const useApplicationUpdater = () => {
-  return useMutation(UPDATE_APPLICATION);
+  return useMutation<{ updateApplication: IApplicationModel }>(
+    UPDATE_APPLICATION
+  );
 };

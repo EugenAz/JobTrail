@@ -1,9 +1,9 @@
 import { NotFoundException } from '@nestjs/common';
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
-import { ApplicationModel } from '@job-trail/types';
 import { ApplicationsService } from './applications.service';
 import { NewApplicationInput } from './dto/new-application.input';
 import { UpdatedApplicationInput } from './dto/updated-application.input';
+import { ApplicationModel } from './application.model';
 
 @Resolver(() => ApplicationModel)
 export class ApplicationsResolver {
@@ -36,7 +36,7 @@ export class ApplicationsResolver {
   }
 
   @Mutation(() => Boolean, { name: 'deleteApplication' })
-  async delete(@Args('id') id: string): Promise<Boolean> {
+  async delete(@Args('id') id: string): Promise<boolean> {
     return this.applicationsService.delete(id);
   }
 }

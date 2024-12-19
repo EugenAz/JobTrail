@@ -31,8 +31,12 @@ export const Campaign = () => {
     <p>{mutationError.message}</p>;
   }
 
+  if (!data) {
+    throw new Error('campaign data is unavailable');
+  }
+
   const campaign = data.campaign;
-  const applications = campaign.applications;
+  const applications = campaign?.applications;
 
   const handleDeleteClick = async (id: string) => {
     if (confirm('Are you sure?')) {
@@ -70,7 +74,7 @@ export const Campaign = () => {
           </tr>
         </thead>
         <tbody>
-          {applications.map((a: any) => (
+          {applications?.map((a) => (
             <tr key={a.id}>
               <td>{formatDate(a.dateCreated)}</td>
               <td>{a.company.name}</td>

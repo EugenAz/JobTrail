@@ -1,4 +1,5 @@
 import { useQuery, gql } from '@apollo/client';
+import { IApplicationModel } from '@job-trail/types';
 
 const GET_APPLICATION = (id: string) => gql`
   query GetApplication {
@@ -22,5 +23,5 @@ const GET_APPLICATION = (id: string) => gql`
 `;
 
 export const useApplicationGetter = (id: string) => {
-  return useQuery(GET_APPLICATION(id));
+  return useQuery<{ application: IApplicationModel }>(GET_APPLICATION(id));
 };

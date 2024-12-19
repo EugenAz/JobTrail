@@ -1,26 +1,20 @@
 import { FC } from 'react';
 import { Link } from 'react-router';
 import { useForm, Controller } from 'react-hook-form';
-import * as yup from 'yup';
+
 import { yupResolver } from '@hookform/resolvers/yup';
 
-import { SelectCompany } from './select-company';
+import { SelectCompany } from '../select-company';
 import { getToday, formatDate } from '@job-trail/dates';
+import { ApplicationModel, ApplicationStatus } from '@job-trail/types';
+import { ApplicationFormData } from './application-form-data.type';
+import { applicationFormSchema } from './application-form.schema';
 
 interface ApplicationFormProps {
-  initialData?: any; // TODO
-  onSubmit: any; // TODO
+  initialData?: ApplicationModel;
+  onSubmit: (applicationFormData: ApplicationFormData) => void;
   campaignId: string;
 }
-
-// Validation schema for the form
-const schema = yup.object().shape({
-  roleName: yup.string().required('Role Name is required'),
-  status: yup.string().required('Status is required'),
-  companyId: yup.string().required('Company is required'),
-  link: yup.string().url('Must be a valid URL'),
-  dateCreated: yup.string().required('Date is required'),
-});
 
 export const ApplicationForm: FC<ApplicationFormProps> = ({
   onSubmit,
@@ -29,10 +23,10 @@ export const ApplicationForm: FC<ApplicationFormProps> = ({
 }) => {
   const isEdit = !!initialData;
 
-  const { control, handleSubmit } = useForm<any>({
+  const { control, handleSubmit } = useForm({
     defaultValues: {
       roleName: initialData?.roleName ?? '',
-      status: initialData?.status ?? 'OPEN', // TODO use enum
+      status: initialData?.status ?? ApplicationStatus.OPEN,
       companyId: initialData?.company.id ?? '',
       link: initialData?.link ?? '',
       notes: initialData?.notes ?? '',
@@ -40,7 +34,7 @@ export const ApplicationForm: FC<ApplicationFormProps> = ({
         ? formatDate(initialData?.dateCreated)
         : getToday(),
     },
-    resolver: yupResolver(schema),
+    resolver: yupResolver(applicationFormSchema),
   });
 
   return (
