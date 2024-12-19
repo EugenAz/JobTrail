@@ -7,6 +7,7 @@ import { Campaigns } from './pages/campaigns';
 import { Campaign } from './pages/campaign';
 import { EditApplication } from './pages/edit-application';
 import { AddApplication } from './pages/add-application';
+import { Layout } from './components/layout';
 
 const client = new ApolloClient({
   uri: 'http://localhost:3000/graphql',
@@ -21,15 +22,18 @@ createRoot(document.getElementById('root')!).render(
     <ApolloProvider client={client}>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Campaigns />} />
-          <Route path="/campaign/:campaignId" element={<Campaign />} />
+          <Route path="/" element={<Layout page={<Campaigns />} />} />
+          <Route
+            path="/campaign/:campaignId"
+            element={<Layout page={<Campaign />} />}
+          />
           <Route
             path="/application/:applicationId"
-            element={<EditApplication />}
+            element={<Layout page={<EditApplication />} />}
           />
           <Route
             path="/campaign/:campaignId/new-application"
-            element={<AddApplication />}
+            element={<Layout page={<AddApplication />} />}
           />
         </Routes>
       </BrowserRouter>

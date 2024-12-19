@@ -16,7 +16,7 @@ export const Campaigns = () => {
   }
 
   return (
-    <div className="container mx-auto p-12 shadow-lg h-svh bg-gray-50">
+    <>
       <MainHeading>Campaings</MainHeading>
       <ul className="flex gap-6 flex-wrap">
         {data?.campaigns.map((c) => (
@@ -33,6 +33,6 @@ export const Campaigns = () => {
           </li>
         ))}
       </ul>
-    </div>
+    </>
   );
 };
