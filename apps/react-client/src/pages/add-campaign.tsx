@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router';
 import { useCampaignCreator } from '../graphql/use-campaign-creator';
 import { CampaignForm } from '../components/campaign-form/campaign-form';
 import { MainHeading } from '../components/atoms/main-heading';
+import { CampaignFormData } from '../components/campaign-form/campaign-form-data.type';
 
 export const AddCampaign = () => {
   const navigate = useNavigate();
@@ -17,7 +18,7 @@ export const AddCampaign = () => {
     <p>{error.message}</p>;
   }
 
-  const onSubmit: SubmitHandler<any> = async (c) => {
+  const onSubmit: SubmitHandler<CampaignFormData> = async (c) => {
     try {
       const response = await createCampaign({
         variables: {

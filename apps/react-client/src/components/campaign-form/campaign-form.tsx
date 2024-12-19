@@ -25,7 +25,7 @@ export const CampaignForm: FC<CampaignFormProps> = ({
       dateStart: initialData?.dateStart
         ? formatDate(initialData?.dateStart)
         : getToday(),
-      dateEnd: initialData?.dateEnd ? formatDate(initialData?.dateStart) : '',
+      dateEnd: initialData?.dateEnd ? formatDate(initialData?.dateEnd) : '',
     },
     resolver: yupResolver(campaignFormSchema),
   });

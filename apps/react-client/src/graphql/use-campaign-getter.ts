@@ -6,6 +6,8 @@ const GET_CAMPAIGN = (id: string) => gql`
     campaign(id: "${id}") {
       id
       name
+      dateStart
+      dateEnd
       applications {
         id
         roleName
