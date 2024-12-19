@@ -15,7 +15,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@job-trail/dates": ["libs/dates/src/index.ts"]
+      "@job-trail/dates": ["libs/dates/src/index.ts"],
+      "@job-trail/types": ["libs/types/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

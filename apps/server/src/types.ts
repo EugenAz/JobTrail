@@ -1,10 +1,4 @@
 import { registerEnumType } from '@nestjs/graphql';
-
-export enum ApplicationStatus {
-  OPEN = 'open',
-  REJECTED = 'rejected',
-  CLOSED = 'closed',
-  EXPIRED = 'expired',
-}
+import { ApplicationStatus } from '@job-trail/types';
 
 registerEnumType(ApplicationStatus, { name: 'ApplicationStatus' });

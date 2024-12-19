@@ -1,6 +1,6 @@
 import { Field, ID, InputType } from '@nestjs/graphql';
 import { MaxLength, IsDateString, IsEnum } from 'class-validator';
-import { ApplicationStatus } from '../../types';
+import { ApplicationStatus } from '@job-trail/types';
 
 @InputType()
 export class NewApplicationInput {

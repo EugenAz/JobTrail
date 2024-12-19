@@ -1,5 +1,5 @@
 import { Field, ID, ObjectType } from '@nestjs/graphql';
-import { ApplicationStatus } from '../types';
+import { ApplicationStatus } from '@job-trail/types';
 import { CampaignSummaryModel } from '../campaign/campaign-summary.model';
 import { CompanyModel } from '../company/company.model';
 

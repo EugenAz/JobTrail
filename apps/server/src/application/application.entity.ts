@@ -5,7 +5,7 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { ApplicationStatus } from '../types';
+import { ApplicationStatus } from '@job-trail/types';
 import { CampaignEntity } from '../campaign/campaign.entity';
 import { CompanyEntity } from '../company/company.entity';
 
