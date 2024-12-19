@@ -100,8 +100,10 @@ export const ApplicationForm: FC<ApplicationFormProps> = ({
             control={control}
             render={({ field }) => (
               <select {...field}>
-                <option value="OPEN">Open</option>
-                <option value="REJECTED">Rejected</option>
+                <option value={ApplicationStatus.OPEN}>Open</option>
+                <option value={ApplicationStatus.REJECTED}>Rejected</option>
+                <option value={ApplicationStatus.CLOSED}>Closed</option>
+                <option value={ApplicationStatus.EXPIRED}>Expired</option>
               </select>
             )}
           />
