@@ -5,14 +5,18 @@ import { UpdatedCampaignInput } from './dto/updated-campaign.input';
 import { mapToCampaignDetailModel } from './campaign.mappers';
 import { CampaignSummaryModel } from './campaign-summary.model';
 import { CampaignDetailModel } from './campaign-detail.model';
+import { OrderByInput } from '../common/dto/order-by.input';
 
 @Resolver()
 export class CampaignsResolver {
   constructor(private campaignsService: CampaingsService) {}
 
   @Query(() => [CampaignSummaryModel], { name: 'campaigns' })
-  async getCampaigns() {
-    return this.campaignsService.findAll();
+  async getCampaigns(
+    @Args('orderBy', { nullable: true })
+    orderBy?: OrderByInput<CampaignSummaryModel>
+  ) {
+    return this.campaignsService.findAll(orderBy);
   }
 
   @Query(() => CampaignDetailModel, { name: 'campaign' })

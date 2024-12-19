@@ -1,4 +1,5 @@
 import { Link } from 'react-router';
+import cx from 'classnames';
 import { useCampaignsGetter } from '../graphql/use-campaigns-getter';
 import { MainHeading } from '../components/atoms/main-heading';
 
@@ -23,7 +24,12 @@ export const Campaigns = () => {
           <li key={c.id}>
             <Link
               to={'/campaign/' + c.id}
-              className="p-8 border border-gray-200 rounded-lg shadow-md hover:shadow-sm block"
+              className={cx(
+                'p-8 border border-gray-200 rounded-lg shadow-md hover:shadow-sm block',
+                {
+                  'bg-gray-100': c.dateEnd && new Date(c.dateEnd) < new Date(),
+                }
+              )}
             >
               {c.name}
               <span className="block text-xs  text-gray-500 mt-2">

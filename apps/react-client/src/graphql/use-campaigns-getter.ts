@@ -2,8 +2,8 @@ import { useQuery, gql } from '@apollo/client';
 import { ICampaignSummaryModel } from '@job-trail/types';
 
 const GET_CAMPAIGNS = gql`
-  query GetCampaigns {
-    campaigns {
+  query GetCampaigns($orderBy: OrderByInput) {
+    campaigns(orderBy: $orderBy) {
       id
       name
       dateStart
@@ -13,5 +13,7 @@ const GET_CAMPAIGNS = gql`
 `;
 
 export const useCampaignsGetter = () => {
-  return useQuery<{ campaigns: ICampaignSummaryModel[] }>(GET_CAMPAIGNS);
+  return useQuery<{ campaigns: ICampaignSummaryModel[] }>(GET_CAMPAIGNS, {
+    variables: { orderBy: { field: 'dateStart', direction: 'ASC' } },
+  });
 };

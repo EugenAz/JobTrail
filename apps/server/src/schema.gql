@@ -69,10 +69,15 @@ input NewCampaignInput {
   name: String!
 }
 
+input OrderByInput {
+  direction: String
+  field: String
+}
+
 type Query {
   application(id: String!): ApplicationModel!
   campaign(id: String!): CampaignDetailModel!
-  campaigns: [CampaignSummaryModel!]!
+  campaigns(orderBy: OrderByInput): [CampaignSummaryModel!]!
   companies: [CompanyModel!]!
 }
 

@@ -6,6 +6,7 @@ import { mapToCampaignSummaryModel } from './campaign.mappers';
 import { NewCampaignInput } from './dto/new-campaign.input';
 import { UpdatedCampaignInput } from './dto/updated-campaign.input';
 import { CampaignSummaryModel } from './campaign-summary.model';
+import { OrderByInput } from '../common/dto/order-by.input';
 
 // TODO come up with an abstraction that would deal with the mapping of entities to models and vice versa
 
@@ -27,8 +28,19 @@ export class CampaingsService {
     });
   }
 
-  async findAll(): Promise<CampaignSummaryModel[]> {
-    const campaigns = await this.campaignRepository.find();
+  async findAll(
+    orderBy?: OrderByInput<CampaignSummaryModel>
+  ): Promise<CampaignSummaryModel[]> {
+    const query = this.campaignRepository.createQueryBuilder('campaigns');
+
+    if (orderBy) {
+      query.orderBy(
+        `campaigns.${orderBy.field}`,
+        orderBy.direction.toUpperCase() as 'ASC' | 'DESC'
+      );
+    }
+
+    const campaigns = await query.getMany();
 
     return campaigns.map(mapToCampaignSummaryModel);
   }
