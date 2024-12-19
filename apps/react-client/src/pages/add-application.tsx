@@ -4,6 +4,7 @@ import { useNavigate, useParams } from 'react-router';
 import { ApplicationForm } from '../components/application-form/application-form';
 import { useApplicationCreator } from '../graphql/use-application-creator';
 import { ApplicationFormData } from '../components/application-form/application-form-data.type';
+import { MainHeading } from '../components/atoms/main-heading';
 
 export const AddApplication = () => {
   const { campaignId } = useParams();
@@ -28,18 +29,17 @@ export const AddApplication = () => {
       const response = await createApplication({
         variables: {
           newApplicationInput: {
+            campaignId,
             roleName: d.roleName,
-            status: d.status.toUpperCase(),
+            status: d.status,
             companyId: d.companyId,
             link: d.link,
             notes: d.notes,
             dateCreated: d.dateCreated,
-            campaignId: campaignId,
           },
         },
       });
-      console.log('Application updated:', response.data.createApplication);
-      // TODO happy path => redirect to edit page OR campaign page
+
       navigate(`/application/${response.data.createApplication.id}`);
     } catch (err) {
       // TODO error strategy
@@ -47,5 +47,10 @@ export const AddApplication = () => {
     }
   };
 
-  return <ApplicationForm onSubmit={onSubmit} campaignId={campaignId} />;
+  return (
+    <>
+      <MainHeading>Add application</MainHeading>
+      <ApplicationForm onSubmit={onSubmit} campaignId={campaignId} />
+    </>
+  );
 };

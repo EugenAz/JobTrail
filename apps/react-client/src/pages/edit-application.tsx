@@ -4,6 +4,7 @@ import { SubmitHandler } from 'react-hook-form';
 import { useApplicationUpdater } from '../graphql/use-application-updater';
 import { useApplicationGetter } from '../graphql/use-application-getter';
 import { ApplicationFormData } from '../components/application-form/application-form-data.type';
+import { MainHeading } from '../components/atoms/main-heading';
 
 export const EditApplication = () => {
   const { applicationId } = useParams<{ applicationId: string }>();
@@ -41,7 +42,7 @@ export const EditApplication = () => {
           updatedApplicationInput: {
             id: applicationId,
             roleName: d.roleName,
-            status: d.status,
+            status: d.status.toUpperCase(),
             companyId: d.companyId,
             link: d.link,
             notes: d.notes,
@@ -61,10 +62,13 @@ export const EditApplication = () => {
   };
 
   return (
-    <ApplicationForm
-      initialData={initialData}
-      onSubmit={onSubmit}
-      campaignId={initialData.campaign.id}
-    />
+    <>
+      <MainHeading>Edit application</MainHeading>
+      <ApplicationForm
+        initialData={initialData}
+        onSubmit={onSubmit}
+        campaignId={initialData.campaign.id}
+      />
+    </>
   );
 };

@@ -1,4 +1,5 @@
 import { useQuery, gql } from '@apollo/client';
+import { ICompanyModel } from '@job-trail/types';
 
 const GET_COMPANIES = gql`
   query GetCompanies {
@@ -10,5 +11,5 @@ const GET_COMPANIES = gql`
 `;
 
 export const useCompaniesGetter = () => {
-  return useQuery(GET_COMPANIES);
+  return useQuery<{ companies: ICompanyModel[] }>(GET_COMPANIES);
 };

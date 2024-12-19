@@ -7,6 +7,9 @@ import { getToday, formatDate } from '@job-trail/dates';
 import { ICampaignSummaryModel } from '@job-trail/types';
 import { CampaignFormData } from './campaign-form-data.type';
 import { campaignFormSchema } from './campaign-form.schema';
+import { FormContainer } from '../atoms/form-container';
+import { FormControlRow } from '../atoms/form-control-row';
+import { Button } from '../atoms/button';
 
 interface CampaignFormProps {
   initialData?: ICampaignSummaryModel;
@@ -32,12 +35,11 @@ export const CampaignForm: FC<CampaignFormProps> = ({
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <div className="mt-10 flex flex-col gap-4 items-start mb-4">
-        <div className="w-1/4">
-          <label htmlFor="name" className="block text-lg font-medium">
-            Name
-          </label>
-          <div className="mt-2">
+      <FormContainer>
+        <FormControlRow
+          htmlFor="name"
+          label="Name"
+          control={({ controlClassName }) => (
             <Controller
               name="name"
               control={control}
@@ -45,7 +47,7 @@ export const CampaignForm: FC<CampaignFormProps> = ({
                 <>
                   <input
                     {...field}
-                    className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+                    className={controlClassName}
                     autoFocus
                     id="name"
                     placeholder="Campaign name"
@@ -54,13 +56,12 @@ export const CampaignForm: FC<CampaignFormProps> = ({
                 </>
               )}
             />
-          </div>
-        </div>
-        <div className="w-1/4">
-          <label htmlFor="dateStart" className="block text-lg font-medium">
-            Start date
-          </label>
-          <div className="mt-2">
+          )}
+        />
+        <FormControlRow
+          htmlFor="dateStart"
+          label="Start date"
+          control={({ controlClassName }) => (
             <Controller
               name="dateStart"
               control={control}
@@ -68,21 +69,20 @@ export const CampaignForm: FC<CampaignFormProps> = ({
                 <>
                   <input
                     {...field}
+                    className={controlClassName}
                     id="dateStart"
                     placeholder="Start date"
-                    className="block rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                   />
                   {fieldState.error && <p>{fieldState.error.message}</p>}
                 </>
               )}
             />
-          </div>
-        </div>
-        <div className="w-1/4">
-          <label htmlFor="dateEnd" className="block text-lg font-medium">
-            End date
-          </label>
-          <div className="mt-2">
+          )}
+        />
+        <FormControlRow
+          htmlFor="dateEnd"
+          label="End date"
+          control={({ controlClassName }) => (
             <Controller
               name="dateEnd"
               control={control}
@@ -90,23 +90,19 @@ export const CampaignForm: FC<CampaignFormProps> = ({
                 <>
                   <input
                     {...field}
+                    className={controlClassName}
                     id="dateEnd"
                     placeholder="End date"
-                    className="block rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                   />
                   {fieldState.error && <p>{fieldState.error.message}</p>}
                 </>
               )}
             />
-          </div>
-        </div>
-        <button
-          type="submit"
-          className="inline-block rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-        >
-          {isEdit ? 'Save' : 'Create'}
-        </button>
-      </div>
+          )}
+        />
+
+        <Button type="submit">{isEdit ? 'Save' : 'Create'}</Button>
+      </FormContainer>
     </form>
   );
 };
