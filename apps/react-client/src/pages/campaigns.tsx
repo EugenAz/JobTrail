@@ -18,7 +18,7 @@ export const Campaigns = () => {
     <>
       <h1>Campaings</h1>
       <ul>
-        {data?.campaigns.map((c: any) => (
+        {data?.campaigns.map((c) => (
           <Link to={'/campaign/' + c.id} key={c.id}>
             {c.name}
           </Link>
