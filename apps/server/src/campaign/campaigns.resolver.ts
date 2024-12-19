@@ -39,7 +39,6 @@ export class CampaignsResolver {
     return this.campaignsService.update(updatedCampaignData);
   }
 
-  // TODO: configure db to cascade delete applications
   @Mutation(() => Boolean, { name: 'deleteCampaign' })
   async delete(@Args('id', { type: () => ID }) id: string): Promise<boolean> {
     return this.campaignsService.delete(id);

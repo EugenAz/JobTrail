@@ -9,7 +9,7 @@ import styles from './campaigns.module.css';
 export const Campaigns = () => {
   const { loading, error, data } = useCampaignsGetter();
 
-  // TODO: Add campaign / Delete campaign
+  // TODO: Delete campaign
 
   if (loading) {
     return <p>Loading...</p>;

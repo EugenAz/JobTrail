@@ -8,8 +8,6 @@ import { UpdatedCampaignInput } from './dto/updated-campaign.input';
 import { CampaignSummaryModel } from './campaign-summary.model';
 import { OrderByInput } from '../common/dto/order-by.input';
 
-// TODO come up with an abstraction that would deal with the mapping of entities to models and vice versa
-
 @Injectable()
 export class CampaingsService {
   constructor(
@@ -66,15 +64,24 @@ export class CampaingsService {
     dateStart,
     dateEnd,
   }: UpdatedCampaignInput): Promise<CampaignSummaryModel> {
-    const campaign = await this.campaignRepository.findOne({ where: { id } });
-    // TODO check if there's more optimal way to do this
-    campaign.name = name ?? campaign.name;
-    campaign.dateStart = dateStart ?? campaign.dateStart;
-    campaign.dateEnd = dateEnd ?? campaign.dateEnd;
+    try {
+      const campaign = await this.campaignRepository.findOne({ where: { id } });
 
-    const savedCampaign = await this.campaignRepository.save(campaign);
+      if (!campaign) {
+        throw new Error(`Campaign with id ${id} not found`);
+      }
 
-    return mapToCampaignSummaryModel(savedCampaign);
+      campaign.name = name ?? campaign.name;
+      campaign.dateStart = dateStart ?? campaign.dateStart;
+      campaign.dateEnd = dateEnd ?? campaign.dateEnd;
+
+      const savedCampaign = await this.campaignRepository.save(campaign);
+
+      return mapToCampaignSummaryModel(savedCampaign);
+    } catch (error) {
+      console.error(`Error updating campaign with id ${id}:`, error);
+      throw error;
+    }
   }
 
   async delete(id: string): Promise<boolean> {
