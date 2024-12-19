@@ -3,9 +3,6 @@ import { createRoot } from 'react-dom/client';
 import { BrowserRouter, Route, Routes } from 'react-router';
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 
-// TODO: add tailwind
-// TODO: reuse types across BE and FE
-
 import { Campaigns } from './pages/campaigns';
 import { Campaign } from './pages/campaign';
 import { EditApplication } from './pages/edit-application';
@@ -18,6 +15,7 @@ const client = new ApolloClient({
 
 // TODO add error boundaries
 
+// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <ApolloProvider client={client}>

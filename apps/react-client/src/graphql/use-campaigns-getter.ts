@@ -1,17 +1,17 @@
 import { useQuery, gql } from '@apollo/client';
 import { ICampaignSummaryModel } from '@job-trail/types';
 
-type Campaign = Pick<ICampaignSummaryModel, 'id' | 'name'>;
-
 const GET_CAMPAIGNS = gql`
   query GetCampaigns {
     campaigns {
       id
       name
+      dateStart
+      dateEnd
     }
   }
 `;
 
 export const useCampaignsGetter = () => {
-  return useQuery<{ campaigns: Campaign[] }>(GET_CAMPAIGNS);
+  return useQuery<{ campaigns: ICampaignSummaryModel[] }>(GET_CAMPAIGNS);
 };

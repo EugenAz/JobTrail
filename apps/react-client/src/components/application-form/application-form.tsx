@@ -6,12 +6,12 @@ import { yupResolver } from '@hookform/resolvers/yup';
 
 import { SelectCompany } from '../select-company';
 import { getToday, formatDate } from '@job-trail/dates';
-import { ApplicationModel, ApplicationStatus } from '@job-trail/types';
+import { IApplicationModel, ApplicationStatus } from '@job-trail/types';
 import { ApplicationFormData } from './application-form-data.type';
 import { applicationFormSchema } from './application-form.schema';
 
 interface ApplicationFormProps {
-  initialData?: ApplicationModel;
+  initialData?: IApplicationModel;
   onSubmit: (applicationFormData: ApplicationFormData) => void;
   campaignId: string;
 }
