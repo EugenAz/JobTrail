@@ -32,8 +32,8 @@ export const CampaignForm: FC<CampaignFormProps> = ({
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-        <div className="col-span-2">
+      <div className="mt-10 flex flex-col gap-4 items-start mb-4">
+        <div className="w-1/4">
           <label htmlFor="name" className="block text-lg font-medium">
             Name
           </label>
@@ -56,7 +56,7 @@ export const CampaignForm: FC<CampaignFormProps> = ({
             />
           </div>
         </div>
-        <div className="col-span-full">
+        <div className="w-1/4">
           <label htmlFor="dateStart" className="block text-lg font-medium">
             Start date
           </label>
@@ -78,7 +78,7 @@ export const CampaignForm: FC<CampaignFormProps> = ({
             />
           </div>
         </div>
-        <div className="col-span-full">
+        <div className="w-1/4">
           <label htmlFor="dateEnd" className="block text-lg font-medium">
             End date
           </label>
@@ -100,10 +100,9 @@ export const CampaignForm: FC<CampaignFormProps> = ({
             />
           </div>
         </div>
-
         <button
           type="submit"
-          className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+          className="inline-block rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
         >
           {isEdit ? 'Save' : 'Create'}
         </button>
