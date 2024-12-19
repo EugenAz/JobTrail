@@ -16,6 +16,11 @@ export const CREATE_APPLICATION = gql`
 
 export const AddApplication = () => {
   const { campaignId } = useParams();
+
+  if (!campaignId) {
+    throw new Error('campaign ID is missing');
+  }
+
   const navigate = useNavigate();
 
   const [createApplication, { loading, error }] =
