@@ -16,6 +16,8 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
+// TODO add error boundaries
+
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <ApolloProvider client={client}>

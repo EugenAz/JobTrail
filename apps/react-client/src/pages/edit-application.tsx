@@ -1,48 +1,8 @@
-import { useQuery, useMutation, gql } from '@apollo/client';
-
 import { ApplicationForm } from '../components/application-form';
 import { useParams } from 'react-router';
 import { SubmitHandler } from 'react-hook-form';
-
-export const UPDATE_APPLICATION = gql`
-  mutation UpdateApplication(
-    $updatedApplicationInput: UpdatedApplicationInput!
-  ) {
-    updateApplication(updatedApplicationInput: $updatedApplicationInput) {
-      id
-      roleName
-      status
-      dateCreated
-      notes
-      link
-      company {
-        id
-        name
-      }
-    }
-  }
-`;
-
-const GET_APPLICATION = (id: string) => gql`
-  query GetApplication {
-    application(id: "${id}") {
-      roleName
-      status
-      dateCreated
-      dateUpdated
-      notes
-      link
-      company {
-        id
-        name
-      }
-      campaign {
-        id
-        name
-      }
-    }
-  }
-`;
+import { useApplicationUpdater } from '../graphql/use-application-updater';
+import { useApplicationGetter } from '../graphql/use-application-getter';
 
 export const EditApplication = () => {
   const { applicationId } = useParams<{ applicationId: string }>();
@@ -54,8 +14,8 @@ export const EditApplication = () => {
   const [
     updateApplication,
     { loading: mutationLoading, error: mutationError, data: mutationData },
-  ] = useMutation(UPDATE_APPLICATION);
-  const { loading, error, data } = useQuery(GET_APPLICATION(applicationId));
+  ] = useApplicationUpdater();
+  const { loading, error, data } = useApplicationGetter(applicationId);
 
   if (loading || mutationLoading) {
     return <p>Loading...</p>;

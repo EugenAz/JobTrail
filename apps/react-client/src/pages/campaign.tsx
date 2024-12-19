@@ -1,44 +1,25 @@
-import { useQuery, gql, useMutation } from '@apollo/client';
 import { Link, useParams } from 'react-router';
+import { useApplicationDeleter } from '../graphql/use-application-deleter';
+import { useCampaignGetter } from '../graphql/use-campaign-getter';
 
+// TODO use the lib?
 const formatDate = (dateString: string): string => {
   const [date] = dateString.split('T');
   return date;
 };
 
-
-const DELETE_APPLICATION = gql`
-  mutation DeleteApplication($id: String!) {
-    deleteApplication(id: $id)
-  }
-`;
-
-const GET_CAMPAIGN = (id: string) => gql`
-  query GetCampaign {
-    campaign(id: "${id}") {
-      id
-      name
-      applications {
-        id
-        roleName
-        status
-        dateCreated
-        dateUpdated
-        company {
-          name
-        }
-      }
-    }
-  }
-`;
-
 export const Campaign = () => {
   const { campaignId } = useParams();
-  const { loading, error, data } = useQuery(GET_CAMPAIGN(campaignId));
+
+  if (!campaignId) {
+    throw new Error('campaign ID is missing');
+  }
+
+  const { loading, error, data } = useCampaignGetter(campaignId);
   const [
     deleteApplication,
     { loading: mutationLoading, error: mutationError },
-  ] = useMutation(DELETE_APPLICATION);
+  ] = useApplicationDeleter();
 
   // TODO sort by date and status
 

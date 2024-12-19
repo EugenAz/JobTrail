@@ -1,6 +1,7 @@
 import { forwardRef, useEffect, useState } from 'react';
-import { useQuery, useMutation, gql } from '@apollo/client';
 import CreatableSelect from 'react-select/creatable';
+import { useCompanyCreator } from '../graphql/use-company-creator';
+import { useCompaniesGetter } from '../graphql/use-companies-getter';
 
 interface Option {
   readonly label: string;
@@ -12,24 +13,6 @@ const createOption = (companyName: string, companyId: string) => ({
   value: companyId,
 });
 
-const CREATE_COMPANY = gql`
-  mutation CreateCompany($name: String!) {
-    createCompany(name: $name) {
-      id
-      name
-    }
-  }
-`;
-
-const GET_COMPANIES = gql`
-  query GetCompanies {
-    companies {
-      id
-      name
-    }
-  }
-`;
-
 interface SelectCompanyProps {
   value: string;
   onChange: (value: string) => void;
@@ -40,12 +23,12 @@ export const SelectCompany = forwardRef<HTMLSelectElement, SelectCompanyProps>(
   ({ value, onChange, error }, ref) => {
     const [options, setOptions] = useState<Option[]>([]);
     const [createCompany, { loading: mutationLoading, error: mutationError }] =
-      useMutation(CREATE_COMPANY);
+      useCompanyCreator();
     const {
       loading: fetchingLoading,
       error: fetchError,
       data,
-    } = useQuery(GET_COMPANIES);
+    } = useCompaniesGetter();
 
     // TODO sort alphabetically
 

@@ -1,18 +1,8 @@
-import { useMutation, gql } from '@apollo/client';
-
-import { ApplicationForm } from '../components/application-form';
 import { SubmitHandler } from 'react-hook-form';
 import { useNavigate, useParams } from 'react-router';
 
-// TODO move all mutations to the mutations directory
-
-export const CREATE_APPLICATION = gql`
-  mutation CreateApplication($newApplicationInput: NewApplicationInput!) {
-    createApplication(newApplicationInput: $newApplicationInput) {
-      id
-    }
-  }
-`;
+import { ApplicationForm } from '../components/application-form';
+import { useApplicationCreator } from '../graphql/use-application-creator';
 
 export const AddApplication = () => {
   const { campaignId } = useParams();
@@ -22,9 +12,7 @@ export const AddApplication = () => {
   }
 
   const navigate = useNavigate();
-
-  const [createApplication, { loading, error }] =
-    useMutation(CREATE_APPLICATION);
+  const [createApplication, { loading, error }] = useApplicationCreator();
 
   if (loading) {
     return <p>Loading...</p>;

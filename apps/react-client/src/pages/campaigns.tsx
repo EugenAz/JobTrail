@@ -1,17 +1,8 @@
-import { useQuery, gql } from '@apollo/client';
 import { Link } from 'react-router';
-
-const GET_CAMPAIGNS = gql`
-  query GetCampaigns {
-    campaigns {
-      id
-      name
-    }
-  }
-`;
+import { useCampaignsGetter } from '../graphql/use-campaigns-getter';
 
 export const Campaigns = () => {
-  const { loading, error, data } = useQuery(GET_CAMPAIGNS);
+  const { loading, error, data } = useCampaignsGetter();
 
   // TODO: Add campaign / Delete campaign
 
