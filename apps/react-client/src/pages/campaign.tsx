@@ -14,7 +14,7 @@ export const Campaign = () => {
     throw new Error('campaign ID is missing');
   }
 
-  const { loading, error, data } = useCampaignGetter(campaignId);
+  const { loading, error, data, refetch } = useCampaignGetter(campaignId);
   const [
     deleteApplication,
     { loading: mutationLoading, error: mutationError },
@@ -51,7 +51,7 @@ export const Campaign = () => {
       });
 
       if (response.data.deleteApplication) {
-        // TODO invalidate cache of GET_CAMPAIGN query ...
+        await refetch();
       }
     }
   };
