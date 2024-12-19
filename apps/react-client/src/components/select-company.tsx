@@ -1,4 +1,5 @@
 import { forwardRef, useEffect, useState } from 'react';
+import { SingleValue } from 'react-select';
 import CreatableSelect from 'react-select/creatable';
 import { useCompanyCreator } from '../graphql/use-company-creator';
 import { useCompaniesGetter } from '../graphql/use-companies-getter';
@@ -42,7 +43,7 @@ export const SelectCompany = forwardRef<HTMLSelectElement, SelectCompanyProps>(
 
     useEffect(() => {
       if (data?.companies) {
-        setOptions(data.companies.map((c: any) => createOption(c.name, c.id)));
+        setOptions(data.companies.map((c) => createOption(c.name, c.id)));
       }
     }, [data?.companies]);
 
@@ -70,7 +71,8 @@ export const SelectCompany = forwardRef<HTMLSelectElement, SelectCompanyProps>(
           onCreateOption={handleCreate}
           options={options}
           isMulti={false}
-          onChange={(option: Option) => onChange(option.value)}
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+          onChange={(option: SingleValue<Option>) => onChange(option!.value)}
           value={optionValue}
         />
         {error && <p>{error}</p>}
