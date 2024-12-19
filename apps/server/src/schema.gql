@@ -9,7 +9,7 @@ type ApplicationModel {
   dateUpdated: String
   id: ID!
   link: String
-  notes: [String!]
+  notes: String
   roleName: String!
   status: ApplicationStatus!
 }
