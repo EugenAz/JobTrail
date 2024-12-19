@@ -39,7 +39,7 @@ export const Campaign = () => {
   const applications = campaign?.applications;
 
   const handleDeleteClick = async (id: string) => {
-    if (confirm('Are you sure?')) {
+    if (window.confirm('Are you sure?')) {
       const response = await deleteApplication({
         variables: {
           id,
