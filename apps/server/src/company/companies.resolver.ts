@@ -1,7 +1,7 @@
 import { Args, ID, Mutation, Query, Resolver } from '@nestjs/graphql';
 
 import { CompaniesService } from './companies.service';
-import { CompanyModel } from './company.model';
+import { CompanyModel } from '@job-trail/types';
 import { CompanyEntity } from './company.entity';
 import { UpdatedCompanyInput } from './updated-company.input';
 
@@ -21,7 +21,7 @@ export class CompaniesResolver {
 
   @Mutation(() => CompanyModel, { name: 'updateCompany' })
   async update(
-    @Args('updatedCompanyData') updatedCompanyData: UpdatedCompanyInput,
+    @Args('updatedCompanyData') updatedCompanyData: UpdatedCompanyInput
   ): Promise<CompanyEntity> {
     return this.companiesService.update(updatedCompanyData);
   }

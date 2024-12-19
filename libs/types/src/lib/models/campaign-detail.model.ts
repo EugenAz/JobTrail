@@ -1,6 +1,6 @@
 import { Field, ObjectType } from '@nestjs/graphql';
 import { CampaignSummaryModel } from './campaign-summary.model';
-import { ApplicationModel } from '../application/application.model';
+import { ApplicationModel } from './application.model';
 
 @ObjectType()
 export class CampaignDetailModel extends CampaignSummaryModel {

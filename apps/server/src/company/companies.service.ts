@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { CompanyModel } from './company.model';
+import { CompanyModel } from '@job-trail/types';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CompanyEntity } from './company.entity';
 import { Repository } from 'typeorm';
@@ -9,7 +9,7 @@ import { UpdatedCompanyInput } from './updated-company.input';
 export class CompaniesService {
   constructor(
     @InjectRepository(CompanyEntity)
-    private readonly companyRepository: Repository<CompanyEntity>,
+    private readonly companyRepository: Repository<CompanyEntity>
   ) {}
 
   async findOneById(id: string): Promise<CompanyModel> {

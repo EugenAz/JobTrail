@@ -7,7 +7,10 @@
     "emitDecoratorMetadata": true,
     "target": "es2021"
   },
-  "include": ["src/**/*.ts"],
+  "include": [
+    "src/**/*.ts",
+    "../../libs/types/src/lib/models/company.model.ts"
+  ],
   "exclude": [
     "jest.config.ts",
     "src/**/*.spec.ts",

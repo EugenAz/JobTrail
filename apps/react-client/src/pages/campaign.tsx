@@ -1,12 +1,7 @@
 import { Link, useParams } from 'react-router';
+import { formatDate } from '@job-trail/dates';
 import { useApplicationDeleter } from '../graphql/use-application-deleter';
 import { useCampaignGetter } from '../graphql/use-campaign-getter';
-
-// TODO use the lib?
-const formatDate = (dateString: string): string => {
-  const [date] = dateString.split('T');
-  return date;
-};
 
 export const Campaign = () => {
   const { campaignId } = useParams();

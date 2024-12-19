@@ -4,7 +4,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 
 import { getToday } from '@job-trail/dates';
 
-import { ApplicationModel } from './application.model';
+import { ApplicationModel } from '@job-trail/types';
 import { NewApplicationInput } from './dto/new-application.input';
 import { ApplicationEntity } from './application.entity';
 import { mapToApplicationModel } from './application.mappers';

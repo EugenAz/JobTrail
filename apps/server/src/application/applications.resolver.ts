@@ -1,6 +1,6 @@
 import { NotFoundException } from '@nestjs/common';
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
-import { ApplicationModel } from './application.model';
+import { ApplicationModel } from '@job-trail/types';
 import { ApplicationsService } from './applications.service';
 import { NewApplicationInput } from './dto/new-application.input';
 import { UpdatedApplicationInput } from './dto/updated-application.input';
@@ -22,7 +22,7 @@ export class ApplicationsResolver {
 
   @Mutation(() => ApplicationModel, { name: 'createApplication' })
   async create(
-    @Args('newApplicationInput') newApplicationInput: NewApplicationInput,
+    @Args('newApplicationInput') newApplicationInput: NewApplicationInput
   ): Promise<ApplicationModel> {
     return this.applicationsService.create(newApplicationInput);
   }
@@ -30,7 +30,7 @@ export class ApplicationsResolver {
   @Mutation(() => ApplicationModel, { name: 'updateApplication' })
   async update(
     @Args('updatedApplicationInput')
-    updatedApplicationInput: UpdatedApplicationInput,
+    updatedApplicationInput: UpdatedApplicationInput
   ): Promise<ApplicationModel> {
     return this.applicationsService.update(updatedApplicationInput);
   }

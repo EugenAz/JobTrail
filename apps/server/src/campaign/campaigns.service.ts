@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { CampaignSummaryModel } from './campaign-summary.model';
+import { CampaignSummaryModel } from '@job-trail/types';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CampaignEntity } from './campaign.entity';
 import { Repository } from 'typeorm';
