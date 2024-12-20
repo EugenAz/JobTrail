@@ -1,9 +1,11 @@
 import { Link, useParams } from 'react-router';
 import { formatDate } from '@job-trail/dates';
+
 import { useApplicationDeleter } from '../graphql/use-application-deleter';
 import { useCampaignGetter } from '../graphql/use-campaign-getter';
 import { MainHeading } from '../components/atoms/main-heading';
 import { ButtonLink } from '../components/atoms/button-link';
+import { LoadingErrorHandler } from '../components/loading-error-handler';
 
 import styles from './campaign.module.css';
 
@@ -22,24 +24,7 @@ export const Campaign = () => {
 
   // TODO sort by date and status
 
-  if (loading || mutationLoading) {
-    return <p>Loading...</p>;
-  }
-
-  if (error) {
-    <p>{error.message}</p>;
-  }
-
-  // TODO error strategy
-  if (mutationError) {
-    <p>{mutationError.message}</p>;
-  }
-
-  if (!data) {
-    throw new Error('campaign data is unavailable');
-  }
-
-  const campaign = data.campaign;
+  const campaign = data?.campaign;
   const applications = campaign?.applications;
 
   const handleDeleteClick = async (id: string) => {
@@ -59,15 +44,18 @@ export const Campaign = () => {
   // TODO search by role names and company names
 
   return (
-    <div>
-      <MainHeading>{campaign.name}</MainHeading>
+    <LoadingErrorHandler
+      loading={loading || mutationLoading}
+      error={error || mutationError}
+    >
+      <MainHeading>{campaign?.name}</MainHeading>
 
       <ButtonLink to={`/campaign/${campaignId}/new-application`}>
         + Add application
       </ButtonLink>
 
       <table className="mt-4 rounded-t-lg overflow-hidden">
-        <thead className="bg-purple-600 text-center">
+        <thead className="text-center">
           <tr>
             <th className={styles.thStyle}>Date</th>
             <th className={styles.thStyle}>Company</th>
@@ -107,6 +95,6 @@ export const Campaign = () => {
           ))}
         </tbody>
       </table>
-    </div>
+    </LoadingErrorHandler>
   );
 };
