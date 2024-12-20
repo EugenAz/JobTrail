@@ -5,6 +5,7 @@ import { ApplicationForm } from '../components/application-form/application-form
 import { useApplicationCreator } from '../graphql/use-application-creator';
 import { ApplicationFormData } from '../components/application-form/application-form-data.type';
 import { MainHeading } from '../components/atoms/main-heading';
+import { LoadingErrorHandler } from '../components/loading-error-handler';
 
 export const AddApplication = () => {
   const { campaignId } = useParams();
@@ -15,14 +16,6 @@ export const AddApplication = () => {
 
   const navigate = useNavigate();
   const [createApplication, { loading, error }] = useApplicationCreator();
-
-  if (loading) {
-    return <p>Loading...</p>;
-  }
-
-  if (error) {
-    <p>{error.message}</p>;
-  }
 
   const onSubmit: SubmitHandler<ApplicationFormData> = async (d) => {
     try {
@@ -48,9 +41,9 @@ export const AddApplication = () => {
   };
 
   return (
-    <>
+    <LoadingErrorHandler loading={loading} error={error}>
       <MainHeading>Add application</MainHeading>
       <ApplicationForm onSubmit={onSubmit} campaignId={campaignId} />
-    </>
+    </LoadingErrorHandler>
   );
 };

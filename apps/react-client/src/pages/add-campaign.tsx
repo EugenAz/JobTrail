@@ -5,18 +5,11 @@ import { useCampaignCreator } from '../graphql/use-campaign-creator';
 import { CampaignForm } from '../components/campaign-form/campaign-form';
 import { MainHeading } from '../components/atoms/main-heading';
 import { CampaignFormData } from '../components/campaign-form/campaign-form-data.type';
+import { LoadingErrorHandler } from '../components/loading-error-handler';
 
 export const AddCampaign = () => {
   const navigate = useNavigate();
   const [createCampaign, { loading, error }] = useCampaignCreator();
-
-  if (loading) {
-    return <p>Loading...</p>;
-  }
-
-  if (error) {
-    <p>{error.message}</p>;
-  }
 
   const onSubmit: SubmitHandler<CampaignFormData> = async (c) => {
     try {
@@ -40,9 +33,9 @@ export const AddCampaign = () => {
   };
 
   return (
-    <>
+    <LoadingErrorHandler loading={loading} error={error}>
       <MainHeading>Add Campaign</MainHeading>
       <CampaignForm onSubmit={onSubmit} />
-    </>
+    </LoadingErrorHandler>
   );
 };

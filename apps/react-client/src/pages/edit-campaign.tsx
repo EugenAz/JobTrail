@@ -5,6 +5,7 @@ import { useCampaignUpdater } from '../graphql/use-campaign-updater';
 import { useCampaignGetter } from '../graphql/use-campaign-getter';
 import { CampaignFormData } from '../components/campaign-form/campaign-form-data.type';
 import { MainHeading } from '../components/atoms/main-heading';
+import { LoadingErrorHandler } from '../components/loading-error-handler';
 
 export const EditCampaign = () => {
   const { campaignId } = useParams<{ campaignId: string }>();
@@ -18,18 +19,6 @@ export const EditCampaign = () => {
     { loading: mutationLoading, error: mutationError, data: mutationData },
   ] = useCampaignUpdater();
   const { loading, error, data } = useCampaignGetter(campaignId);
-
-  if (loading || mutationLoading) {
-    return <p>Loading...</p>;
-  }
-
-  if (error) {
-    <p>{error.message}</p>;
-  }
-
-  if (mutationError) {
-    <p>{mutationError.message}</p>;
-  }
 
   if (!data) {
     throw new Error('Campaign data is unavailable');
@@ -59,7 +48,10 @@ export const EditCampaign = () => {
   };
 
   return (
-    <>
+    <LoadingErrorHandler
+      loading={loading || mutationLoading}
+      error={error || mutationError}
+    >
       <MainHeading>Edit Campaign</MainHeading>
 
       <CampaignForm initialData={initialData} onSubmit={onSubmit} />
@@ -67,6 +59,6 @@ export const EditCampaign = () => {
       <button className="rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600">
         Delete campaign
       </button>
-    </>
+    </LoadingErrorHandler>
   );
 };

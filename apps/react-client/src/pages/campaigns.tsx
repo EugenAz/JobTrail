@@ -5,22 +5,15 @@ import { useCampaignsGetter } from '../graphql/use-campaigns-getter';
 import { MainHeading } from '../components/atoms/main-heading';
 import { TileLink } from '../components/atoms/tile-link';
 import styles from './campaigns.module.css';
+import { LoadingErrorHandler } from '../components/loading-error-handler';
 
 export const Campaigns = () => {
   const { loading, error, data } = useCampaignsGetter();
 
   // TODO: Delete campaign
 
-  if (loading) {
-    return <p>Loading...</p>;
-  }
-
-  if (error) {
-    <p>{error.message}</p>;
-  }
-
   return (
-    <>
+    <LoadingErrorHandler loading={loading} error={error}>
       <MainHeading>Campaings</MainHeading>
       <ul className="flex gap-6 flex-wrap">
         {data?.campaigns.map((c) => (
@@ -50,6 +43,6 @@ export const Campaigns = () => {
           </TileLink>
         </li>
       </ul>
-    </>
+    </LoadingErrorHandler>
   );
 };
