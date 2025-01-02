@@ -24,7 +24,7 @@ export const AddApplication = () => {
           newApplicationInput: {
             campaignId,
             roleName: d.roleName,
-            status: d.status,
+            status: d.status.toUpperCase(),
             companyId: d.companyId,
             link: d.link,
             notes: d.notes,
