@@ -11,11 +11,11 @@ import styles from './campaign.module.css';
 import { Button } from '../components/atoms/button';
 import { useEffect, useState } from 'react';
 import { ApplicationStatus, IApplicationModel } from '@job-trail/types';
-
-const STATUS_FILTER_KEY = 'statusFilter';
+import { getFilteredApplications, STATUS_FILTER_KEY } from './campaign.utils';
 
 export const Campaign = () => {
   const { campaignId } = useParams();
+  const [searchTerm, setSearchTerm] = useState('');
   const [searchParams, setSearchParams] = useSearchParams();
   const filterStatus = searchParams.get(STATUS_FILTER_KEY) as ApplicationStatus;
   const [applications, setApplications] = useState<IApplicationModel[]>([]);
@@ -30,24 +30,22 @@ export const Campaign = () => {
     { loading: mutationLoading, error: mutationError },
   ] = useApplicationDeleter();
 
-  // TODO sort by date and status
-
   const campaign = data?.campaign;
+
   useEffect(() => {
-    let apps: IApplicationModel[];
-
     if (campaign?.applications) {
-      apps = campaign?.applications;
-
-      if (filterStatus === ApplicationStatus.OPEN) {
-        apps = apps?.filter(
-          (a) => a.status.toLowerCase() === ApplicationStatus.OPEN
-        );
-      }
-
-      setApplications(apps);
+      const filteredApps = getFilteredApplications(
+        campaign.applications,
+        filterStatus,
+        searchTerm
+      );
+      setApplications(filteredApps);
     }
-  }, [campaign?.applications, filterStatus]);
+  }, [campaign?.applications, filterStatus, searchTerm]);
+
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(e.target.value.trim().toLowerCase());
+  };
 
   const handleDeleteClick = async (id: string) => {
     if (window.confirm('Are you sure?')) {
@@ -62,8 +60,6 @@ export const Campaign = () => {
       }
     }
   };
-
-  // TODO search by role names and company names
 
   const handleFilterOpenToggleClick = () => {
     setSearchParams((prev) => {
@@ -93,6 +89,13 @@ export const Campaign = () => {
             ? 'Show all'
             : 'Show only open'}
         </Button>
+
+        <input
+          className="border-gray-600 border-2 rounded-md p-2"
+          placeholder="Search..."
+          onChange={handleSearch}
+          value={searchTerm}
+        />
       </div>
 
       <table className="mt-4 rounded-t-lg overflow-hidden">
