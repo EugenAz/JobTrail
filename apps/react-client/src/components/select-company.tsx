@@ -29,9 +29,8 @@ export const SelectCompany = forwardRef<HTMLSelectElement, SelectCompanyProps>(
       loading: fetchingLoading,
       error: fetchError,
       data,
+      refetch,
     } = useCompaniesGetter();
-
-    // TODO sort alphabetically
 
     if (fetchError) {
       <p>{fetchError.message}</p>;
@@ -43,7 +42,11 @@ export const SelectCompany = forwardRef<HTMLSelectElement, SelectCompanyProps>(
 
     useEffect(() => {
       if (data?.companies) {
-        setOptions(data.companies.map((c) => createOption(c.name, c.id)));
+        setOptions(
+          data.companies
+            .map((c) => createOption(c.name, c.id))
+            .sort((a, b) => a.label.localeCompare(b.label))
+        );
       }
     }, [data?.companies]);
 
@@ -55,6 +58,8 @@ export const SelectCompany = forwardRef<HTMLSelectElement, SelectCompanyProps>(
       setOptions((prev) => [...prev, createOption(inputValue, newCompanyId)]);
 
       onChange(newCompanyId);
+
+      refetch();
     };
 
     const optionValue = options.find((o) => value === o.value);
