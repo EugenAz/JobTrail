@@ -23,6 +23,11 @@ export class CampaingsService {
         'applications.company',
         'applications.campaign',
       ],
+      order: {
+        applications: {
+          dateCreated: 'DESC',
+        },
+      },
     });
   }
 
