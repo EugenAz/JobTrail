@@ -1,5 +1,5 @@
 import { SubmitHandler } from 'react-hook-form';
-import { useNavigate, useParams } from 'react-router';
+import { Link, useNavigate, useParams } from 'react-router';
 
 import { ApplicationForm } from '../components/application-form/application-form';
 import { useApplicationCreator } from '../graphql/use-application-creator';
@@ -43,6 +43,9 @@ export const AddApplication = () => {
   return (
     <LoadingErrorHandler loading={loading} error={error}>
       <MainHeading>Add application</MainHeading>
+      <Link className="underline" to={`/campaign/${campaignId}`}>
+        To the campaign
+      </Link>
       <ApplicationForm onSubmit={onSubmit} campaignId={campaignId} />
     </LoadingErrorHandler>
   );

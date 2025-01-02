@@ -1,5 +1,5 @@
 import { ApplicationForm } from '../components/application-form/application-form';
-import { useParams } from 'react-router';
+import { Link, useParams } from 'react-router';
 import { SubmitHandler } from 'react-hook-form';
 import { useApplicationUpdater } from '../graphql/use-application-updater';
 import { useApplicationGetter } from '../graphql/use-application-getter';
@@ -64,6 +64,9 @@ export const EditApplication = () => {
   return (
     <>
       <MainHeading>Edit application</MainHeading>
+      <Link className="underline" to={`/campaign/${initialData.campaign.id}`}>
+        To the campaign
+      </Link>
       <ApplicationForm
         initialData={initialData}
         onSubmit={onSubmit}
