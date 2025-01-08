@@ -1,5 +1,6 @@
 import { Link, useParams, useSearchParams } from 'react-router';
 import { formatDate } from '@job-trail/dates';
+import { PresentationChartLineIcon } from '@heroicons/react/16/solid';
 
 import { useApplicationDeleter } from '../graphql/use-application-deleter';
 import { useCampaignGetter } from '../graphql/use-campaign-getter';
@@ -78,7 +79,12 @@ export const Campaign = () => {
       loading={loading || mutationLoading}
       error={error || mutationError}
     >
-      <MainHeading>{campaign?.name}</MainHeading>
+      <div className="flex gap-2">
+        <MainHeading>{campaign?.name} /</MainHeading>
+        <Link to={`analytics`} className="mt-1">
+          <PresentationChartLineIcon className="w-7 text-blue-500" />
+        </Link>
+      </div>
 
       <div className="flex gap-4">
         <ButtonLink to={`/campaign/${campaignId}/new-application`}>

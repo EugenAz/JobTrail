@@ -10,6 +10,7 @@ import { EditApplication } from './pages/edit-application';
 import { AddApplication } from './pages/add-application';
 import { AddCampaign } from './pages/add-campaign';
 import { EditCampaign } from './pages/edit-campaign';
+import { CampaignAnalytics } from './pages/campaign-analytics';
 
 const client = new ApolloClient({
   uri: 'http://localhost:3000/graphql',
@@ -36,6 +37,10 @@ createRoot(document.getElementById('root')!).render(
           <Route
             path="/campaign/:campaignId"
             element={<Layout page={<Campaign />} />}
+          />
+          <Route
+            path="/campaign/:campaignId/analytics"
+            element={<Layout page={<CampaignAnalytics />} />}
           />
           <Route
             path="/application/:applicationId"
