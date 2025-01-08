@@ -19,7 +19,7 @@ export const AddApplication = () => {
 
   const onSubmit: SubmitHandler<ApplicationFormData> = async (d) => {
     try {
-      const response = await createApplication({
+      await createApplication({
         variables: {
           newApplicationInput: {
             campaignId,
@@ -33,7 +33,7 @@ export const AddApplication = () => {
         },
       });
 
-      navigate(`/application/${response.data.createApplication.id}`);
+      navigate(`/campaign/${campaignId}`);
     } catch (err) {
       // TODO error strategy
       console.error('Error updating application:', err);
