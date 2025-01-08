@@ -12,6 +12,7 @@ const GET_CAMPAIGN = (id: string) => gql`
         id
         roleName
         status
+        link
         dateCreated
         dateUpdated
         company {

@@ -110,7 +110,16 @@ export const Campaign = () => {
             <tr key={a.id}>
               <td className={styles.tdStyle}>{formatDate(a.dateCreated)}</td>
               <td className={styles.tdStyle2}>{a.company.name}</td>
-              <td className={styles.tdStyle}>{a.roleName}</td>
+              <td className={styles.tdStyle}>
+                <a
+                  className="underline hover:no-underline text-blue-600"
+                  href={a.link}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {a.roleName}
+                </a>
+              </td>
               <td className={styles.tdStyle2}>{a.status}</td>
               <td className={styles.tdStyle}>
                 {a.dateUpdated ? formatDate(a.dateUpdated) : '-'}
