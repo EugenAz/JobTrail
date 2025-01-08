@@ -12,12 +12,13 @@ import { Button } from '../components/atoms/button';
 import { useEffect, useState } from 'react';
 import { ApplicationStatus, IApplicationModel } from '@job-trail/types';
 import { getFilteredApplications, STATUS_FILTER_KEY } from './campaign.utils';
+import { SearchInput } from '../components/search-input';
 
 export const Campaign = () => {
   const { campaignId } = useParams();
   const [searchTerm, setSearchTerm] = useState('');
-  const [searchParams, setSearchParams] = useSearchParams();
-  const filterStatus = searchParams.get(STATUS_FILTER_KEY) as ApplicationStatus;
+  const [filterParams, setFilterParams] = useSearchParams();
+  const filterStatus = filterParams.get(STATUS_FILTER_KEY) as ApplicationStatus;
   const [applications, setApplications] = useState<IApplicationModel[]>([]);
 
   if (!campaignId) {
@@ -62,7 +63,7 @@ export const Campaign = () => {
   };
 
   const handleFilterOpenToggleClick = () => {
-    setSearchParams((prev) => {
+    setFilterParams((prev) => {
       if (filterStatus === ApplicationStatus.OPEN) {
         prev.delete(STATUS_FILTER_KEY);
       } else {
@@ -90,12 +91,7 @@ export const Campaign = () => {
             : 'Show only open'}
         </Button>
 
-        <input
-          className="border-gray-600 border-2 rounded-md p-2"
-          placeholder="Search..."
-          onChange={handleSearch}
-          value={searchTerm}
-        />
+        <SearchInput handleSearch={handleSearch} searchTerm={searchTerm} />
       </div>
 
       <table className="mt-4 rounded-t-lg overflow-hidden">
