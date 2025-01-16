@@ -4,7 +4,14 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { join } from 'path';
 
-import { DB, DB_PASSWORD, DB_USERNAME, ENVIRONMENT } from './env';
+import {
+  DB_NAME,
+  DB_HOST,
+  DB_PORT,
+  DB_PASSWORD,
+  DB_USERNAME,
+  ENVIRONMENT,
+} from './env';
 
 import { ApplicationModule } from './application/application.module';
 import { CompanyModule } from './company/company.module';
@@ -14,11 +21,11 @@ import { CampaignModule } from './campaign/campaign.module';
   imports: [
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: 'localhost',
-      port: 5432,
+      host: DB_HOST,
+      port: DB_PORT,
       username: DB_USERNAME,
       password: DB_PASSWORD,
-      database: DB,
+      database: DB_NAME,
       entities: [__dirname + '/**/*.entity.ts'],
       autoLoadEntities: true,
       synchronize: ENVIRONMENT === 'development',

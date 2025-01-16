@@ -9,6 +9,8 @@ db
 
 # env
 .env
+.env.development
+.env.production
 
 vite.config.*.timestamp*
 

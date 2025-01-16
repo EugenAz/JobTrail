@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client';
 import { BrowserRouter, Route, Routes } from 'react-router';
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 
+import { API_URL } from './utils/env';
 import { Layout } from './components/layout';
 import { Campaigns } from './pages/campaigns';
 import { Campaign } from './pages/campaign';
@@ -13,7 +14,7 @@ import { EditCampaign } from './pages/edit-campaign';
 import { CampaignAnalytics } from './pages/campaign-analytics';
 
 const client = new ApolloClient({
-  uri: 'http://localhost:3000/graphql',
+  uri: API_URL,
   cache: new InMemoryCache(),
 });
 
