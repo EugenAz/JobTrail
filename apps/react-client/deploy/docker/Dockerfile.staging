@@ -1,0 +1,19 @@
+FROM node:23.4-alpine AS builder
+WORKDIR /monorepo
+
+COPY package.json package-lock.json ./
+RUN npm install
+
+COPY . .
+
+RUN npx nx run react-client:build
+
+FROM caddy:2.6-alpine
+WORKDIR /usr/share/caddy
+
+COPY --from=builder /monorepo/dist/apps/react-client ./site
+
+COPY apps/react-client/deploy/docker/Caddyfile /etc/caddy/Caddyfile
+
+EXPOSE 80
+CMD ["caddy", "run", "--config", "/etc/caddy/Caddyfile"]
