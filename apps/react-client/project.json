@@ -5,17 +5,31 @@
   "projectType": "application",
   "tags": [],
   "targets": {
-    "options": {
-      "command": ""
+    "build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "vite build"
+      },
+      "configurations": {
+        "staging": {
+          "command": "vite build --mode staging"
+        },
+        "production": {
+          "command": "vite build --mode production"
+        }
+      }
     },
     "docker-build": {
+      "dependsOn": ["build"],
       "executor": "nx:run-commands",
       "configurations": {
         "staging": {
-          "command": "docker build -f apps/react-client/deploy/docker/Dockerfile.staging . -t react-client-staging:${IMAGE_VERSION:-latest}"
+          "command": "docker build -f apps/react-client/deploy/docker/Dockerfile.staging . -t react-client-staging:${IMAGE_VERSION:-latest}",
+          "dependsOn": ["build:staging"]
         },
         "production": {
-          "command": "docker build -f ${DOCKERFILE_PATH:-apps/react-client/deploy/docker/Dockerfile.production} . -t react-client-production:${IMAGE_VERSION:-latest}"
+          "command": "docker build -f ${DOCKERFILE_PATH:-apps/react-client/deploy/docker/Dockerfile.production} . -t react-client-production:${IMAGE_VERSION:-latest}",
+          "dependsOn": ["build:production"]
         }
       }
     }
