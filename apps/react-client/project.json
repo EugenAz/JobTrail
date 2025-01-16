@@ -12,10 +12,10 @@
       "executor": "nx:run-commands",
       "configurations": {
         "staging": {
-          "command": "docker build -f apps/react-client/deploy/docker/Dockerfile.staging . -t react-client-staging:latest"
+          "command": "docker build -f apps/react-client/deploy/docker/Dockerfile.staging . -t react-client-staging:${IMAGE_VERSION:-latest}"
         },
         "production": {
-          "command": "docker build -f ${DOCKERFILE_PATH:-apps/react-client/deploy/docker/Dockerfile.production} . -t ${IMAGE_TAG:-react-client-production:latest}"
+          "command": "docker build -f ${DOCKERFILE_PATH:-apps/react-client/deploy/docker/Dockerfile.production} . -t react-client-production:${IMAGE_VERSION:-latest}"
         }
       }
     }

@@ -1,34 +1,31 @@
 # JobTrail
 
+## Structure
+This app is deployed to a local k8s cluster as a [staging](http://job-trail.local/). For learning and testing purposes.
+
+It's deployed to prod at AWS EC2 using Github Actions.
+
 ## Run tasks
 
-To run the dev server for your app, use:
+To run the dev server:
 
 ```sh
-npx nx serve job-trail
+npm start
 ```
 
 To create a production bundle:
 
 ```sh
-npx nx build job-trail
+npx nx build
 ```
 
 To see all available targets to run for a project, run:
 
 ```sh
-npx nx show project job-trail
+npx nx show project 
 ```
-## Set up CI!
 
-### Step 1
-
-To connect to Nx Cloud, run the following command:
-
-```sh
-npx nx connect
-```
-### Step 2
+## TODO: Set up CI!
 
 Use the following command to configure a CI workflow for your workspace:
 
