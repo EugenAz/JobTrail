@@ -14,6 +14,9 @@
       "configurations": {
         "development": {
           "args": ["node-env=development"]
+        },
+        "staging": {
+          "args": ["node-env=staging"]
         }
       }
     },
@@ -29,8 +32,23 @@
         "development": {
           "buildTarget": "server:build:development"
         },
+        "staging": {
+          "buildTarget": "server:build:staging"
+        },
         "production": {
           "buildTarget": "server:build:production"
+        }
+      }
+    },
+    "docker-build": {
+      "dependsOn": ["build"],
+      "executor": "nx:run-commands",
+      "configurations": {
+        "staging": {
+          "command": "docker build -f apps/server/deploy/docker/Dockerfile.staging . -t server-staging:${IMAGE_VERSION:-latest}"
+        },
+        "production": {
+          "command": "docker build -f apps/server/deploy/docker/Dockerfile.production . -t server-production:${IMAGE_VERSION:-latest}"
         }
       }
     }
