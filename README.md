@@ -29,7 +29,8 @@ npx nx show project
 
 ## TODO: Local k8s cluster 
 1. create db secrets
-2. /etc/hosts => job-trail.local record
+kubectl create secret generic db-secret --from-literal=DB_NAME=<db-name> --from-literal=DB_USERNAME=<db-username> --from-literal=DB_PASSWORD=<db-password>
+1. /etc/hosts => job-trail.local record
 
 ## TODO: Set up CI!
 
