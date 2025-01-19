@@ -5,7 +5,9 @@ This app is deployed to a local k8s cluster as a [staging](http://job-trail.loca
 
 It's deployed to prod at AWS EC2 using Github Actions.
 
-## Run tasks
+
+## Local development
+### Run tasks
 
 To run the dev server:
 
@@ -24,6 +26,10 @@ To see all available targets to run for a project, run:
 ```sh
 npx nx show project 
 ```
+
+## TODO: Local k8s cluster 
+1. create db secrets
+2. /etc/hosts => job-trail.local record
 
 ## TODO: Set up CI!
 

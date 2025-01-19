@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
         - name: react-client
-          image: react-client-staging:v2
+          image: react-client-staging:v4
           ports:
             - containerPort: 80
