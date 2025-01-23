@@ -20,10 +20,24 @@
         }
       }
     },
+    "start-db": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "apps/server",
+        "commands": ["docker compose --env-file .env.development up -d"]
+      }
+    },
+    "stop-db": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "apps/server",
+        "commands": ["docker compose --env-file .env.development down"]
+      }
+    },
     "serve": {
       "executor": "@nx/js:node",
       "defaultConfiguration": "development",
-      "dependsOn": ["build"],
+      "dependsOn": ["build", "start-db"],
       "options": {
         "buildTarget": "server:build",
         "runBuildTargetDependencies": false
