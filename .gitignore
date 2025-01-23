@@ -6,6 +6,7 @@ dist
 
 # DB
 db
+db-test
 
 # env
 .env
