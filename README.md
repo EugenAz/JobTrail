@@ -37,14 +37,14 @@ To create a migration:
 nx generate-migration server --name=<name>
 ```
 
-Build and deploy server:
+Release a server to staging: (bump version, build image, deploy to k8s)
 ```sh
-IMAGE_VERSION=v7 nx run server:docker-build:staging && k apply -f apps/server/deploy/k8s/server-deployment.yaml
+nx run server:release --spec <patch|minor|major>
 ```
 
-Build and deploy client app:
+Release a react-client to staging: (bump version, build image, deploy to k8s)
 ```sh
-IMAGE_VERSION=v7 nx run react-client:docker-build:staging && k apply -f apps/react-client/deploy/k8s/react-client-deployment.yaml
+nx run react-client:release --spec <patch|minor|major>
 ```
 
 Local staging

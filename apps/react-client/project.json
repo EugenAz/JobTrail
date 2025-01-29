@@ -32,6 +32,28 @@
           "dependsOn": ["build:production"]
         }
       }
+    },
+    "release": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "apps/react-client",
+        "spec": "patch",
+        "commands": [
+          {
+            "forwardAllArgs": true,
+            "command": "nx release -p react-client --specifier {args.spec} --skip-publish"
+          },
+          {
+            "command": "IMAGE_VERSION=$(jq -r .version package.json) nx run react-client:docker-build:staging",
+            "forwardAllArgs": false
+          },
+          {
+            "command": "IMAGE_VERSION=$(jq -r .version package.json) envsubst < deploy/k8s/react-client-deployment.yaml | kubectl apply -f -",
+            "forwardAllArgs": false
+          }
+        ],
+        "parallel": false
+      }
     }
   }
 }
