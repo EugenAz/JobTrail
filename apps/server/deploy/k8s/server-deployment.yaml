@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: server
-          image: server-staging:v7
+          image: server-staging:${IMAGE_VERSION}
           ports:
             - containerPort: 3333
           env:

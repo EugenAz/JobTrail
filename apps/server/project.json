@@ -93,6 +93,17 @@
           "command": "docker build -f apps/server/deploy/docker/Dockerfile.production . -t server-production:${IMAGE_VERSION:-latest}"
         }
       }
+    },
+    "release": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "apps/server",
+        "commands": [
+          "nx release -p server --specifier {args.spec} --skip-publish --dry-run",
+          "IMAGE_VERSION=$(jq -r .version package.json) nx run server:docker-build:staging",
+          "IMAGE_VERSION=$(jq -r .version package.json) envsubst < deploy/k8s/server-deployment.yaml | kubectl apply -f -"
+        ]
+      }
     }
   }
 }

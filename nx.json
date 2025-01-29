@@ -54,6 +54,11 @@
       }
     }
   },
+  "release": {
+    "projects": ["server", "react-client"],
+    "projectsRelationship": "independent",
+    "conventionalCommits": true
+  },
   "targetDefaults": {
     "@nx/js:tsc": {
       "cache": true,
