@@ -1,5 +1,5 @@
 import { ApplicationForm } from '../components/application-form/application-form';
-import { Link, useParams } from 'react-router';
+import { Link, useNavigate, useParams } from 'react-router';
 import { SubmitHandler } from 'react-hook-form';
 import { useApplicationUpdater } from '../graphql/use-application-updater';
 import { useApplicationGetter } from '../graphql/use-application-getter';
@@ -7,6 +7,7 @@ import { ApplicationFormData } from '../components/application-form/application-
 import { MainHeading } from '../components/atoms/main-heading';
 
 export const EditApplication = () => {
+  const navigate = useNavigate();
   const { applicationId } = useParams<{ applicationId: string }>();
 
   if (!applicationId) {
@@ -32,7 +33,7 @@ export const EditApplication = () => {
   }
 
   if (!data) {
-    throw new Error('application data is unavailable');
+    navigate('/404');
   }
 
   const onSubmit: SubmitHandler<ApplicationFormData> = async (d) => {
