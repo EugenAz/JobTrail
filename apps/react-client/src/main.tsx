@@ -12,6 +12,7 @@ import { AddApplication } from './pages/add-application';
 import { AddCampaign } from './pages/add-campaign';
 import { EditCampaign } from './pages/edit-campaign';
 import { CampaignAnalytics } from './pages/campaign-analytics';
+import { Page404 } from './pages/404';
 
 const client = new ApolloClient({
   uri: API_URL,
@@ -51,6 +52,8 @@ createRoot(document.getElementById('root')!).render(
             path="/campaign/:campaignId/new-application"
             element={<Layout page={<AddApplication />} />}
           />
+          <Route path="/404" element={<Page404 />} />
+          <Route path="*" element={<Page404 />} />
         </Routes>
       </BrowserRouter>
     </ApolloProvider>
