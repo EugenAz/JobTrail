@@ -2,19 +2,26 @@ apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: db-pv
+  labels:
+    purpose: job-trail-db
 spec:
+  storageClassName: manual
   capacity:
     storage: 1Gi
   accessModes:
     - ReadWriteOnce
   hostPath:
-    path: /Users/eugenaz/workspace/job-trail-k8s-db
+    path: ~/workspace/job-trail-k8s-db
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: db-pvc
 spec:
+  storageClassName: manual
+  selector:
+    matchLabels:
+      purpose: job-trail-db
   accessModes:
     - ReadWriteOnce
   resources:
