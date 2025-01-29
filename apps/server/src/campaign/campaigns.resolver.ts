@@ -6,7 +6,7 @@ import { mapToCampaignDetailModel } from './campaign.mappers';
 import { CampaignSummaryModel } from './campaign-summary.model';
 import { CampaignDetailModel } from './campaign-detail.model';
 import { OrderByInput } from '../common/dto/order-by.input';
-import { HttpException } from '@nestjs/common';
+import { NotFoundException } from '@nestjs/common';
 
 @Resolver()
 export class CampaignsResolver {
@@ -24,7 +24,7 @@ export class CampaignsResolver {
   async getCampaign(@Args('id') id: string) {
     const campaign = await this.campaignsService.findOneById(id);
     if (!campaign) {
-      throw new HttpException('Campaign not found', 404);
+      throw new NotFoundException('Campaign not found');
     }
     return mapToCampaignDetailModel(campaign);
   }

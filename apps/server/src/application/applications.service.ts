@@ -27,6 +27,10 @@ export class ApplicationsService {
       relations: ['company', 'campaign'],
     });
 
+    if (!application) {
+      return null;
+    }
+
     return mapToApplicationModel(application);
   }
 

@@ -98,11 +98,22 @@
       "executor": "nx:run-commands",
       "options": {
         "cwd": "apps/server",
+        "spec": "patch",
         "commands": [
-          "SPECIFIER=${args.spec:-patch} && nx release -p server --specifier $SPECIFIER --skip-publish",
-          "IMAGE_VERSION=$(jq -r .version package.json) nx run server:docker-build:staging",
-          "IMAGE_VERSION=$(jq -r .version package.json) envsubst < deploy/k8s/server-deployment.yaml | kubectl apply -f -"
-        ]
+          {
+            "forwardAllArgs": true,
+            "command": "nx release -p server --specifier {args.spec} --skip-publish"
+          },
+          {
+            "command": "IMAGE_VERSION=$(jq -r .version package.json) nx run server:docker-build:staging",
+            "forwardAllArgs": false
+          },
+          {
+            "command": "IMAGE_VERSION=$(jq -r .version package.json) envsubst < deploy/k8s/server-deployment.yaml | kubectl apply -f -",
+            "forwardAllArgs": false
+          }
+        ],
+        "parallel": false
       }
     }
   }

@@ -14,7 +14,7 @@ export class ApplicationsResolver {
     const application = await this.applicationsService.findOneById(id);
 
     if (!application) {
-      throw new NotFoundException(id);
+      throw new NotFoundException('Application not found');
     }
 
     return application;
