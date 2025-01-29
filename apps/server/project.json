@@ -99,7 +99,7 @@
       "options": {
         "cwd": "apps/server",
         "commands": [
-          "nx release -p server --specifier {args.spec} --skip-publish",
+          "SPECIFIER=${args.spec:-patch} && nx release -p server --specifier $SPECIFIER --skip-publish",
           "IMAGE_VERSION=$(jq -r .version package.json) nx run server:docker-build:staging",
           "IMAGE_VERSION=$(jq -r .version package.json) envsubst < deploy/k8s/server-deployment.yaml | kubectl apply -f -"
         ]
