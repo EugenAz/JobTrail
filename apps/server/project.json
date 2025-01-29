@@ -5,20 +5,35 @@
   "projectType": "application",
   "tags": [],
   "targets": {
-    "build": {
+    "_build": {
       "executor": "nx:run-commands",
       "options": {
+        "cwd": "apps/server",
         "command": "webpack-cli build",
-        "args": ["node-env=production"]
+        "env": {
+          "NODE_ENV": "production"
+        }
       },
       "configurations": {
         "development": {
-          "args": ["node-env=development"]
+          "env": {
+            "NODE_ENV": "development"
+          }
         },
         "staging": {
-          "args": ["node-env=staging"]
+          "env": {
+            "NODE_ENV": "staging"
+          }
         }
       }
+    },
+    "build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "apps/server",
+        "commands": ["tsc -p tsconfig.migrations.json"]
+      },
+      "dependsOn": ["_build"]
     },
     "start-db": {
       "executor": "nx:run-commands",
@@ -65,8 +80,7 @@
         "commands": [
           "npx @dotenvx/dotenvx run --env-file=.env.development -- npx ts-node -r tsconfig-paths/register -O '{\"module\": \"commonjs\"}' --project tsconfig.app.json ../../node_modules/.bin/typeorm migration:generate -d src/datasource.config.ts src/migrations/{args.name}"
         ]
-      },
-      "dependsOn": ["build-migration-config"]
+      }
     },
     "docker-build": {
       "dependsOn": ["build"],

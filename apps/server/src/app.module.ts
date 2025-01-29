@@ -28,12 +28,19 @@ import { CampaignModule } from './campaign/campaign.module';
       database: DB_NAME,
       entities: [__dirname + '/**/*.entity.ts'],
       autoLoadEntities: true,
+      migrationsRun: ENVIRONMENT !== 'development',
       synchronize: ENVIRONMENT === 'development',
-      // logging: ENVIRONMENT === 'development',
+      logging: ENVIRONMENT !== 'production',
+      migrations: ['./migrations/*.js'],
     }),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
-      autoSchemaFile: join(process.cwd(), 'apps/server/src/schema.gql'),
+      autoSchemaFile: join(
+        process.cwd(),
+        ENVIRONMENT === 'development'
+          ? 'apps/server/src/schema.gql'
+          : 'schema.gql'
+      ),
       sortSchema: true,
     }),
     CompanyModule,
