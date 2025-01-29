@@ -1,5 +1,10 @@
 # JobTrail
 
+## Tech Stack
+- Nx monorepo, typescript, docker, k8s
+- **Front-End**: React, React Router, react-hook-form, Tailwind, shadcn/ui, Apollo Client, vite, webpack
+- **Back-End**: Nest.js, Typeorm, PostgreSQL, Apollo GraphQL API
+
 ## Structure
 This app is deployed to a local k8s cluster as a [staging](http://job-trail.local/). For learning and testing purposes.
 
