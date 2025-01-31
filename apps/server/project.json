@@ -87,10 +87,14 @@
       "executor": "nx:run-commands",
       "configurations": {
         "staging": {
-          "command": "docker build -f apps/server/deploy/docker/Dockerfile.staging . -t server-staging:${IMAGE_VERSION:-latest}"
+          "command": "docker build -f apps/server/deploy/docker/Dockerfile . -t server-staging:${IMAGE_VERSION:-latest}"
         },
         "production": {
-          "command": "docker build -f apps/server/deploy/docker/Dockerfile.production . -t server-production:${IMAGE_VERSION:-latest}"
+          "commands": [
+            "docker build -f apps/server/deploy/docker/Dockerfile . -t eugenaz/private:server-${IMAGE_VERSION:-latest}",
+            "docker push eugenaz/private:server-${IMAGE_VERSION:-latest}"
+          ],
+          "parallel": false
         }
       }
     },

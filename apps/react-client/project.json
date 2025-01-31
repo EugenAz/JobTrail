@@ -24,11 +24,15 @@
       "executor": "nx:run-commands",
       "configurations": {
         "staging": {
-          "command": "docker build -f apps/react-client/deploy/docker/Dockerfile.staging . -t react-client-staging:${IMAGE_VERSION:-latest}",
+          "command": "docker build -f apps/react-client/deploy/docker/Dockerfile . -t react-client-staging:${IMAGE_VERSION:-latest}",
           "dependsOn": ["build:staging"]
         },
         "production": {
-          "command": "docker build -f ${DOCKERFILE_PATH:-apps/react-client/deploy/docker/Dockerfile.production} . -t react-client-production:${IMAGE_VERSION:-latest}",
+          "commands": [
+            "docker build -f apps/react-client/deploy/docker/Dockerfile . -t eugenaz/private:react-client-${IMAGE_VERSION:-latest}",
+            "docker push eugenaz/private:react-client-${IMAGE_VERSION:-latest}"
+          ],
+          "parallel": false,
           "dependsOn": ["build:production"]
         }
       }

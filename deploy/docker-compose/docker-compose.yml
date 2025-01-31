@@ -1,0 +1,35 @@
+services:
+  server:
+    image: eugenaz/private:server-${SERVER_VERSION}
+    restart: always
+    ports:
+      - 3000:3000
+    environment:
+      ENVIRONMENT: 'production'
+      PORT: 3000
+      DB_HOST: ${DB_HOST}
+      DB_PORT: ${DB_PORT}
+      DB_NAME: ${DB_NAME}
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
+
+  client:
+    image: eugenaz/private:react-client-${REACT_CLIENT_VERSION}
+    restart: always
+    ports:
+      - 8080:80
+    environment:
+      VITE_API_URL: ${VITE_API_URL}
+    depends_on:
+      - server
+
+  proxy:
+    image: caddy:latest
+    restart: always
+    ports:
+      - 80:80
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+    depends_on:
+      - client
+      - server

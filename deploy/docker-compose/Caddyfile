@@ -1,0 +1,8 @@
+{
+	auto_https off
+}
+
+:80 {
+	reverse_proxy /api/* server:3333
+	reverse_proxy /* client:80
+}
