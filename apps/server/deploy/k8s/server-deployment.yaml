@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: server
-          image: server-staging:${IMAGE_VERSION}
+          image: eugenaz/private:server-${IMAGE_VERSION}
           ports:
             - containerPort: 3333
           env:
