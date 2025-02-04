@@ -24,7 +24,7 @@
       "executor": "nx:run-commands",
       "configurations": {
         "staging": {
-          "command": "docker build -f apps/react-client/deploy/docker/Dockerfile . -t react-client-staging:${IMAGE_VERSION:-latest}",
+          "command": "docker build -f apps/react-client/deploy/docker/Dockerfile . -t eugenaz/private:react-client-${IMAGE_VERSION:-latest}",
           "dependsOn": ["build:staging"]
         },
         "production": {
@@ -42,21 +42,37 @@
       "options": {
         "cwd": "apps/react-client",
         "spec": "patch",
-        "commands": [
-          {
-            "forwardAllArgs": true,
-            "command": "nx release -p react-client --specifier {args.spec} --skip-publish"
-          },
-          {
-            "command": "IMAGE_VERSION=$(jq -r .version package.json) nx run react-client:docker-build:staging",
-            "forwardAllArgs": false
-          },
-          {
-            "command": "IMAGE_VERSION=$(jq -r .version package.json) envsubst < deploy/k8s/react-client-deployment.yaml | kubectl apply -f -",
-            "forwardAllArgs": false
-          }
-        ],
         "parallel": false
+      },
+      "configurations": {
+        "staging": {
+          "commands": [
+            {
+              "forwardAllArgs": true,
+              "command": "nx release -p react-client --specifier {args.spec} --skip-publish"
+            },
+            {
+              "command": "IMAGE_VERSION=$(jq -r .version package.json) nx run react-client:docker-build:staging",
+              "forwardAllArgs": false
+            },
+            {
+              "command": "IMAGE_VERSION=$(jq -r .version package.json) envsubst < deploy/k8s/react-client-deployment.yaml | kubectl apply -f -",
+              "forwardAllArgs": false
+            }
+          ]
+        },
+        "production": {
+          "commands": [
+            {
+              "forwardAllArgs": true,
+              "command": "nx release -p react-client --specifier {args.spec} --skip-publish"
+            },
+            {
+              "command": "IMAGE_VERSION=$(jq -r .version package.json) nx run react-client:docker-build:production",
+              "forwardAllArgs": false
+            }
+          ]
+        }
       }
     }
   }

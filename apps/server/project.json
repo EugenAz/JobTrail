@@ -24,16 +24,29 @@
           "env": {
             "NODE_ENV": "staging"
           }
+        },
+        "production": {
+          "env": {
+            "NODE_ENV": "production"
+          }
         }
       }
     },
     "build": {
+      "dependsOn": ["_build"],
       "executor": "nx:run-commands",
       "options": {
         "cwd": "apps/server",
         "commands": ["tsc -p tsconfig.migrations.json"]
       },
-      "dependsOn": ["_build"]
+      "configurations": {
+        "staging": {
+          "dependsOn": ["_build:staging"]
+        },
+        "production": {
+          "dependsOn": ["_build:production"]
+        }
+      }
     },
     "start-db": {
       "executor": "nx:run-commands",
@@ -87,9 +100,11 @@
       "executor": "nx:run-commands",
       "configurations": {
         "staging": {
-          "command": "docker build -f apps/server/deploy/docker/Dockerfile . -t server-staging:${IMAGE_VERSION:-latest}"
+          "dependsOn": ["build:staging"],
+          "command": "docker build -f apps/server/deploy/docker/Dockerfile . -t eugenaz/private:server-${IMAGE_VERSION:-latest}"
         },
         "production": {
+          "dependsOn": ["build:production"],
           "commands": [
             "docker build -f apps/server/deploy/docker/Dockerfile . -t eugenaz/private:server-${IMAGE_VERSION:-latest}",
             "docker push eugenaz/private:server-${IMAGE_VERSION:-latest}"
@@ -103,21 +118,37 @@
       "options": {
         "cwd": "apps/server",
         "spec": "patch",
-        "commands": [
-          {
-            "forwardAllArgs": true,
-            "command": "nx release -p server --specifier {args.spec} --skip-publish"
-          },
-          {
-            "command": "IMAGE_VERSION=$(jq -r .version package.json) nx run server:docker-build:staging",
-            "forwardAllArgs": false
-          },
-          {
-            "command": "IMAGE_VERSION=$(jq -r .version package.json) envsubst < deploy/k8s/server-deployment.yaml | kubectl apply -f -",
-            "forwardAllArgs": false
-          }
-        ],
         "parallel": false
+      },
+      "configurations": {
+        "staging": {
+          "commands": [
+            {
+              "forwardAllArgs": true,
+              "command": "nx release -p server --specifier {args.spec} --skip-publish"
+            },
+            {
+              "command": "IMAGE_VERSION=$(jq -r .version package.json) nx run server:docker-build:staging",
+              "forwardAllArgs": false
+            },
+            {
+              "command": "IMAGE_VERSION=$(jq -r .version package.json) envsubst < deploy/k8s/server-deployment.yaml | kubectl apply -f -",
+              "forwardAllArgs": false
+            }
+          ]
+        },
+        "production": {
+          "commands": [
+            {
+              "forwardAllArgs": true,
+              "command": "nx release -p server --specifier {args.spec} --skip-publish"
+            },
+            {
+              "command": "IMAGE_VERSION=$(jq -r .version package.json) nx run server:docker-build:production",
+              "forwardAllArgs": false
+            }
+          ]
+        }
       }
     }
   }
