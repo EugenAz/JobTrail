@@ -42,6 +42,7 @@ import { CampaignModule } from './campaign/campaign.module';
           : 'schema.gql'
       ),
       sortSchema: true,
+      playground: ENVIRONMENT !== 'production',
     }),
     CompanyModule,
     CampaignModule,
