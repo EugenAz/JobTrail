@@ -21,12 +21,18 @@ enum ApplicationStatus {
   REJECTED
 }
 
+input AuthUserInput {
+  password: String!
+  username: String!
+}
+
 type CampaignDetailModel {
   applications: [ApplicationModel!]
   dateEnd: String
   dateStart: String!
   id: ID!
   name: String!
+  user: UserModel!
 }
 
 type CampaignSummaryModel {
@@ -34,11 +40,18 @@ type CampaignSummaryModel {
   dateStart: String!
   id: ID!
   name: String!
+  user: UserModel!
 }
 
 type CompanyModel {
   id: ID!
   name: String!
+  user: UserModel!
+}
+
+type LoginResponse {
+  access_token: String!
+  user: UserModel!
 }
 
 type Mutation {
@@ -48,6 +61,8 @@ type Mutation {
   deleteApplication(id: String!): Boolean!
   deleteCampaign(id: ID!): Boolean!
   deleteCompany(id: ID!): Boolean!
+  login: LoginResponse!
+  signup(signupInput: AuthUserInput!): UserModel!
   updateApplication(updatedApplicationInput: UpdatedApplicationInput!): ApplicationModel!
   updateCampaign(updatedCampaignData: UpdatedCampaignInput!): CampaignSummaryModel!
   updateCompany(updatedCompanyData: UpdatedCompanyInput!): CompanyModel!
@@ -102,4 +117,11 @@ input UpdatedCampaignInput {
 input UpdatedCompanyInput {
   id: ID!
   name: String!
+}
+
+type UserModel {
+  firstName: String!
+  id: ID!
+  lastName: String!
+  username: String!
 }

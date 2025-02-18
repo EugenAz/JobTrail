@@ -1,5 +1,13 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { ApplicationEntity } from '../application/application.entity';
+import { UserEntity } from '../users/user.entity';
 
 @Entity('campaigns')
 export class CampaignEntity {
@@ -21,4 +29,8 @@ export class CampaignEntity {
 
   @OneToMany(() => ApplicationEntity, (application) => application.campaign)
   applications: ApplicationEntity[];
+
+  @ManyToOne(() => UserEntity, { eager: true, nullable: true }) // TODO make nullable after migration
+  @JoinColumn({ name: 'user_id' })
+  user: UserEntity;
 }

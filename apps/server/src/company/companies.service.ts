@@ -3,7 +3,6 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { CompanyEntity } from './company.entity';
 import { Repository } from 'typeorm';
 import { UpdatedCompanyInput } from './updated-company.input';
-import { CompanyModel } from './company.model';
 
 @Injectable()
 export class CompaniesService {
@@ -12,23 +11,23 @@ export class CompaniesService {
     private readonly companyRepository: Repository<CompanyEntity>
   ) {}
 
-  async findOneById(id: string): Promise<CompanyModel> {
+  async findOneById(id: string): Promise<CompanyEntity> {
     const campaign = await this.companyRepository.findOne({ where: { id } });
 
     return campaign;
   }
 
-  async findAll(): Promise<CompanyModel[]> {
+  async findAll(): Promise<CompanyEntity[]> {
     return await this.companyRepository.find();
   }
 
-  async create(name: string): Promise<CompanyModel> {
+  async create(name: string): Promise<CompanyEntity> {
     const company = this.companyRepository.create({ name });
 
     return this.companyRepository.save(company);
   }
 
-  async update({ id, name }: UpdatedCompanyInput): Promise<CompanyModel> {
+  async update({ id, name }: UpdatedCompanyInput): Promise<CompanyEntity> {
     const company = await this.companyRepository.findOne({ where: { id } });
     company.name = name;
 

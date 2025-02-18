@@ -1,4 +1,11 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { UserEntity } from '../users/user.entity';
 
 @Entity('companies')
 export class CompanyEntity {
@@ -11,4 +18,8 @@ export class CompanyEntity {
     unique: true,
   })
   name: string;
+
+  @ManyToOne(() => UserEntity, { nullable: true }) // TODO make nullable after migration
+  @JoinColumn({ name: 'user_id' })
+  user: UserEntity;
 }

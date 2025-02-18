@@ -8,11 +8,13 @@ export const mapToCampaignSummaryModel = ({
   name,
   dateStart,
   dateEnd,
+  user,
 }: CampaignEntity): CampaignSummaryModel => ({
   id,
   name,
   dateStart,
   dateEnd,
+  user,
 });
 
 export const mapToCampaignDetailModel = (

@@ -16,6 +16,10 @@ import {
 import { ApplicationModule } from './application/application.module';
 import { CompanyModule } from './company/company.module';
 import { CampaignModule } from './campaign/campaign.module';
+import { UsersModule } from './users/users.module';
+import { AuthModule } from './auth/auth.module';
+
+console.log('ENVIRONMENT', ENVIRONMENT);
 
 @Module({
   imports: [
@@ -44,9 +48,11 @@ import { CampaignModule } from './campaign/campaign.module';
       sortSchema: true,
       playground: ENVIRONMENT !== 'production',
     }),
+    UsersModule,
     CompanyModule,
     CampaignModule,
     ApplicationModule,
+    AuthModule,
   ],
 })
 export class AppModule {}

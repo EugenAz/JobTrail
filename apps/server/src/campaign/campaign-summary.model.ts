@@ -1,5 +1,6 @@
 import { Field, ID, ObjectType } from '@nestjs/graphql';
 import { ICampaignSummaryModel } from '@job-trail/types';
+import { UserModel } from '../users/user.model';
 
 @ObjectType()
 export class CampaignSummaryModel implements ICampaignSummaryModel {
@@ -14,4 +15,7 @@ export class CampaignSummaryModel implements ICampaignSummaryModel {
 
   @Field({ nullable: true })
   dateEnd?: string;
+
+  @Field()
+  user: UserModel;
 }

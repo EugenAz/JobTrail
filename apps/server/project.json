@@ -68,20 +68,20 @@
     "serve": {
       "executor": "@nx/js:node",
       "defaultConfiguration": "development",
-      "dependsOn": ["build", "start-db"],
+      "dependsOn": ["_build", "start-db"],
       "options": {
-        "buildTarget": "server:build",
+        "buildTarget": "server:_build",
         "runBuildTargetDependencies": false
       },
       "configurations": {
         "development": {
-          "buildTarget": "server:build:development"
+          "buildTarget": "server:_build:development"
         },
         "staging": {
-          "buildTarget": "server:build:staging"
+          "buildTarget": "server:_build:staging"
         },
         "production": {
-          "buildTarget": "server:build:production"
+          "buildTarget": "server:_build:production"
         }
       }
     },
