@@ -15,6 +15,7 @@ import { CampaignAnalytics } from './pages/campaign-analytics';
 import { Login } from './pages/login';
 import { Page404 } from './pages/404';
 import { createApolloClient } from './utils/create-apollo-client';
+import { GuardedRoute } from './components/guarded-route';
 
 // TODO add error boundaries
 export const App = () => {
@@ -29,31 +30,34 @@ export const App = () => {
       <ApolloProvider client={apolloClient}>
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Layout page={<Campaigns />} />} />
-            <Route
-              path="/new-campaign"
-              element={<Layout page={<AddCampaign />} />}
-            />
-            <Route
-              path="/campaign/:campaignId/edit"
-              element={<Layout page={<EditCampaign />} />}
-            />
-            <Route
-              path="/campaign/:campaignId"
-              element={<Layout page={<Campaign />} />}
-            />
-            <Route
-              path="/campaign/:campaignId/analytics"
-              element={<Layout page={<CampaignAnalytics />} />}
-            />
-            <Route
-              path="/application/:applicationId"
-              element={<Layout page={<EditApplication />} />}
-            />
-            <Route
-              path="/campaign/:campaignId/new-application"
-              element={<Layout page={<AddApplication />} />}
-            />
+            <Route path="/" element={<GuardedRoute />}>
+              <Route path="/" element={<Layout page={<Campaigns />} />} />
+              <Route
+                path="/new-campaign"
+                element={<Layout page={<AddCampaign />} />}
+              />
+              <Route
+                path="/campaign/:campaignId/edit"
+                element={<Layout page={<EditCampaign />} />}
+              />
+              <Route
+                path="/campaign/:campaignId"
+                element={<Layout page={<Campaign />} />}
+              />
+              <Route
+                path="/campaign/:campaignId/analytics"
+                element={<Layout page={<CampaignAnalytics />} />}
+              />
+              <Route
+                path="/application/:applicationId"
+                element={<Layout page={<EditApplication />} />}
+              />
+              <Route
+                path="/campaign/:campaignId/new-application"
+                element={<Layout page={<AddApplication />} />}
+              />
+            </Route>
+
             <Route path="/404" element={<Page404 />} />
             <Route path="*" element={<Page404 />} />
             <Route path="/login" element={<Layout page={<Login />} />}></Route>
