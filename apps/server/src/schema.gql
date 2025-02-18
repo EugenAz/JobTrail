@@ -51,7 +51,6 @@ type CompanyModel {
 
 type LoginResponse {
   access_token: String!
-  user: UserModel!
 }
 
 type Mutation {
@@ -61,7 +60,7 @@ type Mutation {
   deleteApplication(id: String!): Boolean!
   deleteCampaign(id: ID!): Boolean!
   deleteCompany(id: ID!): Boolean!
-  login: LoginResponse!
+  login(loginInput: AuthUserInput!): LoginResponse!
   signup(signupInput: AuthUserInput!): UserModel!
   updateApplication(updatedApplicationInput: UpdatedApplicationInput!): ApplicationModel!
   updateCampaign(updatedCampaignData: UpdatedCampaignInput!): CampaignSummaryModel!

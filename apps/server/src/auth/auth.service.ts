@@ -16,7 +16,7 @@ export class AuthService {
   async validateUser(
     username: string,
     password: string
-  ): Promise<Omit<UserModel, 'password'> | null> {
+  ): Promise<UserModel | null> {
     const user = await this.usersService.findOne(username);
 
     const doesPasswordMatch = await bcrypt.compare(password, user?.password);
@@ -35,7 +35,6 @@ export class AuthService {
         username: user.username,
         sub: user.id,
       }),
-      user,
     };
   }
 
