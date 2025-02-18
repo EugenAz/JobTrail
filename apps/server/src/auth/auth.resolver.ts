@@ -7,7 +7,6 @@ import { UseGuards } from '@nestjs/common';
 import { AuthGuard } from './auth.guard';
 import { Public } from '../common/public.decorator';
 import { LoginResponse } from './dto/login-response';
-import { ENVIRONMENT } from '../env';
 
 @Resolver()
 export class AuthResolver {
@@ -17,19 +16,7 @@ export class AuthResolver {
   @UseGuards(AuthGuard)
   @Public()
   login(@Args('loginInput') loginInput: AuthUserInput, @Context() context) {
-    if (!context?.res) {
-      throw new Error('Response object not available in context.');
-    }
-
-    const tokenResponse = this.authService.login(context.user);
-
-    context.res.cookie('jwt', tokenResponse.access_token, {
-      httpOnly: true,
-      secure: ENVIRONMENT === 'production',
-      sameSite: 'strict',
-    });
-
-    return tokenResponse;
+    return this.authService.login(context.user);
   }
 
   @Mutation(() => UserModel)

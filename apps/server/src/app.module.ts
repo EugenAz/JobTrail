@@ -51,7 +51,6 @@ import { JwtAuthGuard } from './auth/jwt-auth.guard';
           ? 'apps/server/src/schema.gql'
           : 'schema.gql'
       ),
-      context: ({ req, res }) => ({ req, res }),
       sortSchema: true,
       playground: ENVIRONMENT !== 'production',
     }),
