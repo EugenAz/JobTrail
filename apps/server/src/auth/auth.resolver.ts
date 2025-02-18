@@ -6,6 +6,7 @@ import { AuthUserInput } from './dto/auth.input';
 import { UserModel } from '../users/user.model';
 import { UseGuards } from '@nestjs/common';
 import { AuthGuard } from './auth.guard';
+import { Public } from '../common/public.decorator';
 
 @Resolver()
 export class AuthResolver {
@@ -13,6 +14,7 @@ export class AuthResolver {
 
   @Mutation(() => LoginResponse)
   @UseGuards(AuthGuard)
+  @Public()
   login(@Args('loginInput') loginInput: AuthUserInput, @Context() context) {
     return this.authService.login(context.user);
   }

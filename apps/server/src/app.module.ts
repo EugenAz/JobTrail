@@ -18,10 +18,16 @@ import { CompanyModule } from './company/company.module';
 import { CampaignModule } from './campaign/campaign.module';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
-
-console.log('ENVIRONMENT', ENVIRONMENT);
+import { APP_GUARD } from '@nestjs/core';
+import { JwtAuthGuard } from './auth/jwt-auth.guard';
 
 @Module({
+  providers: [
+    {
+      provide: APP_GUARD,
+      useClass: JwtAuthGuard,
+    },
+  ],
   imports: [
     TypeOrmModule.forRoot({
       type: 'postgres',

@@ -29,7 +29,7 @@ export class AuthService {
     return null;
   }
 
-  async login(user: UserModel): Promise<LoginResponse> {
+  login(user: UserModel): LoginResponse {
     return {
       access_token: this.jwtService.sign({
         username: user.username,
