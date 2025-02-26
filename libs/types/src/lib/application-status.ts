@@ -3,4 +3,5 @@ export enum ApplicationStatus {
   REJECTED = 'rejected',
   CLOSED = 'closed',
   EXPIRED = 'expired',
+  IN_PROGRESS = 'in-progress',
 }

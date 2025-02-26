@@ -17,6 +17,7 @@ type ApplicationModel {
 enum ApplicationStatus {
   CLOSED
   EXPIRED
+  IN_PROGRESS
   OPEN
   REJECTED
 }
