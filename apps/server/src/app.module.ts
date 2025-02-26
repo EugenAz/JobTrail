@@ -20,6 +20,7 @@ import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { APP_GUARD } from '@nestjs/core';
 import { JwtAuthGuard } from './auth/jwt-auth.guard';
+import { SharedModule } from './common/shared.module';
 
 @Module({
   providers: [
@@ -60,6 +61,7 @@ import { JwtAuthGuard } from './auth/jwt-auth.guard';
     CampaignModule,
     ApplicationModule,
     AuthModule,
+    SharedModule,
   ],
 })
 export class AppModule {}

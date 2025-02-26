@@ -8,19 +8,22 @@ import { UpdatedCampaignInput } from './dto/updated-campaign.input';
 import { CampaignSummaryModel } from './campaign-summary.model';
 import { OrderByInput } from '../common/dto/order-by.input';
 import { AsyncLocalStorage } from 'async_hooks';
-import { AsyncLocalStorageType } from '../auth/types';
+import { AsyncLocalStorageType } from '../common/types';
+import { UsersService } from '../users/users.service';
 
 @Injectable()
 export class CampaingsService {
   constructor(
     @InjectRepository(CampaignEntity)
     private readonly campaignRepository: Repository<CampaignEntity>,
-    private readonly als: AsyncLocalStorage<AsyncLocalStorageType>
+    private readonly als: AsyncLocalStorage<AsyncLocalStorageType>,
+    private readonly userService: UsersService
   ) {}
 
   async findOneById(id: string): Promise<CampaignEntity> {
+    const userId = this.als.getStore().userId;
     return this.campaignRepository.findOne({
-      where: { id },
+      where: { id, user: { id: userId } },
       relations: [
         'applications',
         'applications.company',
@@ -38,15 +41,17 @@ export class CampaingsService {
     orderBy?: OrderByInput<CampaignSummaryModel>
   ): Promise<CampaignSummaryModel[]> {
     const query = this.campaignRepository.createQueryBuilder('campaigns');
-    const userId = this.als.getStore()['userId'];
-
-    console.log('!! userId', userId);
+    const userId = this.als.getStore().userId;
 
     if (orderBy) {
-      query.orderBy(
-        `campaigns.${orderBy.field}`,
-        orderBy.direction.toUpperCase() as 'ASC' | 'DESC'
-      );
+      query
+        .where({
+          user: { id: userId },
+        })
+        .orderBy(
+          `campaigns.${orderBy.field}`,
+          orderBy.direction.toUpperCase() as 'ASC' | 'DESC'
+        );
     }
 
     const campaigns = await query.getMany();
@@ -59,11 +64,15 @@ export class CampaingsService {
     dateStart,
     dateEnd,
   }: NewCampaignInput): Promise<CampaignSummaryModel> {
+    const userId = this.als.getStore().userId;
+    const user = await this.userService.findById(userId);
     const newCampaign = this.campaignRepository.create({
       name,
       dateStart,
       dateEnd,
+      user,
     });
+
     const savedCampaign = await this.campaignRepository.save(newCampaign);
 
     return mapToCampaignSummaryModel(savedCampaign);
@@ -76,7 +85,10 @@ export class CampaingsService {
     dateEnd,
   }: UpdatedCampaignInput): Promise<CampaignSummaryModel> {
     try {
-      const campaign = await this.campaignRepository.findOne({ where: { id } });
+      const userId = this.als.getStore().userId;
+      const campaign = await this.campaignRepository.findOne({
+        where: { id, user: { id: userId } },
+      });
 
       if (!campaign) {
         throw new Error(`Campaign with id ${id} not found`);
@@ -97,6 +109,11 @@ export class CampaingsService {
 
   async delete(id: string): Promise<boolean> {
     try {
+      const campaign = await this.findOneById(id);
+      if (!campaign) {
+        return false;
+      }
+
       const result = await this.campaignRepository.delete(id);
 
       return result.affected > 0;

@@ -11,6 +11,8 @@ import { CompaniesService } from '../company/companies.service';
 import { CampaingsService } from '../campaign/campaigns.service';
 import { UpdatedApplicationInput } from './dto/updated-application.input';
 import { ApplicationModel } from './application.model';
+import { AsyncLocalStorage } from 'async_hooks';
+import { AsyncLocalStorageType } from '../common/types';
 
 @Injectable()
 export class ApplicationsService {
@@ -18,13 +20,15 @@ export class ApplicationsService {
     @InjectRepository(ApplicationEntity)
     private readonly applicationsRepository: Repository<ApplicationEntity>,
     private companiesService: CompaniesService,
-    private campaignsService: CampaingsService
+    private campaignsService: CampaingsService,
+    private readonly als: AsyncLocalStorage<AsyncLocalStorageType>
   ) {}
 
   async findOneById(id: string): Promise<ApplicationModel> {
+    const userId = this.als.getStore().userId;
     const application = await this.applicationsRepository.findOne({
-      where: { id },
-      relations: ['company', 'campaign'],
+      where: { id, campaign: { user: { id: userId } } },
+      relations: ['company', 'campaign', 'campaign.user'],
     });
 
     if (!application) {
@@ -79,8 +83,10 @@ export class ApplicationsService {
     roleName,
     status,
   }: UpdatedApplicationInput): Promise<ApplicationModel> {
+    const userId = this.als.getStore().userId;
     const application = await this.applicationsRepository.findOne({
-      where: { id },
+      where: { id, campaign: { user: { id: userId } } },
+      relations: ['campaign.user'],
     });
     if (!application) {
       throw new Error(`Application with ID ${id} not found.`);
@@ -130,6 +136,11 @@ export class ApplicationsService {
 
   async delete(id: string): Promise<boolean> {
     try {
+      const application = await this.findOneById(id);
+      if (!application) {
+        return false;
+      }
+
       const result = await this.applicationsRepository.delete(id);
 
       return result.affected > 0;
