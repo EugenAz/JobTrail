@@ -10,25 +10,14 @@
       "options": {
         "cwd": "apps/server",
         "command": "webpack-cli build",
-        "env": {
-          "NODE_ENV": "production"
-        }
+        "args": ["node-env=production"]
       },
       "configurations": {
         "development": {
-          "env": {
-            "NODE_ENV": "development"
-          }
+          "args": ["node-env=development"]
         },
         "staging": {
-          "env": {
-            "NODE_ENV": "staging"
-          }
-        },
-        "production": {
-          "env": {
-            "NODE_ENV": "production"
-          }
+          "args": ["node-env=staging"]
         }
       }
     },
