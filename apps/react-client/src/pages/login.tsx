@@ -8,6 +8,7 @@ import { useAuthenticator } from '../graphql/use-authenticator';
 import { useNavigate } from 'react-router';
 import { LoadingErrorHandler } from '../components/loading-error-handler';
 import { useAuth } from '../utils/auth.context';
+import { LAST_VISITED_ROUTE_KEY } from '../utils/constants';
 
 type LoginFormData = {
   username: string;
@@ -39,8 +40,8 @@ export const Login = () => {
       });
 
       setAuthToken(response.data.login.access_token);
-
-      navigate(`/`);
+      const lastVisitedRoute = localStorage.getItem(LAST_VISITED_ROUTE_KEY);
+      navigate(lastVisitedRoute || `/`);
     } catch (err) {
       console.error(err);
     }

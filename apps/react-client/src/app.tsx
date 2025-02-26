@@ -16,6 +16,7 @@ import { Login } from './pages/login';
 import { Page404 } from './pages/404';
 import { createApolloClient } from './utils/create-apollo-client';
 import { GuardedRoute } from './components/guarded-route';
+import { RouteTracker } from './components/router-tracker';
 
 // TODO add error boundaries
 export const App = () => {
@@ -29,6 +30,7 @@ export const App = () => {
     <StrictMode>
       <ApolloProvider client={apolloClient}>
         <BrowserRouter>
+          <RouteTracker />
           <Routes>
             <Route path="/" element={<GuardedRoute />}>
               <Route path="/" element={<Layout page={<Campaigns />} />} />
