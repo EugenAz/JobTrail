@@ -17,7 +17,7 @@ import { SharedModule } from '../common/shared.module';
     PassportModule,
     forwardRef(() => UsersModule),
     JwtModule.register({
-      signOptions: { expiresIn: '60s' },
+      signOptions: { expiresIn: '1d' },
       secret: JWT_SECRET,
     }),
   ],
