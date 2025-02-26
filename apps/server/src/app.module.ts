@@ -45,6 +45,7 @@ import { JwtAuthGuard } from './auth/jwt-auth.guard';
     }),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
+      context: ({ req }) => ({ req }),
       autoSchemaFile: join(
         process.cwd(),
         ENVIRONMENT === 'development'

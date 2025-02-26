@@ -7,12 +7,15 @@ import { NewCampaignInput } from './dto/new-campaign.input';
 import { UpdatedCampaignInput } from './dto/updated-campaign.input';
 import { CampaignSummaryModel } from './campaign-summary.model';
 import { OrderByInput } from '../common/dto/order-by.input';
+import { AsyncLocalStorage } from 'async_hooks';
+import { AsyncLocalStorageType } from '../auth/types';
 
 @Injectable()
 export class CampaingsService {
   constructor(
     @InjectRepository(CampaignEntity)
-    private readonly campaignRepository: Repository<CampaignEntity>
+    private readonly campaignRepository: Repository<CampaignEntity>,
+    private readonly als: AsyncLocalStorage<AsyncLocalStorageType>
   ) {}
 
   async findOneById(id: string): Promise<CampaignEntity> {
@@ -35,6 +38,9 @@ export class CampaingsService {
     orderBy?: OrderByInput<CampaignSummaryModel>
   ): Promise<CampaignSummaryModel[]> {
     const query = this.campaignRepository.createQueryBuilder('campaigns');
+    const userId = this.als.getStore()['userId'];
+
+    console.log('!! userId', userId);
 
     if (orderBy) {
       query.orderBy(
