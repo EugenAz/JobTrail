@@ -79,6 +79,9 @@ export const Campaign = () => {
       loading={loading || mutationLoading}
       error={error || mutationError}
     >
+      <Link to="/" className="text-blue-600 underline">
+        all campaigns
+      </Link>
       <div className="flex gap-2">
         <MainHeading>{campaign?.name} /</MainHeading>
         <Link to={`analytics`} className="mt-1">
