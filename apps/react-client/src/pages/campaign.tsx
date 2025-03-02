@@ -10,9 +10,13 @@ import { LoadingErrorHandler } from '../components/loading-error-handler';
 
 import styles from './campaign.module.css';
 import { Button } from '../components/atoms/button';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { ApplicationStatus, IApplicationModel } from '@job-trail/types';
-import { getFilteredApplications, STATUS_FILTER_KEY } from './campaign.utils';
+import {
+  getFilteredApplications,
+  STATUS_FILTER_KEY,
+  getStatusName,
+} from './campaign.utils';
 import { SearchInput } from '../components/search-input';
 
 export const Campaign = () => {
@@ -20,7 +24,9 @@ export const Campaign = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [filterParams, setFilterParams] = useSearchParams();
   const filterStatus = filterParams.get(STATUS_FILTER_KEY) as ApplicationStatus;
-  const [applications, setApplications] = useState<IApplicationModel[]>([]);
+  const [filteredApplications, setFilteredApplications] = useState<
+    IApplicationModel[]
+  >([]);
 
   if (!campaignId) {
     throw new Error('campaign ID is missing');
@@ -34,16 +40,25 @@ export const Campaign = () => {
 
   const campaign = data?.campaign;
 
+  const applications = useMemo(
+    () =>
+      campaign?.applications
+        ? campaign?.applications.map((a) => ({
+            ...a,
+            status: getStatusName(a.status),
+          }))
+        : [],
+    [campaign]
+  );
+
   useEffect(() => {
-    if (campaign?.applications) {
-      const filteredApps = getFilteredApplications(
-        campaign.applications,
-        filterStatus,
-        searchTerm
-      );
-      setApplications(filteredApps);
-    }
-  }, [campaign?.applications, filterStatus, searchTerm]);
+    const filteredApps = getFilteredApplications(
+      applications as IApplicationModel[],
+      filterStatus,
+      searchTerm
+    );
+    setFilteredApplications(filteredApps);
+  }, [applications, filterStatus, searchTerm]);
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value.trim().toLowerCase());
@@ -115,7 +130,7 @@ export const Campaign = () => {
           </tr>
         </thead>
         <tbody>
-          {applications?.map((a) => (
+          {filteredApplications?.map((a) => (
             <tr key={a.id}>
               <td className={styles.tdStyle}>{formatDate(a.dateCreated)}</td>
               <td className={styles.tdStyle2}>{a.company.name}</td>

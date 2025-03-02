@@ -37,3 +37,20 @@ const filterApplicationsBySearchTerm = (
   }
   return applications;
 };
+
+export const getStatusName = (status: ApplicationStatus) => {
+  switch (status.toLowerCase()) {
+    case ApplicationStatus.OPEN:
+      return 'Open';
+    case ApplicationStatus.IN_PROGRESS:
+      return 'In Progress';
+    case ApplicationStatus.CLOSED:
+      return 'Closed';
+    case ApplicationStatus.EXPIRED:
+      return 'Expired';
+    case ApplicationStatus.REJECTED:
+      return 'Rejected';
+    default:
+      return 'Unknown';
+  }
+};

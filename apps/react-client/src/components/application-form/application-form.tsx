@@ -142,6 +142,9 @@ export const ApplicationForm: FC<ApplicationFormProps> = ({
                       <option value={ApplicationStatus.REJECTED}>
                         Rejected
                       </option>
+                      <option value={ApplicationStatus.IN_PROGRESS}>
+                        In Progress
+                      </option>
                       <option value={ApplicationStatus.CLOSED}>Closed</option>
                       <option value={ApplicationStatus.EXPIRED}>Expired</option>
                     </select>
