@@ -91,7 +91,6 @@ export const Login = () => {
                     <input
                       {...field}
                       className={controlClassName}
-                      autoFocus
                       id="password"
                       placeholder="Password"
                       type="password"
