@@ -1,0 +1,18 @@
+{
+        email eugen.aznaurov@gmail.com
+}
+
+jobtrail.aznaurov.com {
+        tls {
+                protocols tls1.2 tls1.3
+        }
+
+        handle_path /api/graphql* {
+                rewrite * /graphql{path}
+                reverse_proxy server:3333
+        }
+
+        handle /* {
+                reverse_proxy client:80
+        }
+}

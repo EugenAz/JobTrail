@@ -54,6 +54,7 @@ export const EditApplication = () => {
         },
       });
       toast.success(`Application updated`);
+      navigate(`/campaign/${data.application.campaign.id}`);
     } catch (err) {
       // TODO error strategy
       toast.error(`Error. Application not updated`);

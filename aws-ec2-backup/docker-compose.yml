@@ -1,0 +1,47 @@
+services:
+  server:
+    image: eugenaz/private:server-${SERVER_VERSION}
+    restart: always
+    expose:
+      - "3333"
+    environment:
+      ENVIRONMENT: 'production'
+      PORT: 3333
+      DB_HOST: ${DB_HOST}
+      DB_PORT: ${DB_PORT}
+      DB_NAME: ${DB_NAME}
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
+
+  client:
+    image: eugenaz/private:react-client-${REACT_CLIENT_VERSION}
+    restart: always
+    expose:
+      - "80"
+    environment:
+      VITE_API_URL: ${VITE_API_URL}
+    depends_on:
+      - server
+
+  proxy:
+    image: caddy:latest
+    restart: always
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - client
+      - server
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+volumes:
+  caddy_data:
+  caddy_config:
