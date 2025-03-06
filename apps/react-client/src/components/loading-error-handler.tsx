@@ -1,5 +1,6 @@
 import { ApolloError } from '@apollo/client';
 import { FC, ReactNode } from 'react';
+import { toast } from 'react-toastify';
 
 interface LoadingErrorHandlerProps {
   loading: boolean;
@@ -17,6 +18,7 @@ export const LoadingErrorHandler: FC<LoadingErrorHandlerProps> = ({
   }
 
   if (error) {
+    toast.error(error.message);
     return <p>{error.message}</p>;
   }
 

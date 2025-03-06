@@ -6,6 +6,7 @@ import { CampaignForm } from '../components/campaign-form/campaign-form';
 import { MainHeading } from '../components/atoms/main-heading';
 import { CampaignFormData } from '../components/campaign-form/campaign-form-data.type';
 import { LoadingErrorHandler } from '../components/loading-error-handler';
+import { toast } from 'react-toastify';
 
 export const AddCampaign = () => {
   const navigate = useNavigate();
@@ -24,10 +25,12 @@ export const AddCampaign = () => {
       });
 
       if (response.data?.createCampaign) {
+        toast.success(`Campaign created`);
         navigate(`/campaign/${response.data.createCampaign.id}`);
       }
     } catch (err) {
       // TODO error strategy
+      toast.error(`Campaign not created`);
       console.error('Error updating campaign:', err);
     }
   };

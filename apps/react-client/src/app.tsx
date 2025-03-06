@@ -1,6 +1,7 @@
 import { StrictMode, useMemo } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router';
 import { ApolloProvider } from '@apollo/client';
+import { Bounce, ToastContainer } from 'react-toastify';
 
 import { useAuth } from './utils/auth.context';
 
@@ -64,6 +65,19 @@ export const App = () => {
             <Route path="*" element={<Page404 />} />
             <Route path="/login" element={<Layout page={<Login />} />}></Route>
           </Routes>
+          <ToastContainer
+            position="bottom-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop
+            closeOnClick={false}
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="dark"
+            transition={Bounce}
+          />
         </BrowserRouter>
       </ApolloProvider>
     </StrictMode>

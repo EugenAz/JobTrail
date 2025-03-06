@@ -6,6 +6,7 @@ import { useApplicationCreator } from '../graphql/use-application-creator';
 import { ApplicationFormData } from '../components/application-form/application-form-data.type';
 import { MainHeading } from '../components/atoms/main-heading';
 import { LoadingErrorHandler } from '../components/loading-error-handler';
+import { toast } from 'react-toastify';
 
 export const AddApplication = () => {
   const { campaignId } = useParams();
@@ -34,10 +35,12 @@ export const AddApplication = () => {
         },
       });
 
+      toast.success(`Application created`);
       navigate(`/campaign/${campaignId}`);
     } catch (err) {
       // TODO error strategy
-      console.error('Error updating application:', err);
+      toast.error(`Error. Application was not created.`);
+      console.error('Error creating application:', err);
     }
   };
 

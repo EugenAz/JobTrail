@@ -5,6 +5,7 @@ import { useApplicationUpdater } from '../graphql/use-application-updater';
 import { useApplicationGetter } from '../graphql/use-application-getter';
 import { ApplicationFormData } from '../components/application-form/application-form-data.type';
 import { MainHeading } from '../components/atoms/main-heading';
+import { toast } from 'react-toastify';
 
 export const EditApplication = () => {
   const navigate = useNavigate();
@@ -52,8 +53,10 @@ export const EditApplication = () => {
           },
         },
       });
+      toast.success(`Application updated`);
     } catch (err) {
       // TODO error strategy
+      toast.error(`Error. Application not updated`);
       console.error('Error updating application:', err);
     }
   };

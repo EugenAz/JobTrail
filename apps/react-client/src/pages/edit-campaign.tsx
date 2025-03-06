@@ -6,6 +6,7 @@ import { useCampaignGetter } from '../graphql/use-campaign-getter';
 import { CampaignFormData } from '../components/campaign-form/campaign-form-data.type';
 import { MainHeading } from '../components/atoms/main-heading';
 import { LoadingErrorHandler } from '../components/loading-error-handler';
+import { toast } from 'react-toastify';
 
 export const EditCampaign = () => {
   const { campaignId } = useParams<{ campaignId: string }>();
@@ -36,8 +37,10 @@ export const EditCampaign = () => {
           },
         },
       });
+      toast.success(`Campaign updated`);
     } catch (err) {
       // TODO error strategy
+      toast.error(`Error. Campaign not updated`);
       console.error('Error updating Campaign:', err);
     }
   };
