@@ -34,6 +34,7 @@ export const EditApplication = () => {
 
   if (!data) {
     navigate('/404');
+    return;
   }
 
   const onSubmit: SubmitHandler<ApplicationFormData> = async (d) => {

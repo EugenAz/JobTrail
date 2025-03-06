@@ -23,5 +23,7 @@ const GET_APPLICATION = (id: string) => gql`
 `;
 
 export const useApplicationGetter = (id: string) => {
-  return useQuery<{ application: IApplicationModel }>(GET_APPLICATION(id));
+  return useQuery<{ application: IApplicationModel }>(GET_APPLICATION(id), {
+    fetchPolicy: 'no-cache',
+  });
 };
