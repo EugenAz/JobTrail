@@ -17,23 +17,23 @@ export class Authentication1739882465685 implements MigrationInterface {
       `ALTER TABLE "companies" ADD COLUMN "user_id" UUID NULL`
     );
     await queryRunner.query(
-      `ALTER TABLE "companies" ADD CONSTRAINT "FK_ee0839cba07cb0c52602021ad4b" FOREIGN KEY ("user_id") REFERENCES "users"("id") ON DELETE NO ACTION ON UPDATE NO ACTION`
+      `ALTER TABLE "companies" ADD CONSTRAINT "FK_companies_user" FOREIGN KEY ("user_id") REFERENCES "users"("id") ON DELETE NO ACTION ON UPDATE NO ACTION`
     );
     await queryRunner.query(
       `ALTER TABLE "campaigns" ADD COLUMN "user_id" UUID NULL`
     );
     await queryRunner.query(
-      `ALTER TABLE "campaigns" ADD CONSTRAINT "FK_45455b21195721407322ddce007" FOREIGN KEY ("user_id") REFERENCES "users"("id") ON DELETE NO ACTION ON UPDATE NO ACTION`
+      `ALTER TABLE "campaigns" ADD CONSTRAINT "FK_campaigns_user" FOREIGN KEY ("user_id") REFERENCES "users"("id") ON DELETE NO ACTION ON UPDATE NO ACTION`
     );
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.query(`DROP TABLE users;`);
     await queryRunner.query(
-      `ALTER TABLE "campaigns" DROP CONSTRAINT "FK_45455b21195721407322ddce007"`
+      `ALTER TABLE "campaigns" DROP CONSTRAINT "FK_campaigns_user"`
     );
     await queryRunner.query(
-      `ALTER TABLE "companies" DROP CONSTRAINT "FK_ee0839cba07cb0c52602021ad4b"`
+      `ALTER TABLE "companies" DROP CONSTRAINT "FK_companies_user"`
     );
     await queryRunner.query(
       `ALTER TABLE "campaigns" DROP COLUMN IF EXISTS "user_id";`
