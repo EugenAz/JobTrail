@@ -18,6 +18,8 @@ enum ApplicationStatus {
   CLOSED
   EXPIRED
   IN_PROGRESS
+  OFFER
+  GHOSTED
   OPEN
   REJECTED
 }
@@ -55,7 +57,9 @@ type LoginResponse {
 }
 
 type Mutation {
-  createApplication(newApplicationInput: NewApplicationInput!): ApplicationModel!
+  createApplication(
+    newApplicationInput: NewApplicationInput!
+  ): ApplicationModel!
   createCampaign(newCampaignInput: NewCampaignInput!): CampaignSummaryModel!
   createCompany(name: String!): CompanyModel!
   deleteApplication(id: String!): Boolean!
@@ -63,8 +67,12 @@ type Mutation {
   deleteCompany(id: ID!): Boolean!
   login(loginInput: AuthUserInput!): LoginResponse!
   signup(signupInput: AuthUserInput!): UserModel!
-  updateApplication(updatedApplicationInput: UpdatedApplicationInput!): ApplicationModel!
-  updateCampaign(updatedCampaignData: UpdatedCampaignInput!): CampaignSummaryModel!
+  updateApplication(
+    updatedApplicationInput: UpdatedApplicationInput!
+  ): ApplicationModel!
+  updateCampaign(
+    updatedCampaignData: UpdatedCampaignInput!
+  ): CampaignSummaryModel!
   updateCompany(updatedCompanyData: UpdatedCompanyInput!): CompanyModel!
 }
 

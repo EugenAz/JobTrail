@@ -36,7 +36,7 @@ const filterApplicationsBySearchTerm = (
   return applications;
 };
 
-export const getStatusName = (status: ApplicationStatus) => {
+export const getStatusName = (status: ApplicationStatus): string => {
   switch (status.toLowerCase()) {
     case ApplicationStatus.OPEN:
       return 'Open';
@@ -46,8 +46,12 @@ export const getStatusName = (status: ApplicationStatus) => {
       return 'Closed';
     case ApplicationStatus.EXPIRED:
       return 'Expired';
+    case ApplicationStatus.GHOSTED:
+      return 'Ghosted';
     case ApplicationStatus.REJECTED:
       return 'Rejected';
+    case ApplicationStatus.OFFER:
+      return 'Offer';
     default:
       return 'Unknown';
   }

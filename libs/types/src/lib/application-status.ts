@@ -4,4 +4,6 @@ export enum ApplicationStatus {
   CLOSED = 'closed',
   EXPIRED = 'expired',
   IN_PROGRESS = 'in_progress',
+  OFFER = 'offer',
+  GHOSTED = 'ghosted',
 }
