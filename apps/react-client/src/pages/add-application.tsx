@@ -15,7 +15,8 @@ export const AddApplication = () => {
   }
 
   const navigate = useNavigate();
-  const [createApplication, { loading, error }] = useApplicationCreator();
+  const [createApplication, { loading, error }] =
+    useApplicationCreator(campaignId);
 
   const onSubmit: SubmitHandler<ApplicationFormData> = async (d) => {
     try {
