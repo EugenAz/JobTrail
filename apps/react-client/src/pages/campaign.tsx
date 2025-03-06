@@ -9,7 +9,6 @@ import { ButtonLink } from '../components/atoms/button-link';
 import { LoadingErrorHandler } from '../components/loading-error-handler';
 
 import styles from './campaign.module.css';
-import { Button } from '../components/atoms/button';
 import { useEffect, useMemo, useState } from 'react';
 import { ApplicationStatus, IApplicationModel } from '@job-trail/types';
 import {
@@ -18,6 +17,12 @@ import {
   getStatusName,
 } from './campaign.utils';
 import { SearchInput } from '../components/search-input';
+
+enum ApplicationsFilter {
+  ALL = 'all',
+  OPEN = 'open',
+  IN_PROGRESS = 'in_progress',
+}
 
 export const Campaign = () => {
   const { campaignId } = useParams();
@@ -78,13 +83,20 @@ export const Campaign = () => {
     }
   };
 
-  const handleFilterOpenToggleClick = () => {
+  const handleFilterChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setFilterParams((prev) => {
-      if (filterStatus === ApplicationStatus.OPEN) {
-        prev.delete(STATUS_FILTER_KEY);
-      } else {
-        prev.set(STATUS_FILTER_KEY, ApplicationStatus.OPEN);
+      switch (e.target.value as unknown as ApplicationsFilter) {
+        case ApplicationsFilter.ALL:
+          prev.delete(STATUS_FILTER_KEY);
+          break;
+        case ApplicationsFilter.OPEN:
+          prev.set(STATUS_FILTER_KEY, ApplicationStatus.OPEN);
+          break;
+        case ApplicationsFilter.IN_PROGRESS:
+          prev.set(STATUS_FILTER_KEY, ApplicationStatus.IN_PROGRESS);
+          break;
       }
+
       return prev;
     });
   };
@@ -104,17 +116,19 @@ export const Campaign = () => {
         </Link>
       </div>
 
-      <div className="flex gap-4">
+      <div className="flex gap-4 items-center">
         <ButtonLink to={`/campaign/${campaignId}/new-application`}>
           + Add application
         </ButtonLink>
-
-        <Button onClick={handleFilterOpenToggleClick}>
-          {filterStatus === ApplicationStatus.OPEN
-            ? 'Show all'
-            : 'Show only open'}
-        </Button>
-
+        Show:
+        <select
+          onChange={handleFilterChange}
+          className="p-2 border-gray-600 border-solid border-2 rounded-md"
+        >
+          <option value={ApplicationsFilter.ALL}>All</option>
+          <option value={ApplicationsFilter.OPEN}>Open</option>
+          <option value={ApplicationsFilter.IN_PROGRESS}>In Progress</option>
+        </select>
         <SearchInput handleSearch={handleSearch} searchTerm={searchTerm} />
       </div>
 

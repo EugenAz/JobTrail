@@ -16,12 +16,10 @@ const filterApplicationsByStatus = (
   applications: IApplicationModel[],
   status: ApplicationStatus
 ) => {
-  if (status === ApplicationStatus.OPEN) {
-    return applications.filter(
-      (a) => a.status.toLowerCase() === ApplicationStatus.OPEN
-    );
+  if (Object.values(ApplicationStatus).includes(status) === false) {
+    return applications;
   }
-  return applications;
+  return applications.filter((a) => a.status.toLowerCase() === status);
 };
 
 const filterApplicationsBySearchTerm = (
