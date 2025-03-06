@@ -9,7 +9,7 @@ import { ButtonLink } from '../components/atoms/button-link';
 import { LoadingErrorHandler } from '../components/loading-error-handler';
 
 import styles from './campaign.module.css';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ApplicationStatus, IApplicationModel } from '@job-trail/types';
 import {
   getFilteredApplications,
@@ -45,16 +45,7 @@ export const Campaign = () => {
 
   const campaign = data?.campaign;
 
-  const applications = useMemo(
-    () =>
-      campaign?.applications
-        ? campaign?.applications.map((a) => ({
-            ...a,
-            status: getStatusName(a.status),
-          }))
-        : [],
-    [campaign]
-  );
+  const applications = campaign?.applications;
 
   useEffect(() => {
     const filteredApps = getFilteredApplications(
@@ -158,7 +149,7 @@ export const Campaign = () => {
                   {a.roleName}
                 </a>
               </td>
-              <td className={styles.tdStyle2}>{a.status}</td>
+              <td className={styles.tdStyle2}>{getStatusName(a.status)}</td>
               <td className={styles.tdStyle}>
                 {a.dateUpdated ? formatDate(a.dateUpdated) : '-'}
               </td>
