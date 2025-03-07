@@ -19,7 +19,7 @@ const filterApplicationsByStatus = (
   if (Object.values(ApplicationStatus).includes(status) === false) {
     return applications;
   }
-  return applications.filter((a) => a.status.toLowerCase() === status);
+  return applications.filter((a) => a.status === status);
 };
 
 const filterApplicationsBySearchTerm = (
@@ -37,7 +37,7 @@ const filterApplicationsBySearchTerm = (
 };
 
 export const getStatusName = (status: ApplicationStatus): string => {
-  switch (status.toLowerCase()) {
+  switch (status) {
     case ApplicationStatus.OPEN:
       return 'Open';
     case ApplicationStatus.IN_PROGRESS:

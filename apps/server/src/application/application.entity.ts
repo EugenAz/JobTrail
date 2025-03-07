@@ -10,7 +10,12 @@ import { ApplicationStatus } from '@job-trail/types';
 import { CampaignEntity } from '../campaign/campaign.entity';
 import { CompanyEntity } from '../company/company.entity';
 
-registerEnumType(ApplicationStatus, { name: 'ApplicationStatus' });
+registerEnumType(ApplicationStatus, {
+  name: 'ApplicationStatus',
+  valuesMap: Object.fromEntries(
+    Object.values(ApplicationStatus).map((value) => [value, { value }])
+  ),
+});
 
 @Entity('applications')
 export class ApplicationEntity {

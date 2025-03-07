@@ -27,9 +27,7 @@ export const ApplicationForm: FC<ApplicationFormProps> = ({
   const { control, handleSubmit } = useForm({
     defaultValues: {
       roleName: initialData?.roleName ?? '',
-      status: initialData?.status
-        ? (initialData.status.toLowerCase() as ApplicationStatus)
-        : ApplicationStatus.OPEN,
+      status: initialData?.status ?? ApplicationStatus.OPEN,
       companyId: initialData?.company.id ?? '',
       link: initialData?.link ?? '',
       notes: initialData?.notes ?? '',

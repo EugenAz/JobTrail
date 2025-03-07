@@ -97,10 +97,7 @@ export const Campaign = () => {
   };
 
   const gotOffer = useMemo(
-    () =>
-      applications?.some(
-        (a) => a.status.toLowerCase() === ApplicationStatus.OFFER
-      ),
+    () => applications?.some((a) => a.status === ApplicationStatus.OFFER),
     [applications]
   );
 

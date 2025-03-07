@@ -11,7 +11,7 @@ type ApplicationModel {
   link: String
   notes: String
   roleName: String!
-  status: ApplicationStatus!
+  status: String!
 }
 
 enum ApplicationStatus {

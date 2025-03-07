@@ -24,8 +24,6 @@ export const CampaignAnalytics = () => {
       {} as Record<ApplicationStatus, number>
     );
 
-  // TODO fix the status case
-
   return (
     <LoadingErrorHandler loading={loading} error={error}>
       <MainHeading>Analytics for {campaign?.name}</MainHeading>

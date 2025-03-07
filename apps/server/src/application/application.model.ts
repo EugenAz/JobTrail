@@ -26,7 +26,7 @@ export class ApplicationModel implements IApplicationModel {
   @Field({ nullable: true })
   link?: string;
 
-  @Field(() => ApplicationStatus)
+  @Field(() => String)
   status: ApplicationStatus;
 
   @Field(() => String, { nullable: true })
