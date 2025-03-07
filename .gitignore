@@ -17,3 +17,5 @@ db-test
 vite.config.*.timestamp*
 
 .nx
+
+vitest.config.*.timestamp*

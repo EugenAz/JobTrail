@@ -12,6 +12,8 @@
     "paths": {
       "@job-trail/dates": ["../../libs/dates/src/index.ts"],
       "@job-trail/types": ["../../libs/types/src/index.ts"],
+      "@job-trail/utils": ["../../libs/utils/src/index.ts"],
+      "@job-trail/ui-styles/*": ["../../libs/ui/src/styles/*"],
       "@/*": ["src/*"]
     }
   },

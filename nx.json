@@ -50,14 +50,18 @@
       },
       "library": {
         "style": "tailwind",
-        "linter": "eslint"
+        "linter": "eslint",
+        "unitTestRunner": "none"
       }
     }
   },
   "release": {
     "projects": ["server", "react-client"],
     "projectsRelationship": "independent",
-    "conventionalCommits": true
+    "conventionalCommits": true,
+    "version": {
+      "preVersionCommand": "npx nx run-many -t build"
+    }
   },
   "targetDefaults": {
     "@nx/js:tsc": {
