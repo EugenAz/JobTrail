@@ -1,14 +1,15 @@
+import { useEffect } from 'react';
 import { useForm, Controller, SubmitHandler } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { FormContainer } from '../components/atoms/form-container';
-import { FormControlRow } from '../components/atoms/form-control-row';
-import { Button } from '../components/atoms/button';
-import { useAuthenticator } from '../graphql/use-authenticator';
+import { useAuthenticator } from './api/use-authenticator';
 import { useNavigate } from 'react-router';
-import { LoadingErrorHandler } from '../components/loading-error-handler';
-import { useAuth } from '../utils/auth.context';
-import { LAST_VISITED_ROUTE_KEY } from '../utils/constants';
+import { LoadingErrorHandler } from '../common/loading-error-handler';
+import { useAuth } from '../../utils/auth.context';
+import { LAST_VISITED_ROUTE_KEY } from '../../utils/constants';
+import { FormContainer } from '../common/atoms/form-container';
+import { FormControlRow } from '../common/atoms/form-control-row';
+import { Button } from '../common/atoms/button';
 
 type LoginFormData = {
   username: string;
@@ -24,6 +25,15 @@ export const Login = () => {
   const navigate = useNavigate();
   const { setAuthToken } = useAuth();
   const [login, { loading, error }] = useAuthenticator();
+
+  useEffect(() => {
+    if (import.meta.env.VITE_ENVIRONMENT === 'development') {
+      onSubmit({
+        username: import.meta.env.VITE_TEST_USERNAME,
+        password: import.meta.env.VITE_TEST_PASSWORD,
+      });
+    }
+  }, []);
 
   const onSubmit: SubmitHandler<LoginFormData> = async ({
     username,

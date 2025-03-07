@@ -2,11 +2,9 @@ import { Link, useParams, useSearchParams } from 'react-router';
 import { formatDate } from '@job-trail/dates';
 import { PresentationChartLineIcon } from '@heroicons/react/16/solid';
 
-import { useApplicationDeleter } from '../graphql/use-application-deleter';
-import { useCampaignGetter } from '../graphql/use-campaign-getter';
-import { MainHeading } from '../components/atoms/main-heading';
-import { ButtonLink } from '../components/atoms/button-link';
-import { LoadingErrorHandler } from '../components/loading-error-handler';
+import { useApplicationDeleter } from './api/use-application-deleter';
+import { useCampaignGetter } from '../../api/use-campaign-getter';
+import { LoadingErrorHandler } from '../common/loading-error-handler';
 
 import styles from './campaign.module.css';
 import { useEffect, useMemo, useState } from 'react';
@@ -16,7 +14,9 @@ import {
   STATUS_FILTER_KEY,
   getStatusName,
 } from './campaign.utils';
-import { SearchInput } from '../components/search-input';
+import { SearchInput } from '../common/search-input';
+import { MainHeading } from '../common/atoms/main-heading';
+import { ButtonLink } from '../common/atoms/button-link';
 
 enum ApplicationsFilter {
   ALL = 'all',

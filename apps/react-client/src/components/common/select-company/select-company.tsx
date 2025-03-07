@@ -1,8 +1,8 @@
 import { forwardRef, useEffect, useState } from 'react';
 import { SingleValue } from 'react-select';
 import CreatableSelect from 'react-select/creatable';
-import { useCompanyCreator } from '../graphql/use-company-creator';
-import { useCompaniesGetter } from '../graphql/use-companies-getter';
+import { useCompanyCreator } from './api/use-company-creator';
+import { useCompaniesGetter } from './api/use-companies-getter';
 
 interface Option {
   readonly label: string;

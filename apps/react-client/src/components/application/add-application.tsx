@@ -1,12 +1,12 @@
 import { SubmitHandler } from 'react-hook-form';
 import { Link, useNavigate, useParams } from 'react-router';
-
-import { ApplicationForm } from '../components/application-form/application-form';
-import { useApplicationCreator } from '../graphql/use-application-creator';
-import { ApplicationFormData } from '../components/application-form/application-form-data.type';
-import { MainHeading } from '../components/atoms/main-heading';
-import { LoadingErrorHandler } from '../components/loading-error-handler';
 import { toast } from 'react-toastify';
+
+import { useApplicationCreator } from './api/use-application-creator';
+import { LoadingErrorHandler } from '../common/loading-error-handler';
+import { ApplicationFormData } from './application-form/application-form-data.type';
+import { MainHeading } from '../common/atoms/main-heading';
+import { ApplicationForm } from './application-form/application-form';
 
 export const AddApplication = () => {
   const { campaignId } = useParams();

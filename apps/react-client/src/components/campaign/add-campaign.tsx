@@ -1,12 +1,12 @@
 import { SubmitHandler } from 'react-hook-form';
 import { useNavigate } from 'react-router';
 
-import { useCampaignCreator } from '../graphql/use-campaign-creator';
-import { CampaignForm } from '../components/campaign-form/campaign-form';
-import { MainHeading } from '../components/atoms/main-heading';
-import { CampaignFormData } from '../components/campaign-form/campaign-form-data.type';
-import { LoadingErrorHandler } from '../components/loading-error-handler';
+import { useCampaignCreator } from './api/use-campaign-creator';
+import { CampaignForm } from './campaign-form/campaign-form';
+import { CampaignFormData } from './campaign-form/campaign-form-data.type';
+import { LoadingErrorHandler } from '../common/loading-error-handler';
 import { toast } from 'react-toastify';
+import { MainHeading } from '../common/atoms/main-heading';
 
 export const AddCampaign = () => {
   const navigate = useNavigate();

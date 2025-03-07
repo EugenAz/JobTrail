@@ -1,12 +1,13 @@
-import { CampaignForm } from '../components/campaign-form/campaign-form';
+import { CampaignForm } from './campaign-form/campaign-form';
 import { useParams } from 'react-router';
 import { SubmitHandler } from 'react-hook-form';
-import { useCampaignUpdater } from '../graphql/use-campaign-updater';
-import { useCampaignGetter } from '../graphql/use-campaign-getter';
-import { CampaignFormData } from '../components/campaign-form/campaign-form-data.type';
-import { MainHeading } from '../components/atoms/main-heading';
-import { LoadingErrorHandler } from '../components/loading-error-handler';
 import { toast } from 'react-toastify';
+
+import { useCampaignUpdater } from './api/use-campaign-updater';
+import { useCampaignGetter } from '../../api/use-campaign-getter';
+import { CampaignFormData } from './campaign-form/campaign-form-data.type';
+import { LoadingErrorHandler } from '../common/loading-error-handler';
+import { MainHeading } from '../common/atoms/main-heading';
 
 export const EditCampaign = () => {
   const { campaignId } = useParams<{ campaignId: string }>();

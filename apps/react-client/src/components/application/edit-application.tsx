@@ -1,11 +1,12 @@
-import { ApplicationForm } from '../components/application-form/application-form';
 import { Link, useNavigate, useParams } from 'react-router';
 import { SubmitHandler } from 'react-hook-form';
-import { useApplicationUpdater } from '../graphql/use-application-updater';
-import { useApplicationGetter } from '../graphql/use-application-getter';
-import { ApplicationFormData } from '../components/application-form/application-form-data.type';
-import { MainHeading } from '../components/atoms/main-heading';
 import { toast } from 'react-toastify';
+
+import { useApplicationUpdater } from './api/use-application-updater';
+import { useApplicationGetter } from './api/use-application-getter';
+import { ApplicationFormData } from './application-form/application-form-data.type';
+import { MainHeading } from '../common/atoms/main-heading';
+import { ApplicationForm } from './application-form/application-form';
 
 export const EditApplication = () => {
   const navigate = useNavigate();

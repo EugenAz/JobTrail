@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router';
-import { LAST_VISITED_ROUTE_KEY } from '../utils/constants';
+import { LAST_VISITED_ROUTE_KEY } from '../../utils/constants';
 
 export const RouteTracker = () => {
   const location = useLocation();

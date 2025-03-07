@@ -5,19 +5,19 @@ import { Bounce, ToastContainer } from 'react-toastify';
 
 import { useAuth } from './utils/auth.context';
 
-import { Layout } from './components/layout';
-import { Campaigns } from './pages/campaigns';
-import { Campaign } from './pages/campaign';
-import { EditApplication } from './pages/edit-application';
-import { AddApplication } from './pages/add-application';
-import { AddCampaign } from './pages/add-campaign';
-import { EditCampaign } from './pages/edit-campaign';
-import { CampaignAnalytics } from './pages/campaign-analytics';
-import { Login } from './pages/login';
-import { Page404 } from './pages/404';
+import { Layout } from './components/common/layout';
+import { Campaigns } from './components/campaigns/campaigns';
+import { Campaign } from './components/campaign/campaign';
+import { EditApplication } from './components/application/edit-application';
+import { AddApplication } from './components/application/add-application';
+import { AddCampaign } from './components/campaign/add-campaign';
+import { EditCampaign } from './components/campaign/edit-campaign';
+import { Login } from './components/login/login';
+import { Page404 } from './components/404';
 import { createApolloClient } from './utils/create-apollo-client';
-import { GuardedRoute } from './components/guarded-route';
-import { RouteTracker } from './components/router-tracker';
+import { RouteTracker } from './components/common/router-tracker';
+import { GuardedRoute } from './components/common/guarded-route';
+import { CampaignAnalytics } from './components/campaign-analytics/campaign-analytics';
 
 // TODO add error boundaries
 export const App = () => {

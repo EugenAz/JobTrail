@@ -1,11 +1,11 @@
 import cx from 'classnames';
 import { Link } from 'react-router';
 import { PencilSquareIcon } from '@heroicons/react/16/solid';
-import { useCampaignsGetter } from '../graphql/use-campaigns-getter';
-import { MainHeading } from '../components/atoms/main-heading';
-import { TileLink } from '../components/atoms/tile-link';
+import { useCampaignsGetter } from './api/use-campaigns-getter';
 import styles from './campaigns.module.css';
-import { LoadingErrorHandler } from '../components/loading-error-handler';
+import { LoadingErrorHandler } from '../common/loading-error-handler';
+import { MainHeading } from '../common/atoms/main-heading';
+import { TileLink } from '../common/atoms/tile-link';
 
 export const Campaigns = () => {
   const { loading, error, data } = useCampaignsGetter();

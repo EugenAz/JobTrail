@@ -1,9 +1,9 @@
 import { Link, useParams } from 'react-router';
-import { MainHeading } from '../components/atoms/main-heading';
-import { LoadingErrorHandler } from '../components/loading-error-handler';
-import { useCampaignGetter } from '../graphql/use-campaign-getter';
 import { ApplicationStatus } from '@job-trail/types';
 import cx from 'classnames';
+import { useCampaignGetter } from '../../api/use-campaign-getter';
+import { LoadingErrorHandler } from '../common/loading-error-handler';
+import { MainHeading } from '../common/atoms/main-heading';
 
 export const CampaignAnalytics = () => {
   const { campaignId } = useParams();
