@@ -30,7 +30,7 @@ export class CampaignEntity {
   @OneToMany(() => ApplicationEntity, (application) => application.campaign)
   applications: ApplicationEntity[];
 
-  @ManyToOne(() => UserEntity, { eager: true, nullable: true }) // TODO make nullable after migration
+  @ManyToOne(() => UserEntity, { eager: true, nullable: false })
   @JoinColumn({ name: 'user_id' })
   user: UserEntity;
 }

@@ -20,7 +20,7 @@ export class CompanyEntity {
   })
   name: string;
 
-  @ManyToOne(() => UserEntity, { nullable: true }) // TODO make nullable after migration
+  @ManyToOne(() => UserEntity, { nullable: false })
   @JoinColumn({ name: 'user_id' })
   user: UserEntity;
 }
