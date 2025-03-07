@@ -4,7 +4,7 @@ import { SubmitHandler } from 'react-hook-form';
 import { toast } from 'react-toastify';
 
 import { useCampaignUpdater } from './api/use-campaign-updater';
-import { useCampaignGetter } from '../../api/use-campaign-getter';
+import { useCampaignGetter } from '@/api/use-campaign-getter';
 import { CampaignFormData } from './campaign-form/campaign-form-data.type';
 import { LoadingErrorHandler } from '../common/loading-error-handler';
 import { MainHeading } from '../common/atoms/main-heading';

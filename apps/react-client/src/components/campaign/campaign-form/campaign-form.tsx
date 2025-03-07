@@ -7,9 +7,9 @@ import { getToday, formatDate } from '@job-trail/dates';
 import { ICampaignSummaryModel } from '@job-trail/types';
 import { CampaignFormData } from './campaign-form-data.type';
 import { campaignFormSchema } from './campaign-form.schema';
-import { FormContainer } from '../../common/atoms/form-container';
-import { FormControlRow } from '../../common/atoms/form-control-row';
-import { Button } from '../../common/atoms/button';
+import { FormContainer } from '@/components/common/atoms/form-container';
+import { FormControlRow } from '@/components/common/atoms/form-control-row';
+import { Button } from '@/components/common/atoms/button';
 
 interface CampaignFormProps {
   initialData?: ICampaignSummaryModel;

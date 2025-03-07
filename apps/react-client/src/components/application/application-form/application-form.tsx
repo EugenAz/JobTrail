@@ -3,14 +3,14 @@ import { useForm, Controller } from 'react-hook-form';
 import cx from 'classnames';
 import { yupResolver } from '@hookform/resolvers/yup';
 
-import { SelectCompany } from '../../common/select-company/select-company';
 import { getToday, formatDate } from '@job-trail/dates';
 import { IApplicationModel, ApplicationStatus } from '@job-trail/types';
 import { ApplicationFormData } from './application-form-data.type';
 import { applicationFormSchema } from './application-form.schema';
-import { FormContainer } from '../../common/atoms/form-container';
-import { FormControlRow } from '../../common/atoms/form-control-row';
-import { Button } from '../../common/atoms/button';
+import { SelectCompany } from '@/components/common/select-company/select-company';
+import { FormContainer } from '@/components/common/atoms/form-container';
+import { FormControlRow } from '@/components/common/atoms/form-control-row';
+import { Button } from '@/components/common/atoms/button';
 
 interface ApplicationFormProps {
   initialData?: IApplicationModel;

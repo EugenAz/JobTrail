@@ -5,8 +5,8 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useAuthenticator } from './api/use-authenticator';
 import { useNavigate } from 'react-router';
 import { LoadingErrorHandler } from '../common/loading-error-handler';
-import { useAuth } from '../../utils/auth.context';
-import { LAST_VISITED_ROUTE_KEY } from '../../utils/constants';
+import { useAuth } from '@/utils/auth.context';
+import { LAST_VISITED_ROUTE_KEY } from '@/utils/constants';
 import { FormContainer } from '../common/atoms/form-container';
 import { FormControlRow } from '../common/atoms/form-control-row';
 import { Button } from '../common/atoms/button';
@@ -26,14 +26,14 @@ export const Login = () => {
   const { setAuthToken } = useAuth();
   const [login, { loading, error }] = useAuthenticator();
 
-  useEffect(() => {
-    if (import.meta.env.VITE_ENVIRONMENT === 'development') {
-      onSubmit({
-        username: import.meta.env.VITE_TEST_USERNAME,
-        password: import.meta.env.VITE_TEST_PASSWORD,
-      });
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (import.meta.env.VITE_ENVIRONMENT === 'development') {
+  //     onSubmit({
+  //       username: import.meta.env.VITE_TEST_USERNAME,
+  //       password: import.meta.env.VITE_TEST_PASSWORD,
+  //     });
+  //   }
+  // }, []);
 
   const onSubmit: SubmitHandler<LoginFormData> = async ({
     username,

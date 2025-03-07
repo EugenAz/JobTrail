@@ -1,7 +1,8 @@
 import { Link, useParams } from 'react-router';
-import { ApplicationStatus } from '@job-trail/types';
 import cx from 'classnames';
-import { useCampaignGetter } from '../../api/use-campaign-getter';
+
+import { ApplicationStatus } from '@job-trail/types';
+import { useCampaignGetter } from '@/api/use-campaign-getter';
 import { LoadingErrorHandler } from '../common/loading-error-handler';
 import { MainHeading } from '../common/atoms/main-heading';
 

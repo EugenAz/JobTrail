@@ -3,7 +3,7 @@ import { formatDate } from '@job-trail/dates';
 import { PresentationChartLineIcon } from '@heroicons/react/16/solid';
 
 import { useApplicationDeleter } from './api/use-application-deleter';
-import { useCampaignGetter } from '../../api/use-campaign-getter';
+import { useCampaignGetter } from '@/api/use-campaign-getter';
 import { LoadingErrorHandler } from '../common/loading-error-handler';
 
 import styles from './campaign.module.css';
