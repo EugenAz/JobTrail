@@ -9,7 +9,7 @@ import { ButtonLink } from '../components/atoms/button-link';
 import { LoadingErrorHandler } from '../components/loading-error-handler';
 
 import styles from './campaign.module.css';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { ApplicationStatus, IApplicationModel } from '@job-trail/types';
 import {
   getFilteredApplications,
@@ -22,6 +22,7 @@ enum ApplicationsFilter {
   ALL = 'all',
   OPEN = 'open',
   IN_PROGRESS = 'in_progress',
+  OFFER = 'offer',
 }
 
 export const Campaign = () => {
@@ -86,11 +87,22 @@ export const Campaign = () => {
         case ApplicationsFilter.IN_PROGRESS:
           prev.set(STATUS_FILTER_KEY, ApplicationStatus.IN_PROGRESS);
           break;
+        case ApplicationsFilter.OFFER:
+          prev.set(STATUS_FILTER_KEY, ApplicationStatus.OFFER);
+          break;
       }
 
       return prev;
     });
   };
+
+  const gotOffer = useMemo(
+    () =>
+      applications?.some(
+        (a) => a.status.toLowerCase() === ApplicationStatus.OFFER
+      ),
+    [applications]
+  );
 
   return (
     <LoadingErrorHandler
@@ -119,6 +131,9 @@ export const Campaign = () => {
           <option value={ApplicationsFilter.ALL}>All</option>
           <option value={ApplicationsFilter.OPEN}>Open</option>
           <option value={ApplicationsFilter.IN_PROGRESS}>In Progress</option>
+          {gotOffer ? (
+            <option value={ApplicationsFilter.OFFER}>Offer</option>
+          ) : null}
         </select>
         <SearchInput handleSearch={handleSearch} searchTerm={searchTerm} />
       </div>
