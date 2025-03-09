@@ -6,7 +6,6 @@ import { useApplicationDeleter } from './api/use-application-deleter';
 import { useCampaignGetter } from '@/api/use-campaign-getter';
 import { LoadingErrorHandler } from '../common/loading-error-handler';
 
-import styles from './campaign.module.css';
 import { useEffect, useMemo, useState } from 'react';
 import { ApplicationStatus, IApplicationModel } from '@job-trail/types';
 import {
@@ -138,20 +137,34 @@ export const Campaign = () => {
       <table className="mt-4 rounded-t-lg overflow-hidden">
         <thead className="text-center">
           <tr>
-            <th className={styles.thStyle}>Date</th>
-            <th className={styles.thStyle}>Company</th>
-            <th className={styles.thStyle}>Role</th>
-            <th className={styles.thStyle}>Status</th>
-            <th className={styles.thStyle}>Date Updated</th>
-            <th className={styles.thStyle}></th>
+            <th className="bg-gray-500 w-1/6 min-w-[160px] border-l border-transparent py-4 px-3 text-lg font-medium text-white lg:py-2 lg:px-4">
+              Date
+            </th>
+            <th className="bg-gray-500 w-1/6 min-w-[160px] border-l border-transparent py-4 px-3 text-lg font-medium text-white lg:py-2 lg:px-4">
+              Company
+            </th>
+            <th className="bg-gray-500 w-1/6 min-w-[160px] border-l border-transparent py-4 px-3 text-lg font-medium text-white lg:py-2 lg:px-4">
+              Role
+            </th>
+            <th className="bg-gray-500 w-1/6 min-w-[160px] border-l border-transparent py-4 px-3 text-lg font-medium text-white lg:py-2 lg:px-4">
+              Status
+            </th>
+            <th className="bg-gray-500 w-1/6 min-w-[160px] border-l border-transparent py-4 px-3 text-lg font-medium text-white lg:py-2 lg:px-4">
+              Date Updated
+            </th>
+            <th className="bg-gray-500 w-1/6 min-w-[160px] border-l border-transparent py-4 px-3 text-lg font-medium text-white lg:py-2 lg:px-4"></th>
           </tr>
         </thead>
         <tbody>
           {filteredApplications?.map((a) => (
             <tr key={a.id}>
-              <td className={styles.tdStyle}>{formatDate(a.dateCreated)}</td>
-              <td className={styles.tdStyle2}>{a.company.name}</td>
-              <td className={styles.tdStyle}>
+              <td className="border-b border-[#E8E8E8] py-5 px-2 text-center text-base font-medium">
+                {formatDate(a.dateCreated)}
+              </td>
+              <td className="border-b border-[#E8E8E8] bg-white py-5 px-2 text-center text-base font-medium">
+                {a.company.name}
+              </td>
+              <td className="border-b border-[#E8E8E8] py-5 px-2 text-center text-base font-medium">
                 <a
                   className="underline hover:no-underline text-blue-600"
                   href={a.link}
@@ -161,11 +174,13 @@ export const Campaign = () => {
                   {a.roleName}
                 </a>
               </td>
-              <td className={styles.tdStyle2}>{getStatusName(a.status)}</td>
-              <td className={styles.tdStyle}>
+              <td className="border-b border-[#E8E8E8] bg-white py-5 px-2 text-center text-base font-medium">
+                {getStatusName(a.status)}
+              </td>
+              <td className="border-b border-[#E8E8E8] py-5 px-2 text-center text-base font-medium">
                 {a.dateUpdated ? formatDate(a.dateUpdated) : '-'}
               </td>
-              <td className={styles.tdStyle2}>
+              <td className="border-b border-[#E8E8E8] bg-white py-5 px-2 text-center text-base font-medium">
                 <div className="flex gap-2 justify-center">
                   <Link
                     className="underline text-blue-600"
