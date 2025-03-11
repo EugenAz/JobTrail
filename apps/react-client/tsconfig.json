@@ -1,11 +1,19 @@
 {
   "compilerOptions": {
+    "module": "ESNext",
+    "moduleResolution": "bundler",
     "jsx": "react-jsx",
     "allowJs": false,
     "esModuleInterop": false,
     "allowSyntheticDefaultImports": true,
     "strict": true,
-    "types": ["vite/client", "vitest"]
+    "types": ["vite/client", "vitest"],
+    "baseUrl": ".",
+    "paths": {
+      "@job-trail/dates": ["../../libs/dates/src/index.ts"],
+      "@job-trail/types": ["../../libs/types/src/index.ts"],
+      "@/*": ["src/*"]
+    }
   },
   "files": [],
   "include": [],
