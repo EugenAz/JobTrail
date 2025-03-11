@@ -63,7 +63,7 @@ export const App = () => {
 
             <Route path="/404" element={<Page404 />} />
             <Route path="*" element={<Page404 />} />
-            <Route path="/login" element={<Layout page={<Login />} />}></Route>
+            <Route path="/login" element={<Login />}></Route>
           </Routes>
           <ToastContainer
             position="bottom-right"

@@ -7,9 +7,11 @@ import { useNavigate } from 'react-router';
 import { LoadingErrorHandler } from '../common/loading-error-handler';
 import { useAuth } from '@/utils/auth.context';
 import { LAST_VISITED_ROUTE_KEY } from '@/utils/constants';
-import { FormContainer } from '../common/atoms/form-container';
-import { FormControlRow } from '../common/atoms/form-control-row';
-import { Button } from '../common/atoms/button';
+
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 
 type LoginFormData = {
   username: string;
@@ -63,57 +65,70 @@ export const Login = () => {
 
   return (
     <LoadingErrorHandler loading={loading} error={error}>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <FormContainer>
-          <FormControlRow
-            htmlFor="username"
-            label="User name"
-            control={({ controlClassName }) => (
-              <Controller
-                name="username"
-                control={control}
-                render={({ field, fieldState }) => (
-                  <>
-                    <input
-                      {...field}
-                      className={controlClassName}
-                      autoFocus
-                      id="username"
-                      placeholder="User name"
+      <div className="flex min-h-svh w-full items-center justify-center p-6 md:p-10">
+        <div className="w-full max-w-sm">
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-2xl">Login</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <form onSubmit={handleSubmit(onSubmit)}>
+                <div className="flex flex-col gap-6">
+                  <div className="grid gap-2">
+                    <Controller
+                      name="username"
+                      control={control}
+                      render={({ field, fieldState }) => (
+                        <>
+                          <Label htmlFor="username">Username</Label>
+                          <Input
+                            {...field}
+                            id="username"
+                            autoFocus
+                            placeholder="Username"
+                            required
+                          />
+                          {/* TODO errors */}
+                          {fieldState.error && (
+                            <p>{fieldState.error.message}</p>
+                          )}
+                        </>
+                      )}
                     />
-                    {fieldState.error && <p>{fieldState.error.message}</p>}
-                  </>
-                )}
-              />
-            )}
-          />
-        </FormContainer>
-        <FormContainer>
-          <FormControlRow
-            htmlFor="password"
-            label="Password"
-            control={({ controlClassName }) => (
-              <Controller
-                name="password"
-                control={control}
-                render={({ field, fieldState }) => (
-                  <>
-                    <input
-                      {...field}
-                      className={controlClassName}
-                      id="password"
-                      placeholder="Password"
-                      type="password"
+                  </div>
+                  <div className="grid gap-2">
+                    <div className="flex items-center">
+                      <Label htmlFor="password">Password</Label>
+                    </div>
+
+                    <Controller
+                      name="password"
+                      control={control}
+                      render={({ field, fieldState }) => (
+                        <>
+                          <Input
+                            {...field}
+                            id="password"
+                            placeholder="Password"
+                            type="password"
+                            required
+                          />
+                          {fieldState.error && (
+                            <p>{fieldState.error.message}</p>
+                          )}
+                        </>
+                      )}
                     />
-                    {fieldState.error && <p>{fieldState.error.message}</p>}
-                  </>
-                )}
-              />
-            )}
-          />
-          <Button type="submit">Log In</Button>
-        </FormContainer>
-      </form>
+                  </div>
+                  <Button type="submit" className="w-full">
+                    Login
+                  </Button>
+                </div>
+              </form>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
     </LoadingErrorHandler>
   );
 };
