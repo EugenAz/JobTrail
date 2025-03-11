@@ -74,6 +74,13 @@
           ]
         }
       }
+    },
+    "addui": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "apps/react-client",
+        "command": "npx shadcn@latest add"
+      }
     }
   }
 }
