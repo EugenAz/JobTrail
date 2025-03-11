@@ -16,9 +16,7 @@
     "baseUrl": ".",
     "paths": {
       "@job-trail/dates": ["libs/dates/src/index.ts"],
-      "@job-trail/types": ["libs/types/src/index.ts"],
-      "@job-trail/ui": ["libs/ui/src/ui"],
-      "@job-trail/utils": ["libs/utils/src/index.ts"]
+      "@job-trail/types": ["libs/types/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
