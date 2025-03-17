@@ -5,5 +5,9 @@ interface MainHeadingProps {
 }
 
 export const MainHeading: FC<MainHeadingProps> = ({ children }) => {
-  return <h1 className="text-3xl mb-8">{children}</h1>;
+  return (
+    <h1 className="scroll-m-20 text-3xl font-bold tracking-tight">
+      {children}
+    </h1>
+  );
 };

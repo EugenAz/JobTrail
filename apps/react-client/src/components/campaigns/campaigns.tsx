@@ -15,7 +15,7 @@ export const Campaigns = () => {
   return (
     <LoadingErrorHandler loading={loading} error={error}>
       <MainHeading>Campaings</MainHeading>
-      <ul className="flex gap-6 flex-wrap">
+      <ul className="flex gap-6 flex-wrap pt-8">
         {data?.campaigns.map((c) => (
           <li key={c.id}>
             <TileLink
