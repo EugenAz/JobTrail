@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useForm, Controller, SubmitHandler } from 'react-hook-form';
+import { useForm, SubmitHandler } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useAuthenticator } from './api/use-authenticator';
@@ -59,7 +59,11 @@ export const Login = () => {
     }
   };
 
-  const { control, handleSubmit } = useForm({
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm({
     resolver: yupResolver(loginFormSchema),
   });
 
@@ -75,50 +79,29 @@ export const Login = () => {
               <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="flex flex-col gap-6">
                   <div className="grid gap-2">
-                    <Controller
-                      name="username"
-                      control={control}
-                      render={({ field, fieldState }) => (
-                        <>
-                          <Label htmlFor="username">Username</Label>
-                          <Input
-                            {...field}
-                            id="username"
-                            autoFocus
-                            placeholder="Username"
-                            required
-                          />
-                          {/* TODO errors */}
-                          {fieldState.error && (
-                            <p>{fieldState.error.message}</p>
-                          )}
-                        </>
-                      )}
+                    <Label htmlFor="username">Username</Label>
+                    <Input
+                      {...register('username')}
+                      id="username"
+                      autoFocus
+                      placeholder="Username"
+                      required
                     />
+                    {errors.username && <p>{errors.username.message}</p>}
                   </div>
                   <div className="grid gap-2">
                     <div className="flex items-center">
                       <Label htmlFor="password">Password</Label>
                     </div>
 
-                    <Controller
-                      name="password"
-                      control={control}
-                      render={({ field, fieldState }) => (
-                        <>
-                          <Input
-                            {...field}
-                            id="password"
-                            placeholder="Password"
-                            type="password"
-                            required
-                          />
-                          {fieldState.error && (
-                            <p>{fieldState.error.message}</p>
-                          )}
-                        </>
-                      )}
+                    <Input
+                      {...register('password')}
+                      id="password"
+                      placeholder="Password"
+                      type="password"
+                      required
                     />
+                    {errors.password && <p>{errors.password.message}</p>}
                   </div>
                   <Button type="submit" className="w-full">
                     Login
