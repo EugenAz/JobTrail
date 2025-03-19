@@ -16,13 +16,7 @@ import {
 import { SearchInput } from '../common/search-input';
 import { MainHeading } from '../common/atoms/main-heading';
 import { ButtonLink } from '../common/atoms/button-link';
-
-enum ApplicationsFilter {
-  ALL = 'all',
-  OPEN = 'open',
-  IN_PROGRESS = 'in_progress',
-  OFFER = 'offer',
-}
+import { ApplicationsFilter } from './types.ts';
 
 export const Campaign = () => {
   const { campaignId } = useParams();
@@ -44,7 +38,6 @@ export const Campaign = () => {
   ] = useApplicationDeleter();
 
   const campaign = data?.campaign;
-
   const applications = campaign?.applications;
 
   useEffect(() => {
