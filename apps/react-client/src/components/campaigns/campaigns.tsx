@@ -2,7 +2,7 @@ import { useCampaignsGetter } from './api/use-campaigns-getter';
 import { LoadingErrorHandler } from '../common/loading-error-handler';
 import { MainHeading } from '../common/atoms/main-heading';
 import { TileLink } from '../common/atoms/tile-link';
-import { Campaign } from './campaign.tsx';
+import { Campaign } from './campaign';
 
 export const Campaigns = () => {
   const { loading, error, data } = useCampaignsGetter();

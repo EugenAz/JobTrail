@@ -16,7 +16,7 @@ import {
 import { SearchInput } from '../common/search-input';
 import { MainHeading } from '../common/atoms/main-heading';
 import { ButtonLink } from '../common/atoms/button-link';
-import { ApplicationsFilter } from './types.ts';
+import { ApplicationsFilter } from './types';
 
 export const Campaign = () => {
   const { campaignId } = useParams();
